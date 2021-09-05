@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="misakisaysyes" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      链表 
+      
+      
+      |
+    
+     misakisaysyes
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/avatar.jpeg">
+    <link rel="icon" href="/images/avatar.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+     <!-- 这里加载烟花特效 -->
+    <!-- <a href="/">
+      
+        <img src="/images/avatar.jpeg" alt="" id="avatar-img">
+      
+    </a> -->
+    <div class="nickname">
+      <a id="user-name" href="/">Misakisaysyes </a>
+      <span id="user-icon">♥️</span>
+    </div>
+    
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/mo.min.js"></script>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+<script src="/js/animation.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">链表</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2021-04-23 18:57:02
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/leetcode/" title="leetcode">
+                    <b>#</b> leetcode
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h3 id="1-找出两个链表的交点"><a href="#1-找出两个链表的交点" class="headerlink" title="1 找出两个链表的交点"></a>1 找出两个链表的交点</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 优化前</span><br><span class="line">const getIntersectionNode &#x3D; (headA, headB) &#x3D;&gt; &#123;</span><br><span class="line">    if(!headA || !headB) &#123;</span><br><span class="line">        return null</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(headA &#x3D;&#x3D;&#x3D; headB) &#123;</span><br><span class="line">        return headA</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let aCur &#x3D; headA</span><br><span class="line">    let bCur &#x3D; headB</span><br><span class="line">    </span><br><span class="line">    while(1) &#123;</span><br><span class="line">        aCur &#x3D; aCur.next</span><br><span class="line">        bCur &#x3D; bCur.next</span><br><span class="line"></span><br><span class="line">        if(!aCur&amp;&amp;!bCur) &#123;</span><br><span class="line">            return null</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(!aCur&amp;&amp;bCur) &#123;</span><br><span class="line">            aCur &#x3D; headB</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(aCur&amp;&amp;!bCur) &#123;</span><br><span class="line">            bCur &#x3D; headA</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(aCur &#x3D;&#x3D;&#x3D; bCur) &#123;</span><br><span class="line">            return aCur</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 优化后</span><br><span class="line">const getIntersectionNode &#x3D; (headA, headB) &#x3D;&gt; &#123;</span><br><span class="line">    if(!headA || !headB) &#123;</span><br><span class="line">        return null</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let aCur &#x3D; headA</span><br><span class="line">    let bCur &#x3D; headB</span><br><span class="line">    while(aCur !&#x3D;&#x3D; bCur) &#123;</span><br><span class="line">        aCur &#x3D; !aCur ? headB : aCur.next</span><br><span class="line">        bCur &#x3D; !bCur ? headA : bCur.next</span><br><span class="line">    &#125;</span><br><span class="line">    return aCur</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-链表反转"><a href="#2-链表反转" class="headerlink" title="2 链表反转"></a>2 链表反转</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-linked-list/submissions/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const reverseList &#x3D; head &#x3D;&gt; &#123;</span><br><span class="line">    if(!head || !head.next) &#123;</span><br><span class="line">        return head</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    let p &#x3D; new ListNode(-1)</span><br><span class="line">    let nextHead</span><br><span class="line">    while(head) &#123;</span><br><span class="line">        nextHead &#x3D; head.next</span><br><span class="line">        head.next &#x3D; p.next</span><br><span class="line">        p.next &#x3D; head</span><br><span class="line">        head &#x3D; nextHead</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return p.next</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-归并两个有序链表"><a href="#3-归并两个有序链表" class="headerlink" title="3 归并两个有序链表"></a>3 归并两个有序链表</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">const mergeTwoLists &#x3D; (l1, l2) &#x3D;&gt; &#123;</span><br><span class="line">    if(!l1) &#123;</span><br><span class="line">        return l2</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(!l2) &#123;</span><br><span class="line">        return l1</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    let head &#x3D; new ListNode(-1)</span><br><span class="line">    let tail &#x3D; head</span><br><span class="line">    while(l1&amp;&amp;l2)&#123;</span><br><span class="line">        if(l1.val &lt; l2.val) &#123;</span><br><span class="line">            tail.next &#x3D; l1</span><br><span class="line">            l1 &#x3D; l1.next</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            tail.next &#x3D; l2</span><br><span class="line">            l2 &#x3D; l2.next</span><br><span class="line">        &#125;</span><br><span class="line">        tail &#x3D; tail.next</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(l1) &#123;</span><br><span class="line">        tail.next &#x3D; l1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(l2) &#123;</span><br><span class="line">        tail.next &#x3D; l2</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return head.next</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">const mergeTwoLists &#x3D; (l1, l2) &#x3D;&gt; &#123;</span><br><span class="line">    if(!l1) &#123;</span><br><span class="line">        return l2</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(!l2) &#123;</span><br><span class="line">        return l1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(l1.val &lt; l2.val) &#123;</span><br><span class="line">        l1.next &#x3D; mergeTwoLists(l1.next, l2)</span><br><span class="line">        return l1</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        l2.next &#x3D; mergeTwoLists(l1, l2.next)</span><br><span class="line">        return l2</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-从有序链表中删除重复节点"><a href="#4-从有序链表中删除重复节点" class="headerlink" title="4 从有序链表中删除重复节点"></a>4 从有序链表中删除重复节点</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const deleteDuplicates &#x3D; function(head) &#123;</span><br><span class="line">    if(!head || !head.next) &#123;</span><br><span class="line">        return head</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let prevNode &#x3D; head</span><br><span class="line">    let curNode &#x3D; head.next</span><br><span class="line">    while(curNode) &#123;</span><br><span class="line">        if(curNode.val &#x3D;&#x3D;&#x3D; prevNode.val) &#123;</span><br><span class="line">            prevNode.next &#x3D; curNode.next</span><br><span class="line">            curNode &#x3D; prevNode.next</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            prevNode &#x3D; curNode</span><br><span class="line">            curNode &#x3D; curNode.next</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return head</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const deleteDuplicates &#x3D; function(head) &#123;</span><br><span class="line">    if(!head || !head.next) &#123;</span><br><span class="line">        return head</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    head.next &#x3D; deleteDuplicates(head.next)</span><br><span class="line">    return head.val &#x3D;&#x3D;&#x3D; head.next.val ? head.next : head</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-删除链表的倒数第n个节点"><a href="#5-删除链表的倒数第n个节点" class="headerlink" title="5 删除链表的倒数第n个节点"></a>5 删除链表的倒数第n个节点</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const removeNthFromEnd &#x3D; (head, n) &#x3D;&gt; &#123;</span><br><span class="line">    let newHead &#x3D; new ListNode(-1)</span><br><span class="line">    newHead.next &#x3D; head</span><br><span class="line">    let fastp &#x3D; head</span><br><span class="line">    let slowp &#x3D; newHead</span><br><span class="line">    while(fastp) &#123;</span><br><span class="line">        if(n-- &gt; 0) &#123;</span><br><span class="line">            fastp &#x3D; fastp.next</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            fastp &#x3D; fastp.next</span><br><span class="line">            slowp &#x3D; slowp.next</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    slowp.next &#x3D; slowp.next.next</span><br><span class="line">    return newHead.next</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-交换链表中相邻节点"><a href="#6-交换链表中相邻节点" class="headerlink" title="6 交换链表中相邻节点"></a>6 交换链表中相邻节点</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const swapPairs &#x3D; head &#x3D;&gt; &#123;</span><br><span class="line">    if(!head || !head.next) &#123;</span><br><span class="line">        return head</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let newHead &#x3D; new ListNode(-1)</span><br><span class="line">    let prevHead &#x3D; newHead</span><br><span class="line">    newHead.next &#x3D; head</span><br><span class="line">    head &#x3D; head.next</span><br><span class="line"></span><br><span class="line">    let i &#x3D; 0</span><br><span class="line">    while(head) &#123;</span><br><span class="line">        if(!(i++%2)) &#123;</span><br><span class="line">            let temp &#x3D; prevHead.next</span><br><span class="line">            prevHead.next &#x3D; head</span><br><span class="line">            temp.next &#x3D; head.next</span><br><span class="line">            head.next &#x3D; temp</span><br><span class="line">            head &#x3D; temp</span><br><span class="line">        &#125;</span><br><span class="line">        prevHead &#x3D; prevHead.next</span><br><span class="line">        head &#x3D; head.next</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return newHead.next</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-链表求和"><a href="#7-链表求和" class="headerlink" title="7 链表求和"></a>7 链表求和</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/add-two-numbers-ii/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">const addTwoNumbers &#x3D; (l1, l2) &#x3D;&gt; &#123;</span><br><span class="line">    let aStack &#x3D; []</span><br><span class="line">    let bStack &#x3D; [] </span><br><span class="line"></span><br><span class="line">    while(l1) &#123;</span><br><span class="line">        aStack.push(l1.val)</span><br><span class="line">        l1 &#x3D; l1.next</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    while(l2) &#123;</span><br><span class="line">        bStack.push(l2.val)</span><br><span class="line">        l2 &#x3D; l2.next</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let carry &#x3D; 0</span><br><span class="line">    let res &#x3D; new ListNode(-1)</span><br><span class="line">    while(aStack.length || bStack.length || carry) &#123;</span><br><span class="line">        let temp &#x3D; 0</span><br><span class="line">        aStack.length &amp;&amp; (temp +&#x3D; aStack.pop())</span><br><span class="line">        bStack.length &amp;&amp; (temp +&#x3D; bStack.pop())</span><br><span class="line">        let node &#x3D; new ListNode((temp + carry)%10)</span><br><span class="line">        node.next &#x3D; res.next</span><br><span class="line">        res.next &#x3D; node</span><br><span class="line">        carry &#x3D; Math.floor((temp + carry)&#x2F;10)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return res.next</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-判断回文"><a href="#8-判断回文" class="headerlink" title="8 判断回文"></a>8 判断回文</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-linked-list/submissions/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const isPalindrome &#x3D; head &#x3D;&gt; &#123;</span><br><span class="line">    if(!head || !head.next) &#123;</span><br><span class="line">        return head</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let stack &#x3D; []</span><br><span class="line">    while(head) &#123;</span><br><span class="line">        stack.push(head.val)</span><br><span class="line">        head &#x3D; head.next</span><br><span class="line">    &#125;   </span><br><span class="line"></span><br><span class="line">    return stack.join(&#39;&#39;) &#x3D;&#x3D;&#x3D; stack.reverse().join(&#39;&#39;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">const reverseLink &#x3D; head &#x3D;&gt; &#123;</span><br><span class="line">    if(!head || !head.next) &#123;</span><br><span class="line">        return head</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let temp</span><br><span class="line">    let newHead &#x3D; new ListNode(-1)</span><br><span class="line">    while(head) &#123;</span><br><span class="line">        temp &#x3D; head.next</span><br><span class="line">        head.next &#x3D; newHead.next</span><br><span class="line">        newHead.next &#x3D; head</span><br><span class="line">        head &#x3D; temp</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return newHead.next</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const cutLink &#x3D; head &#x3D;&gt; &#123;</span><br><span class="line">    if(!head || !head.next) &#123;</span><br><span class="line">        return head</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let newHead &#x3D; new ListNode(-1)</span><br><span class="line">    let fastp &#x3D; newHead</span><br><span class="line">    let slowp &#x3D; newHead</span><br><span class="line">    newHead.next &#x3D; head</span><br><span class="line"></span><br><span class="line">    while(fastp) &#123;</span><br><span class="line">        fastp &#x3D; fastp.next</span><br><span class="line">        if(!fastp) &#123; </span><br><span class="line">            break</span><br><span class="line">        &#125;</span><br><span class="line">        fastp &#x3D; fastp.next</span><br><span class="line">        slowp &#x3D; slowp.next</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    fastp &#x3D; slowp.next</span><br><span class="line">    slowp.next &#x3D; null</span><br><span class="line">    return fastp</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const isPalindrome &#x3D; head &#x3D;&gt; &#123;</span><br><span class="line">    if(!head || !head.next) &#123;</span><br><span class="line">        return null</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let l1 &#x3D; head</span><br><span class="line">    let l2 &#x3D; reverseLink(cutLink(head))</span><br><span class="line"></span><br><span class="line">    while(l1 &amp;&amp; l2) &#123;</span><br><span class="line">        if(l1.val !&#x3D;&#x3D; l2.val) &#123;</span><br><span class="line">            return false</span><br><span class="line">        &#125;</span><br><span class="line">        l1 &#x3D; l1.next</span><br><span class="line">        l2 &#x3D; l2.next</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if((!l1&amp;&amp;!l2) || (l1&amp;&amp;!l2&amp;&amp;!l1.next)) &#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-分隔链表"><a href="#9-分隔链表" class="headerlink" title="9 分隔链表"></a>9 分隔链表</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/split-linked-list-in-parts/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const splitListToParts &#x3D; (root, k) &#x3D;&gt; &#123;</span><br><span class="line">    let resArr &#x3D; new Array(k)</span><br><span class="line">    let len &#x3D; 0</span><br><span class="line">    let cur &#x3D; root</span><br><span class="line">    while(cur) &#123;</span><br><span class="line">        len++</span><br><span class="line">        cur &#x3D; cur.next</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let size &#x3D; Math.floor(len&#x2F;k)</span><br><span class="line">    let mod &#x3D; len % k</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 0; i &lt; k; i++) &#123;</span><br><span class="line">        resArr[i] &#x3D; root</span><br><span class="line">        if(root) &#123;</span><br><span class="line">            const curLen &#x3D; size + (mod-- &gt; 0 ? 1 : 0)</span><br><span class="line">            for(let j &#x3D; 0; j &lt; curLen - 1; j++) &#123;</span><br><span class="line">                root &#x3D; root.next</span><br><span class="line">            &#125;</span><br><span class="line">            cur &#x3D; root.next</span><br><span class="line">            root.next &#x3D; null</span><br><span class="line">            root &#x3D; cur</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return resArr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-链表元素按奇偶聚集"><a href="#10-链表元素按奇偶聚集" class="headerlink" title="10 链表元素按奇偶聚集"></a>10 链表元素按奇偶聚集</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/odd-even-linked-list/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const oddEvenList &#x3D; head &#x3D;&gt; &#123;</span><br><span class="line">    if(!head || !head.next) &#123;</span><br><span class="line">        return head</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let oddhead &#x3D; oddtail &#x3D; head</span><br><span class="line">    let evenhead &#x3D; eventail &#x3D; head.next</span><br><span class="line">    let temp</span><br><span class="line"></span><br><span class="line">    let i &#x3D; 1</span><br><span class="line">    while(head) &#123;</span><br><span class="line">        temp &#x3D; head.next</span><br><span class="line">        if(i++%2) &#123;</span><br><span class="line">            oddtail.next &#x3D; head</span><br><span class="line">            head.next &#x3D; null</span><br><span class="line">            oddtail &#x3D; head</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            eventail.next &#x3D; head</span><br><span class="line">            head.next &#x3D; null</span><br><span class="line">            eventail &#x3D; head</span><br><span class="line">        &#125;</span><br><span class="line">        head &#x3D; temp</span><br><span class="line">    &#125;</span><br><span class="line">    oddtail.next &#x3D; evenhead</span><br><span class="line">    return oddhead</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/04/21/dp/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2021-04-23 18:57:02
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/leetcode/" title="leetcode">
+                        <b>#</b> leetcode
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/04/26/develop-notes/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%89%BE%E5%87%BA%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E4%BA%A4%E7%82%B9"><span class="toc-text">1 找出两个链表的交点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC"><span class="toc-text">2 链表反转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%BD%92%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8"><span class="toc-text">3 归并两个有序链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BB%8E%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E8%8A%82%E7%82%B9"><span class="toc-text">4 从有序链表中删除重复节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9"><span class="toc-text">5 删除链表的倒数第n个节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9B%B8%E9%82%BB%E8%8A%82%E7%82%B9"><span class="toc-text">6 交换链表中相邻节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E9%93%BE%E8%A1%A8%E6%B1%82%E5%92%8C"><span class="toc-text">7 链表求和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%88%A4%E6%96%AD%E5%9B%9E%E6%96%87"><span class="toc-text">8 判断回文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8"><span class="toc-text">9 分隔链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0%E6%8C%89%E5%A5%87%E5%81%B6%E8%81%9A%E9%9B%86"><span class="toc-text">10 链表元素按奇偶聚集</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/misakisaysyes">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" target="_blank" rel="noopener" href="https://twitter.com/misakisaysyes">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" target="_blank" rel="noopener" href="https://twitter.com/misakisaysyes">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/misakisaysyes">Copyright © Misakisaysyes 2021</a>
+        
+    </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

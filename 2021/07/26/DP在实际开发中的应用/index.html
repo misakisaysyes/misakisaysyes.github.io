@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="misakisaysyes" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      DP在实际开发中的应用 
+      
+      
+      |
+    
+     misakisaysyes
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/avatar.jpeg">
+    <link rel="icon" href="/images/avatar.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+     <!-- 这里加载烟花特效 -->
+    <!-- <a href="/">
+      
+        <img src="/images/avatar.jpeg" alt="" id="avatar-img">
+      
+    </a> -->
+    <div class="nickname">
+      <a id="user-name" href="/">Misakisaysyes </a>
+      <span id="user-icon">♥️</span>
+    </div>
+    
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/mo.min.js"></script>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+<script src="/js/animation.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">DP在实际开发中的应用</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2021-07-26 09:29:23
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" title="动态规划">
+                    <b>#</b> 动态规划
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>在做需求时，遇到过这么一个场景：</p>
+<blockquote>
+<p>用户设定一张试卷的总分，我们随机从题库中选择几道不同的题目，使它们的分值刚好能组成这张试卷。</p>
+</blockquote>
+<p>这需求算法味儿挺浓的，感觉挺有意思的，于是就写了个demo实现了一下。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/misakisaysyes/full/zYwdYBL">一键组卷 demo</a></p>
+<h2 id="2-需求分析"><a href="#2-需求分析" class="headerlink" title="2 需求分析"></a>2 需求分析</h2><p>我们给这个需求套一组数据，就可以把它变成一道类似于leetcode的题目</p>
+<blockquote>
+<p>用户需要一张<code>100分的试卷</code>。<br>现在题库中有一组人民币面值分数的题目：<code>[1分, 5分, 10分, 20分, 50分]</code>, 这些题目的数量分别为：<code>[5道, 2道, 4道, 2道, 4道]</code>。<br>请随机从题库中挑出几道内容不同的题目，组成总分为100的试卷。</p>
+</blockquote>
+<p>对于这道<code>leetcode</code>，我们先思考🤔两个问题：</p>
+<p><code>问题一</code> </p>
+<pre><code>在当前的条件下：有5道1分、2道5分、4道10分、2道20分、4道50分的题目。
+
+请问在满足题目数量限制的条件下，有多少种选法，能使得所选题目的分数总和为100？
+</code></pre>
+<p><code>问题二</code></p>
+<pre><code>解决了第一个问题后，我们得到n个满足条件的组合。
+
+随机选一个，假设选了 50 + 50 = 100。
+
+即现有的4道50分的题，我们需要从中选择不重复的2道，凑成试卷，这又该怎么选？
+</code></pre>
+<p><code>问题一</code>本质是个<code>多重背包</code>问题，可以用动态规划的方式解决。</p>
+<p><code>问题二</code>本质是个<code>求组合</code>的问题，从C(4, 2)个组合中选一个☝作为结果，这个问题求解方式很多（可以暴力求解），其中也可以用到动态规划。</p>
+<h2 id="3-关于动态规划"><a href="#3-关于动态规划" class="headerlink" title="3 关于动态规划"></a>3 关于动态规划</h2><p>动态规划 即 Dynamic Programming（DP）。</p>
+<p>它是针对一类问题的<code>优化后</code>的解决方案，这类问题能被划分为多个<code>重叠子问题</code>。</p>
+<h3 id="3-1-重叠子问题"><a href="#3-1-重叠子问题" class="headerlink" title="3.1 重叠子问题"></a>3.1 重叠子问题</h3><p>那什么是重叠子问题？</p>
+<p>举个最常见的例子🌰：斐波那契数列</p>
+<table>
+<thead>
+<tr>
+<th align="center">第1位</th>
+<th align="center">第2位</th>
+<th align="center">第3位</th>
+<th align="center">第4位</th>
+<th align="center">第5位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">5</td>
+</tr>
+</tbody></table>
+<p>我们知道斐波那契的递推公式是：<code>第 n 位 = 第 n - 1 位 + 第 n - 2 位</code> </p>
+<p>也就是</p>
+<p>当我们求第4位时，等价在问：第2位等于多少？第3位等于多少？</p>
+<p>当我们求第5位时，等价在问：第3位等于多少？第4位等于多少？</p>
+<p><code>第3位等于多少</code>这个问题，在求第4位和第5位时都被问了一遍，故它是个<code>重叠子问题</code>。</p>
+<p>所以，重叠子问题就是由大问题拆解而来，并在求解过程中会被重复问到的小问题。</p>
+<p>而动态规划就是一种解决<code>能被划分为重叠子问题</code>这类问题的求解方法。</p>
+<h3 id="3-2-从递归到动态规划"><a href="#3-2-从递归到动态规划" class="headerlink" title="3.2 从递归到动态规划"></a>3.2 从递归到动态规划</h3><p>但其实我们可以从很多地方了解到，解决这类问题的方法是递归。</p>
+<p>但递归有个缺陷，就是会重复求解重叠子问题，而导致一些浪费。</p>
+<p>比如在<code>斐波那契</code>这个例子中：</p>
+<p>若用递归，那我们在求<code>第5位等于多少</code>时，就必须再求一遍<code>第3位等于多少</code>。</p>
+<p>尽管<code>第3位等于多少</code>这个问题在求<code>第4位等于多少</code>时算过一遍。</p>
+<p>而动态规划算法就正好解决了这种浪费。它最朴素的核心思想就是：</p>
+<p>在内存中开一个缓存数组，每求解一个重叠子问题，就将答案记录下来。</p>
+<p>当再次问到该子问题时，就可以直接从缓存中取答案，从而减少计算次数。</p>
+<p>所以，动态规划可以理解为进化后的递归。</p>
+<p>这里就用上文中的<code>问题二</code>稍加变化，来演绎一下<code>递归</code>是如何进化成<code>动态规划</code>的。</p>
+<p>变形后的<code>问题二</code>：</p>
+<pre><code>从4道不同的题目中随机选2道，请问能得到多少种组合？
+
+即 求C(4, 2)等于多少？
+</code></pre>
+<blockquote>
+<p>tips: 在基于<code>枚举思想</code>的算法里，能求出所有情况数（组合数），就必然能求出所有情况（列举出所有组合）。</p>
+</blockquote>
+<h3 id="3-3-原始递归求C-4-2"><a href="#3-3-原始递归求C-4-2" class="headerlink" title="3.3 原始递归求C(4, 2)"></a>3.3 原始递归求C(4, 2)</h3><h4 id="3-3-1-分析递推关系"><a href="#3-3-1-分析递推关系" class="headerlink" title="3.3.1 分析递推关系"></a>3.3.1 分析递推关系</h4><p>已知数组[a, b, c, d]，随机选2元素，类似于[a, b]、[b, c]、[c, d]…这种两元素组合共有多少？</p>
+<p>借助组合数学中<code>集合</code>这个工具，有如下分析：</p>
+<p>设<code>全集U</code>为：[a, b]、[b, c]、[c, d]… 即[a, b, c, d]中所有2元素组合。</p>
+<p>设<code>子集A</code>为：[a, b]、[a, c]… 即所有<strong>含</strong><code>a</code>的2元素组合。</p>
+<p>设<code>子集B</code>为：[b, c]、[c, d]… 即所有<strong>不含</strong><code>a</code>的2元素组合。</p>
+<p>由我们赋予U、A、B的含义，可以得到如下关系：</p>
+<p>U = A ∪ B</p>
+<p>A ∩ B = ∅</p>
+<p>再借助<code>容斥原理</code>，可得：</p>
+<p>|U| = |A ∪ B| = |A| + |B| - |A ∩ B| </p>
+<p>因为  A ∩ B = ∅ =&gt; |A ∩ B| = 0</p>
+<p>所以 |U| = |A| + |B|</p>
+<p>其中</p>
+<p>|U| = C(4, 2)</p>
+<p>|A| = C(3, 1) // 在数组[b, c, d]中随机再选1个元素的组合数</p>
+<p>|B| = C(3, 2) // 在数组[b, c, d]中随机再选2个元素的组合数</p>
+<p>所以得到：</p>
+<p>C(4, 2) = C(3, 1) + C(3, 2)</p>
+<p>用同样的方法分析C(3, 2)可得：</p>
+<p>C(3, 2) = C(2, 1) + C(2, 2)</p>
+<p>…</p>
+<p>所以通过类比推理，最后得到递推关系式：</p>
+<p>C(m, n) = C(m - 1, n - 1) + C(m - 1, n)</p>
+<h4 id="3-3-2-递归代码"><a href="#3-3-2-递归代码" class="headerlink" title="3.3.2 递归代码"></a>3.3.2 递归代码</h4><p>得到递推关系式后再思考一下边界条件，便可得到如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const testArr &#x3D; [a, b, c, d]</span><br><span class="line">const Cmn &#x3D; (arr, num) &#x3D;&gt; &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; C(m, n) m &#x3D; 0 不合法 返回0</span><br><span class="line">    if (!arr.length) &#123; return 0 &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; C(m, n) m &lt; n 不合法 返回0</span><br><span class="line">    if (arr.length &lt; num) &#123; return 0 &#125; </span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; C(m, 0) &#x3D; 1</span><br><span class="line">    if (!num) &#123; return 1 &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; C(x, x) &#x3D; 1  </span><br><span class="line">    if (arr.length &#x3D;&#x3D;&#x3D; num) &#123; return 1 &#125;</span><br><span class="line">    </span><br><span class="line">    return Cmn(arr.slice(1), num - 1) + Cmn(arr.slice(1), num)</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#39;C(4, 2) &#x3D; &#39;, Cmn(testArr, 2))</span><br></pre></td></tr></table></figure>
+
+<p>原始递归在求解这个问题时，我们可以<code>自顶向下</code>地画出一颗树来：</p>
+<p><img src="/2021/07/26/DP%E5%9C%A8%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/1.png" alt="1.png"></p>
+<p>从图示可看出，C(2, 1)等于多少？这问题，前后被问了两次，也被回答了两次。</p>
+<p>那是不是可以优化一下？</p>
+<h3 id="3-4-记忆化递归求C-4-2"><a href="#3-4-记忆化递归求C-4-2" class="headerlink" title="3.4 记忆化递归求C(4, 2)"></a>3.4 记忆化递归求C(4, 2)</h3><p>最朴素的优化方法，就是记忆化递归。</p>
+<p>基本操作就是弄个缓存，把所有求解过的子问题的答案都存下。</p>
+<p>当再次问到该问题时，就直接从缓存中拿答案，而不用再去求解了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">const testArr &#x3D; [a, b, c, d]</span><br><span class="line"></span><br><span class="line">const memo &#x3D; &#123;&#125;</span><br><span class="line">const Cmn &#x3D; (arr, num) &#x3D;&gt; &#123;</span><br><span class="line"></span><br><span class="line">    if (!arr.length) &#123; return 0 &#125;</span><br><span class="line">    if (arr.length &lt; num) &#123; return 0 &#125; </span><br><span class="line"></span><br><span class="line">    const key &#x3D; &#96;$&#123;arr.length&#125;-$&#123;num&#125;&#96;</span><br><span class="line">    if(memo[key]) &#123; return memo[key] &#125;</span><br><span class="line">    if (!num) &#123; memo[key] &#x3D; 1 &#125;</span><br><span class="line">    if (arr.length &#x3D;&#x3D;&#x3D; num) &#123; memo[key] &#x3D; 1 &#125;</span><br><span class="line">    memo[key] &#x3D; Cmn(arr.slice(1), num - 1) + Cmn(arr.slice(1), num)</span><br><span class="line"></span><br><span class="line">    return memo[key]</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#39;C(4, 2) &#x3D; &#39;, Cmn(testArr, 2))</span><br></pre></td></tr></table></figure>
+
+<p>乍一看上去这种优化思路和动态规划一样，都是开个缓存把结果都存起来。</p>
+<p>但递归下的缓存大小是没法优化的，它必定存储了递归过程中每个节点的值。</p>
+<p>比如</p>
+<p>用带缓存的递归求C(4, 2)，虽然不用重复求C(2, 1)了，但缓存中一定会存下C(4, 2)、C(3, 2)、C(3, 1)、C(2, 2)、C(2, 1)、C(2, 0)、C(1, 1)、C(1, 0)这8个节点的值。</p>
+<p>而事实上，只有C(2, 1)被重复求解了。也就是缓存值其实只有C(2, 1)是有意义的，其它都没用，浪费空间了。</p>
+<p>这是因为递归的这种<code>自顶向下</code>，<code>倒推</code>的求解形式所导致的。</p>
+<p>那有没有办法，去优化一下缓存空间呢？以最小的代价，来解决这类重叠子问题。</p>
+<h3 id="3-5-动态规划求C-4-2"><a href="#3-5-动态规划求C-4-2" class="headerlink" title="3.5 动态规划求C(4, 2)"></a>3.5 动态规划求C(4, 2)</h3><p>答案是有的，那就是动态规划。</p>
+<p>动态规划采取了<code>自底向上</code>的解法。也就是不同于递归从C(4, 2)开始求解，会从C(0, 0)、C(1, 0)…开始计算，直到算到C(4, 2)。</p>
+<p><code>自底向上</code>求解的好处在于：</p>
+<p>可以通过递推关系，预测出当前子问题的结果是否会用到将来的求解中。</p>
+<p>如果被用到了，就缓存下来，如果不会再被用到了，那就把它的空间给释放掉。</p>
+<p>这样就达到了优化缓存大小的目的。</p>
+<p>还是C(4, 2)这个例子，用动态规划的方式改写一遍<code>记忆化递归</code>的解法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">const testArr &#x3D; [a, b, c, d]</span><br><span class="line">const Cmn &#x3D; (arr, num) &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(arr.length + 1).fill()</span><br><span class="line">    dp &#x3D; dp.map(_ &#x3D;&gt; &#123;</span><br><span class="line">        let arr &#x3D; new Array(num + 1).fill(0)</span><br><span class="line">        arr[0] &#x3D; 1</span><br><span class="line">        return arr</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    for (let i &#x3D; 1; i &lt;&#x3D; arr.length; i++) &#123;</span><br><span class="line">        for (let j &#x3D; 1; j &lt;&#x3D; num &amp;&amp; j &lt;&#x3D; i; j++) &#123;</span><br><span class="line">            dp[i][j] &#x3D; dp[i - 1][j - 1] + dp[i - 1][j]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[arr.length][num]</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#39;C(4, 2) &#x3D; &#39;, Cmn(testArr, 2))</span><br></pre></td></tr></table></figure>
+<p>我们开了一个二维数组dp当缓存，也是放8个节点。</p>
+<p>然后根据递推关系式<code>C(m, n) = C(m - 1, n - 1) + C(m - 1, n)</code>写出状态转移方程<code>dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j]</code>。</p>
+<p>这样写的话，本质和前面的<code>记忆化递归</code>没啥两样。</p>
+<p>但是细看状态转移方程会发现：</p>
+<p><strong>对于dp表而言，第i行第值，只与第<code>i - 1行</code>的值相关，和第<code>i - 2行</code>的值无关。</strong></p>
+<p>比如在C(4, 2)中，第3行的值只与第4行相关，第4行第值又只与第3行第值相关。</p>
+<p><img src="/2021/07/26/DP%E5%9C%A8%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/3.png" alt="3.png"></p>
+<p><img src="/2021/07/26/DP%E5%9C%A8%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/4.png" alt="4.png"></p>
+<p>所以，在这里，完全可以只缓存一行（3个节点的结果），而不用开二维数组缓存所有子问题的结果。</p>
+<p>但如果只缓存一行，就会有这样的情况：</p>
+<p>当计算第3行时，使用缓存里第2行的结果。当计算第4行时，需要用第3行的结果。</p>
+<p>所以这时，需要考虑更新缓存。</p>
+<p>这里再回到状态转移方程分析，可以发现，当前所求值，其依赖的值都<code>不会</code>在所求值的<strong>右上方</strong>。 </p>
+<p>比如C(4, 1)的结果只与C(3, 0)和C(3, 1)有关，与右上方的C(3, 2)无关。</p>
+<p><img src="/2021/07/26/DP%E5%9C%A8%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/5.png" alt="5.png"></p>
+<p>也就是说，从右向左地更新缓存，便可在更新缓存的同时，不影响值的计算。</p>
+<p><img src="/2021/07/26/DP%E5%9C%A8%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/2.png" alt="2.png"></p>
+<p>这样分析下来，dp的解法就可以优化为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const testArr &#x3D; [a, b, c, d]</span><br><span class="line">const Cmn &#x3D; (arr, num) &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(num + 1).fill(0)</span><br><span class="line">    dp[0] &#x3D; 1</span><br><span class="line">    for (let i &#x3D; 1; i &lt;&#x3D; arr.length; i++) &#123;</span><br><span class="line">        for(j &#x3D; i; j &gt; 0; j --) &#123;</span><br><span class="line">            dp[j] &#x3D; dp[j - 1] + dp[j]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[num]</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#39;C(4, 2) &#x3D; &#39;, Cmn(testArr, 2))</span><br></pre></td></tr></table></figure>
+
+<p>在解决C(4, 2)这个问题上，这种优化后的dp只用缓存3个节点，相比于<code>记忆化递归</code>的方式节约了至少一半的空间。</p>
+<h2 id="4-回到需求"><a href="#4-回到需求" class="headerlink" title="4 回到需求"></a>4 回到需求</h2><p>以上就是我关于动态规划的一点理解。</p>
+<p>现在回到需求本身。</p>
+<p>这个需求有两个问题要思考，详见<a href="#2-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90">2 需求分析</a></p>
+<p> <code>问题二</code>求C(4, 2)组合上文已经论述过了，这里就主要看看<code>问题一</code>：</p>
+<blockquote>
+<p>用户需要一张<code>100分的试卷</code>，现在我们题库中有一组人民币面值分数的题目：<code>[1分, 5分, 10分, 20分, 50分]</code>，这些题目的数量分别为：<code>[5道, 2道, 4道, 2道, 4道]</code>，请求出所有的组合数</p>
+</blockquote>
+<p>这是一个很典型的多重背包问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const combinations &#x3D; (total, nums, amount) &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(total + 1).fill(0)</span><br><span class="line">    dp[0] &#x3D; 1</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">        for (let j &#x3D; total; j &gt;&#x3D; nums[i]; j--) &#123;</span><br><span class="line">            for(let k &#x3D; 1; k &lt;&#x3D; amount[i] &amp;&amp; j &gt;&#x3D; k*nums[i]; k++) &#123;</span><br><span class="line">                dp[j] +&#x3D; dp[j - k*nums[i]]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[total]</span><br><span class="line">&#125;</span><br><span class="line">console.log(combinations(100, [1, 5, 10, 20, 50], [5, 2, 4, 2, 4]))</span><br></pre></td></tr></table></figure>
+
+<p>背包问题是动态规划中一类问题，其结构如下：</p>
+<p><img src="/2021/07/26/DP%E5%9C%A8%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/6.png" alt="6.png"></p>
+<p>背包问题可以分为<code>0-1背包</code>和<code>完全背包</code>，<code>多重背包</code>是0-1背包的变种。</p>
+<h3 id="4-1-0-1背包和完全背包"><a href="#4-1-0-1背包和完全背包" class="headerlink" title="4.1 0-1背包和完全背包"></a>4.1 0-1背包和完全背包</h3><p>0-1背包的定义：</p>
+<p>有N件物品和一个容量为V的背包，第i件物品消耗的容量为Ci，价值为Wi，求解放入哪些物品可以使得背包中总价值最大。</p>
+<p>基本实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">N &#x2F;&#x2F; 物品种数，且每种物品只有一件</span><br><span class="line"></span><br><span class="line">C &#x3D; [C1, C2, ... , Cn] &#x2F;&#x2F; 每件物品对应消耗的容量</span><br><span class="line"></span><br><span class="line">W &#x3D; [W1, W2, ... , Wn] &#x2F;&#x2F; 每件物品对应的价值</span><br><span class="line"></span><br><span class="line">V &#x2F;&#x2F; 背包容量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const 01Knapsack &#x3D; (C, W, V) &#x3D;&gt; &#123;</span><br><span class="line">    const N &#x3D; C.length</span><br><span class="line">    let dp &#x3D; new Array(V + 1).fill(0)</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 0; i &lt; N; i++) &#123;</span><br><span class="line">        for(let j &#x3D; V; j &gt;&#x3D; C[i]; j--) &#123;</span><br><span class="line">            dp[j] &#x3D; max(dp[j], dp[j - C[i]] + W[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完全背包的定义：</p>
+<p>有N种物品和一个容量为V的背包，每种物品都有无限件可用，第i件物品消耗的容量为Ci，价值为Wi，求解放入哪些物品可以使得背包中总价值最大。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">N &#x2F;&#x2F; 物品种数，且每种物品有无限件</span><br><span class="line"></span><br><span class="line">C &#x3D; [C1, C2, ... , Cn] &#x2F;&#x2F; 每件物品对应消耗的容量</span><br><span class="line"></span><br><span class="line">W &#x3D; [W1, W2, ... , Wn] &#x2F;&#x2F; 每件物品对应的价值</span><br><span class="line"></span><br><span class="line">V &#x2F;&#x2F; 背包容量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const Knapsack &#x3D; (C, W, V) &#x3D;&gt; &#123;</span><br><span class="line">    const N &#x3D; C.length</span><br><span class="line">    let dp &#x3D; new Array(V + 1).fill(0)</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 0; i &lt; N; i++) &#123;</span><br><span class="line">        for(let j &#x3D; C[i]; j &lt;&#x3D; V; j++) &#123;</span><br><span class="line">            dp[j] &#x3D; max(dp[j], dp[j - C[i]] + W[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-多重背包"><a href="#4-2-多重背包" class="headerlink" title="4.2 多重背包"></a>4.2 多重背包</h3><p>思路：先将多重背包转化为0-1背包，再进行相应运算，详见 <a href="#4-%E5%9B%9E%E5%88%B0%E9%9C%80%E6%B1%82">4 回到需求</a></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/07/05/%E5%85%B3%E4%BA%8Emac%E7%BD%91%E7%BB%9C%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2021-07-26 09:29:23
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" title="动态规划">
+                        <b>#</b> 动态规划
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%89%8D%E8%A8%80"><span class="toc-text">1 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="toc-text">2 需求分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%85%B3%E4%BA%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-text">3 关于动态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E9%87%8D%E5%8F%A0%E5%AD%90%E9%97%AE%E9%A2%98"><span class="toc-text">3.1 重叠子问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BB%8E%E9%80%92%E5%BD%92%E5%88%B0%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-text">3.2 从递归到动态规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%8E%9F%E5%A7%8B%E9%80%92%E5%BD%92%E6%B1%82C-4-2"><span class="toc-text">3.3 原始递归求C(4, 2)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-%E5%88%86%E6%9E%90%E9%80%92%E6%8E%A8%E5%85%B3%E7%B3%BB"><span class="toc-text">3.3.1 分析递推关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-%E9%80%92%E5%BD%92%E4%BB%A3%E7%A0%81"><span class="toc-text">3.3.2 递归代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E8%AE%B0%E5%BF%86%E5%8C%96%E9%80%92%E5%BD%92%E6%B1%82C-4-2"><span class="toc-text">3.4 记忆化递归求C(4, 2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%B1%82C-4-2"><span class="toc-text">3.5 动态规划求C(4, 2)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%9B%9E%E5%88%B0%E9%9C%80%E6%B1%82"><span class="toc-text">4 回到需求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-0-1%E8%83%8C%E5%8C%85%E5%92%8C%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85"><span class="toc-text">4.1 0-1背包和完全背包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85"><span class="toc-text">4.2 多重背包</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/misakisaysyes">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" target="_blank" rel="noopener" href="https://twitter.com/misakisaysyes">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" target="_blank" rel="noopener" href="https://twitter.com/misakisaysyes">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/misakisaysyes">Copyright © Misakisaysyes 2021</a>
+        
+    </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

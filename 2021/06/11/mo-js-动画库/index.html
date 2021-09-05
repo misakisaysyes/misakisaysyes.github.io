@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="misakisaysyes" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      mo.js 动画库 
+      
+      
+      |
+    
+     misakisaysyes
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/avatar.jpeg">
+    <link rel="icon" href="/images/avatar.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+     <!-- 这里加载烟花特效 -->
+    <!-- <a href="/">
+      
+        <img src="/images/avatar.jpeg" alt="" id="avatar-img">
+      
+    </a> -->
+    <div class="nickname">
+      <a id="user-name" href="/">Misakisaysyes </a>
+      <span id="user-icon">♥️</span>
+    </div>
+    
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/mo.min.js"></script>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+<script src="/js/animation.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">mo.js 动画库</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2021-06-11 18:53:32
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/animation/" title="animation">
+                    <b>#</b> animation
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>给博客加了个彩蛋，把鼠标移到<code>Misakisaysyes</code>上，会有烟花动画，<code>❤️</code>也会跳动一下。</p>
+<h3 id="mojs简介"><a href="#mojs简介" class="headerlink" title="mojs简介"></a>mojs简介</h3><p>彩蛋动画使用了mo.js动画库，这是一个轻量（130kb）、使用简单（采用声明式语法，同样采用声明式语法的有css和html）的动画库。</p>
+<p>使用mojs制作动画主要分为<code>两步</code>：</p>
+<p>1 <code>创建实体</code></p>
+<p>这里指创建动画实体，是动画中运动的元素。</p>
+<p>在创建实体时，我们可以指定实体的形状、大小、颜色、位置等属性。</p>
+<p>mojs通过<code>Modules类型</code>的api创建实体</p>
+<p>2 <code>控制流程</code></p>
+<p>控制流程主要用来解决：</p>
+<p>一个动画中的元素什么时候开始运动（播放）？</p>
+<p>运动时间有多长？</p>
+<p>能不能重复运动？</p>
+<p>几个动画在一块播出顺序是什么？等诸如此类的问题。</p>
+<p>mojs通过<code>Tweens类型</code>的api进行流程控制。</p>
+<p>让我们来看一个最简单的动画例子 <a target="_blank" rel="noopener" href="https://codepen.io/misakisaysyes/pen/YzZgQPm">view in codepen</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const circle &#x3D; new mojs.Shape(&#123;</span><br><span class="line">  &#x2F;&#x2F; 配置实体属性</span><br><span class="line">  shape:        &#39;circle&#39;,               &#x2F;&#x2F; 圆形</span><br><span class="line">  radius:       &#123;&#39;64&#39;: &#39;0&#39;&#125;,            &#x2F;&#x2F; 半径由64px变到0</span><br><span class="line">  fill:         &#123;&#39;white&#39;: &#39;orange&#39;&#125;,    &#x2F;&#x2F; 填充颜色由white变到orange</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; 配置流程控制属性</span><br><span class="line">  duration:       1000,                 &#x2F;&#x2F; 一次动画周期1000ms</span><br><span class="line">  repeat:         1000,                 &#x2F;&#x2F; 动画重复1000 次</span><br><span class="line">  isYoyo:         true,                 &#x2F;&#x2F; 允许动画往返播放</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 流程控制：播放动画</span><br><span class="line">circle.play();</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，我们使用 <code>Modules类型</code>的<code>mojs.Shape</code>api创建了一个动画实体，并指定了实体的形状、半径变化和填充颜色变化。</p>
+<p>又因为mojs的api本质是<code>类</code>，Modules类型的api都继承了<code>Tweens类型</code>中用来实现<code>流程控制</code>的某个api（<code>mojs.Tween</code>），所以在构造实体时，可以配置和<code>流程控制</code>相关的属性，实体使用时，可以调用<code>流程控制</code>相关的方法。</p>
+<p>在这个例子中，构造时就指定了动画周期、重复次数、播放方向，构造之后调用了play()方法播放动画。</p>
+<p>另外，mojs还提供了一些工具函数来丰富动画细节，更多详见 <a target="_blank" rel="noopener" href="https://mojs.github.io/api/">mojs api 文档</a>。</p>
+<p>这里主要列举一些常用的api：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mojs</span><br><span class="line">    - Modules类api &#x2F;&#x2F; 用于创建动画实体</span><br><span class="line">        - Html</span><br><span class="line">        - Shape</span><br><span class="line">        - ShapeSwirl</span><br><span class="line">        - Burst</span><br><span class="line">    - Tweens类api &#x2F;&#x2F; 用于控制动画流程</span><br><span class="line">        - Tween</span><br><span class="line">        - Timeline</span><br><span class="line">    - Easing类api &#x2F;&#x2F; 用于指定动画在不同点上行进速度的api</span><br><span class="line">        - Base Easing Functions</span><br><span class="line">        - Bezier Curves</span><br><span class="line">        - Path Easing</span><br><span class="line">        - Approximate</span><br></pre></td></tr></table></figure>
+
+<h3 id="mojs-api之Modules类"><a href="#mojs-api之Modules类" class="headerlink" title="mojs api之Modules类"></a>mojs api之Modules类</h3><p>mojs Moudles类型api主要用来创建动画实体。</p>
+<p>我们可以通过这类api，给已存在的<code>dom元素</code>绑定动画，也可以新建<code>mojs动画实体元素</code>。</p>
+<p>Modules类型有好几个api，这些api都有如下共性：</p>
+<ol>
+<li><p>is开头命名的属性都是bool型，该属性值为bool值。</p>
+</li>
+<li><p>∆（delta）类型属性，其值为一个对象，该对象中可以用一对key:value表示属性值的变化范围。还可以在对象中设置easing属性。</p>
+</li>
+<li><p>Tween型属性，该类属性是Modules类型api对Tweens类型api继承的结果。</p>
+</li>
+</ol>
+<p>1、2、3条是Modules类型api属性的共性，这里用 mojs.Shape api举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const circle &#x3D; new mojs.Shape(&#123;</span><br><span class="line">  shape: &#39;circle&#39;,</span><br><span class="line"></span><br><span class="line">  isShowStart: true,    &#x2F;&#x2F; bool型属性，实体创建后便显示出来</span><br><span class="line"></span><br><span class="line">  fill: &#123;               &#x2F;&#x2F; ∆属性</span><br><span class="line">    &#39;red&#39;: &#39;blue&#39;,      &#x2F;&#x2F; 该形状的颜色由red变为blue</span><br><span class="line">    easing: &#39;ease.in&#39;,  &#x2F;&#x2F; 该动画以越来越快的速度执行</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  duration: 1000,       &#x2F;&#x2F; Tween属性，动画执行时间1000ms</span><br><span class="line"></span><br><span class="line">  onComplete(isForward, isYoyo) &#123;   &#x2F;&#x2F; Tween回调属性，动画结束时执行</span><br><span class="line">    console.log(&#39;the animation is over&#39;)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>Tween公共方法，play() 、replay()方法等。</p>
+</li>
+<li><p>Tune方法，该方法用来在动画播放中<code>修改</code>动画实体的某个属性值。</p>
+</li>
+<li><p>Generate方法，该方法用来在动画播放中给动画实体某个属性<code>生成随机值</code>。</p>
+</li>
+</ol>
+<p>4、5、6是Moudles型api方法的共性，继续用mojs.Shape举例 <a target="_blank" rel="noopener" href="https://codepen.io/misakisaysyes/pen/qBrgwwP">view in codepen</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* tune example css *&#x2F;</span><br><span class="line">body &#123;</span><br><span class="line">  position:  &#39;relative&#39;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* tune example js *&#x2F;</span><br><span class="line">const circle &#x3D; new mojs.Shape(&#123;</span><br><span class="line">  shape: &#39;circle&#39;,</span><br><span class="line">  fill: &#123;&#39;gold&#39;: &#39;rgba(255,255,255,0)&#39;&#125;,</span><br><span class="line">  radius: &#123;&#39;0&#39;: &#39;32&#39;&#125;,</span><br><span class="line">  duration: 512,</span><br><span class="line">  position: &#39;absoulte&#39;,</span><br><span class="line">&#125;)</span><br><span class="line">document.addEventListener(&#39;click&#39;, e &#x3D;&gt; &#123;  </span><br><span class="line">  circle</span><br><span class="line">    .tune(&#123; left: &#96;$&#123;e.offsetX&#125;px&#96;, top: &#96;$&#123;e.offsetY&#125;px&#96; &#125;) &#x2F;&#x2F; 每次播放动画时，重新设置属性值</span><br><span class="line">    .replay()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* generate example css*&#x2F;</span><br><span class="line">#btn &#123;</span><br><span class="line">  border: 1px solid black;</span><br><span class="line">  padding: 8px 16px;</span><br><span class="line">  display: inline-block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* generate example js*&#x2F;</span><br><span class="line">const random_circle &#x3D; new mojs.Shape(&#123;</span><br><span class="line">  shape: &#39;circle&#39;,</span><br><span class="line">  fill: &#123;&#39;Crimson&#39;: &#39;rgba(255,255,255,0)&#39;&#125;,</span><br><span class="line">  duration: 512,</span><br><span class="line">  x: &#39;rand(-50, 50)&#39;,</span><br><span class="line">  y: &#39;rand(-50, 50)&#39;, </span><br><span class="line">  radius: &#123;&#39;rand(5, 20)&#39;: &#39;0&#39;&#125;,</span><br><span class="line">  duration: 512,</span><br><span class="line">&#125;)</span><br><span class="line">document.onkeydown &#x3D; e &#x3D;&gt; &#123;</span><br><span class="line">  const &#123; code &#125; &#x3D; e</span><br><span class="line">  if ( code &#x3D;&#x3D; &#39;Space&#39; ) &#123; </span><br><span class="line">    random_circle</span><br><span class="line">      .generate() &#x2F;&#x2F; 每次播放动画时，属性值被设置为&#39;rand(xxx, xxx)&#39;的都会生成新的随机值。</span><br><span class="line">      .replay()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面来具体看看各类api的特性：</p>
+<h4 id="mojs-Html"><a href="#mojs-Html" class="headerlink" title="mojs.Html"></a><a target="_blank" rel="noopener" href="https://mojs.github.io/api/modules/html/#contents">mojs.Html</a></h4><p>这个api可以给现有dom元素绑定动画，它有4点值得了解：</p>
+<ol>
+<li><p>在构造实体时，可以采用驼峰式写法直接指定实体的css属性。</p>
+</li>
+<li><p>mojs.Html的∆型属性，可以直接赋值一个mojs.Tween类对象。</p>
+</li>
+<li><p>可以自定义属性，但需要自己实现相应的方法，告诉mojs.Html自定属性如何生效。</p>
+</li>
+<li><p>目前版本(@mojs/core 1.1.0)的master分支的mo.min.js中没有mojs.Html这个api，但dev分支上有。</p>
+</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/misakisaysyes/pen/abJMWYq">view in codepen</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Html</span><br><span class="line">&lt;div id&#x3D;&quot;circle&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Css</span><br><span class="line">body &#123;</span><br><span class="line">  position: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#circle &#123;</span><br><span class="line">  height: 64px;</span><br><span class="line">  width: 64px;</span><br><span class="line">  border-radius: 32px;</span><br><span class="line">  </span><br><span class="line">  position: absolute;</span><br><span class="line">  top: 32px;</span><br><span class="line">  left: 50%;</span><br><span class="line">  transform: translateX(-50%);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Js</span><br><span class="line">const CUSTOM_PROPERTIES &#x3D; &#123;</span><br><span class="line">    customLeft: 50,  &#x2F;&#x2F; 自定义属性需要设置初始值，初始值都必须是数值。</span><br><span class="line">    draw (el, props) &#123;  &#x2F;&#x2F; 通过自定义方法&#39;教&#39;mojs.Html处理自定义属性</span><br><span class="line">      el.style[&#39;left&#39;] &#x3D; &#96;$&#123;props.customLeft&#125;%&#96;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">const html &#x3D; new mojs.Html(&#123;</span><br><span class="line">  el: &#39;#circle&#39;,  &#x2F;&#x2F; 给circle dom元素绑定动画   </span><br><span class="line">  </span><br><span class="line">  backgroundColor: &#39;gold&#39;,  &#x2F;&#x2F; 驼峰式写法设置dom样式 </span><br><span class="line"></span><br><span class="line">  scaleX: &#123;  &#x2F;&#x2F; 给∆型属性赋一个mojs.Tween对象</span><br><span class="line">    0.1: 2,</span><br><span class="line">    repeat: 4,</span><br><span class="line">    isYoyo: true,</span><br><span class="line">    duration: 1000,</span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">  customProperties: CUSTOM_PROPERTIES,  &#x2F;&#x2F; 自定义属性</span><br><span class="line">  customLeft: &#123;25: 75&#125;,  &#x2F;&#x2F; 使用自定义属性</span><br><span class="line">  easing: &#39;ease.inout&#39;,</span><br><span class="line">  repeat: 2,</span><br><span class="line">  isYoyo: true,</span><br><span class="line">  duration: 2000,</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; mojs 动画播放器</span><br><span class="line">new MojsPlayer(&#123; add: html, isPlaying: true, isRepeat: true &#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="mojs-Shape"><a href="#mojs-Shape" class="headerlink" title="mojs.Shape"></a><a target="_blank" rel="noopener" href="https://mojs.github.io/api/modules/shape/">mojs.Shape</a></h4><p>mojs.Shape api 可以用来创建<code>mojs动画实体元素</code>。</p>
+<p>通过这个api，我们可以既创建指定形状的动画实体（圆、方、三角 …etc），也可以借助svg创建自定义形状的动画实体。</p>
+<p>通过 mojs.Shape 创建指定形状示例 <a target="_blank" rel="noopener" href="https://codepen.io/misakisaysyes/pen/dyvLxvG">view in codepen</a></p>
+<p>通过 mojs.Shape 借助svg创建自定义形状 <a target="_blank" rel="noopener" href="https://codepen.io/misakisaysyes/pen/QWpzedR">view in codepen</a></p>
+<blockquote>
+<p>⚠️ 在自定义形状中，如果当自定义动画实体中的<code>strokeDasharray</code>或<code>strokeDashoffset</code>属性使用了<code>百分比</code>的值，则需要在自定义形状的类里重写<code>getLength</code>方法返回一个<code>确定的长度</code>。</p>
+</blockquote>
+<h4 id="mojs-ShapeSwirl"><a href="#mojs-ShapeSwirl" class="headerlink" title="mojs.ShapeSwirl"></a><a target="_blank" rel="noopener" href="https://mojs.github.io/api/modules/shape-swirl/">mojs.ShapeSwirl</a></h4><p>mojs.ShapeSwirl 是另一个创建<code>mojs动画实体元素</code>的api，它是 mojs.Shape api 的增强版本。</p>
+<p>这个api可以用来创建运动轨迹为正弦函数的元素。 一般用于创建烟雾泡泡效果。<a target="_blank" rel="noopener" href="https://codepen.io/misakisaysyes/pen/qBrweYb">view in codepen</a></p>
+<h4 id="mojs-Burst"><a href="#mojs-Burst" class="headerlink" title="mojs.Burst"></a><a target="_blank" rel="noopener" href="https://mojs.github.io/api/modules/burst/">mojs.Burst</a></h4><p>burst api中的children是用来设置爆照效果中每个粒子的属性，这是个mojs.ShapeSwirl类型的值。</p>
+<h3 id="mojs-api之Tweens类"><a href="#mojs-api之Tweens类" class="headerlink" title="mojs api之Tweens类"></a>mojs api之Tweens类</h3><h4 id="mojs-Tween"><a href="#mojs-Tween" class="headerlink" title="mojs.Tween"></a><a target="_blank" rel="noopener" href="https://mojs.github.io/api/tweens/tween.html">mojs.Tween</a></h4><p>从上文已知，mojs中的Modules类型中的api继承了mojs.Tween类，所以在Modules类型的api中就能使用mojs.Tween中控制流程相关的属性和方法。</p>
+<p>但偶尔，mojs.Tween也可以用于替代mojs.Html，给已有的dom元素绑定动画并控制播放，这里有一个给span标签绑定动画的例子：<a target="_blank" rel="noopener" href="https://codepen.io/misakisaysyes/pen/abJXzrV">view in codepen</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Html</span><br><span class="line">&lt;div id&#x3D;&quot;heart&quot;&gt;❤️&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Css</span><br><span class="line">#heart &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  margin: 64px;</span><br><span class="line">  cursor: pointer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Js</span><br><span class="line">const heart &#x3D; document.getElementById(&#39;heart&#39;)</span><br><span class="line">const tween &#x3D; new mojs.Tween(&#123;</span><br><span class="line">  duration:   869.57,</span><br><span class="line">  onUpdate: function(progress) &#123;</span><br><span class="line">        let factor</span><br><span class="line">        if (progress &lt; 0.5) &#123;</span><br><span class="line">            factor &#x3D; 0.85 + 0.55 * (progress &#x2F; 0.5)</span><br><span class="line">        &#125; else if (progress &lt; 1) &#123;</span><br><span class="line">            factor &#x3D; 1.5 - 0.5 * ((progress - 0.5) &#x2F; 0.5)</span><br><span class="line">        &#125; else if (progress &#x3D;&#x3D; 1) &#123;</span><br><span class="line">            factor &#x3D; 1</span><br><span class="line">        &#125;</span><br><span class="line">        heart.style.transform &#x3D; &#96;scale($&#123;factor&#125;)&#96;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">heart.addEventListener(&#39;mouseenter&#39;, e &#x3D;&gt; &#123;</span><br><span class="line">  tween.replay()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="mojs-Timeline"><a href="#mojs-Timeline" class="headerlink" title="mojs.Timeline"></a>mojs.Timeline</h4><p>被其他类<code>继承</code>的mojs.Tween通常为<code>单个动画实体</code>提供了流程控制。但如果有多个动画实体需要控制时，这时就需要用到mojs.Timeline这个api了。</p>
+<p><code>mojs.Timeline继承了mojs.Tween</code>，故mojs.Timeline实例可以使用mojs.Tween中所有的属性和方法。唯二不同的是：<code>*</code>mojs.Timeline中无法对duration属性赋值，其duration属性是其所有children的duration之和。<code>*</code>mojs.Timeline增加了add和remove方法用于增删其控制的动画实体。</p>
+<p>这是一个mojs.Timeline的使用例子：<a target="_blank" rel="noopener" href="https://codepen.io/misakisaysyes/pen/vYxbOwE">view in codepen</a></p>
+<h3 id="mojs-api之Easing类"><a href="#mojs-api之Easing类" class="headerlink" title="mojs api之Easing类"></a>mojs api之Easing类</h3><p>这些类别的api相当于常量，用于给mojs.Tween的<code>easing</code>属性赋值，表示当前动画在某时间点运行的速度。</p>
+<p>更多用法详见文档 <a target="_blank" rel="noopener" href="https://mojs.github.io/api/easing/base-functions.html">mojs Base Easing Functions</a>、<a target="_blank" rel="noopener" href="https://mojs.github.io/api/easing/bezier-curves.html">mojs Bezier Curves</a>、<a target="_blank" rel="noopener" href="https://mojs.github.io/api/easing/path-easing.html">Path Easing</a>、<a target="_blank" rel="noopener" href="https://mojs.github.io/api/easing/approximate.html">Approximate</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://mojs.github.io/">mojs 官网</a></p>
+<p><a target="_blank" rel="noopener" href="https://css-tricks.com/introduction-mo-js/">An Introduction to mo.js</a></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/05/17/electron/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2021-06-11 18:53:32
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/animation/" title="animation">
+                        <b>#</b> animation
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/06/23/%E5%85%B3%E4%BA%8Enpm-%E8%84%9A%E6%89%8B%E6%9E%B6%E7%B3%BB%E5%88%970/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mojs%E7%AE%80%E4%BB%8B"><span class="toc-text">mojs简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mojs-api%E4%B9%8BModules%E7%B1%BB"><span class="toc-text">mojs api之Modules类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mojs-Html"><span class="toc-text">mojs.Html</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mojs-Shape"><span class="toc-text">mojs.Shape</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mojs-ShapeSwirl"><span class="toc-text">mojs.ShapeSwirl</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mojs-Burst"><span class="toc-text">mojs.Burst</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mojs-api%E4%B9%8BTweens%E7%B1%BB"><span class="toc-text">mojs api之Tweens类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mojs-Tween"><span class="toc-text">mojs.Tween</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mojs-Timeline"><span class="toc-text">mojs.Timeline</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mojs-api%E4%B9%8BEasing%E7%B1%BB"><span class="toc-text">mojs api之Easing类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/misakisaysyes">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" target="_blank" rel="noopener" href="https://twitter.com/misakisaysyes">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" target="_blank" rel="noopener" href="https://twitter.com/misakisaysyes">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/misakisaysyes">Copyright © Misakisaysyes 2021</a>
+        
+    </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

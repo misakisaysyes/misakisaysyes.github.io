@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="misakisaysyes" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      动态规划 
+      
+      
+      |
+    
+     misakisaysyes
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/avatar.jpeg">
+    <link rel="icon" href="/images/avatar.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+     <!-- 这里加载烟花特效 -->
+    <!-- <a href="/">
+      
+        <img src="/images/avatar.jpeg" alt="" id="avatar-img">
+      
+    </a> -->
+    <div class="nickname">
+      <a id="user-name" href="/">Misakisaysyes </a>
+      <span id="user-icon">♥️</span>
+    </div>
+    
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/mo.min.js"></script>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+<script src="/js/animation.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">动态规划</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2021-04-21 09:23:22
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/leetcode/" title="leetcode">
+                    <b>#</b> leetcode
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <blockquote>
+<p>动态规划总特点：当前状态可以由之前状态计算出来，一般用dp数组记录运算中的状态。</p>
+</blockquote>
+<h2 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h2><p><code>斐波那契数列</code>类问题的当前状态与之前某几个确定位置的状态相关，且通过当前状态直接可以得出下一个状态的前状态，故可以将记录状态的dp数组优化成几个记录之前特定位置状态的变量，从而减少空间复杂度。</p>
+<h3 id="1-爬楼梯"><a href="#1-爬楼梯" class="headerlink" title="1 爬楼梯"></a>1 爬楼梯</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/climbing-stairs/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 优化前，用dp数组记录状态变化。dp含义为：当总阶梯数为时的爬法总数。</span><br><span class="line">const climbStairs &#x3D; n &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(n + 1).fill(0)</span><br><span class="line">    dp[1] &#x3D; 1</span><br><span class="line">    dp[2] &#x3D; 2</span><br><span class="line">    for(let i &#x3D; 3; i &lt;&#x3D; n; i++ ) &#123;</span><br><span class="line">        dp[i] &#x3D; dp[i - 1] + dp[i - 2]</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[n]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 优化后，分析得出当前状态i只与状态i - 1，和状态i - 2相关，所以用变量n_2记录i - 2，用变量n_1记录i - 1，从而省去了dp数组的空间。</span><br><span class="line">const climbStairs &#x3D; n &#x3D;&gt; &#123;</span><br><span class="line">    if(n &#x3D;&#x3D;&#x3D; 0) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if(n &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return 1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(n &#x3D;&#x3D;&#x3D; 2) &#123;</span><br><span class="line">        return 2</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let n_1 &#x3D; 2</span><br><span class="line">    let n_2 &#x3D; 1</span><br><span class="line">    let n_</span><br><span class="line">    for(let i &#x3D; 3; i &lt;&#x3D; n; i++) &#123;</span><br><span class="line">        n_ &#x3D; n_1 + n_2</span><br><span class="line">        n_2 &#x3D; n_1</span><br><span class="line">        n_1 &#x3D; n_</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return n_</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-强盗抢劫"><a href="#2-强盗抢劫" class="headerlink" title="2 强盗抢劫"></a>2 强盗抢劫</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/house-robber/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 优化前，用dp数组记录状态变化，dp含义为：当街道中最后一个房子为i时，能抢到的最大金额</span><br><span class="line">const rob &#x3D; nums &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(nums.length + 1).fill(0)</span><br><span class="line">    dp[0] &#x3D; 0</span><br><span class="line">    dp[1] &#x3D; nums[0]</span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; nums.length; i++) &#123;</span><br><span class="line">        dp[i] &#x3D; Math.max(dp[i - 1], dp[i - 2] + nums[i - 1])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[nums.length]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 优化后，分析得出当前状态i只与状态i - 1，和状态i - 2相关，所以用变量prev2记录i - 2，用变量prev1记录i - 1，从而省去了dp数组的空间。</span><br><span class="line">const rob &#x3D; nums &#x3D;&gt; &#123;</span><br><span class="line">    if(nums.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return nums[0]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(nums.length &#x3D;&#x3D;&#x3D; 2) &#123;</span><br><span class="line">        return Math.max(nums[0], nums[1])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let cur</span><br><span class="line">    let prev1 &#x3D; nums[0]</span><br><span class="line">    let prev2 &#x3D; 0</span><br><span class="line">    for(let i &#x3D; 1; i &lt; nums.length; i++) &#123;</span><br><span class="line">        cur &#x3D; Math.max(prev1, prev2 + nums[i])</span><br><span class="line">        prev2 &#x3D; prev1</span><br><span class="line">        prev1 &#x3D; cur</span><br><span class="line">    &#125;</span><br><span class="line">    return cur</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-强盗在环形街区抢劫"><a href="#3-强盗在环形街区抢劫" class="headerlink" title="3 强盗在环形街区抢劫"></a>3 强盗在环形街区抢劫</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/house-robber-ii/description/">力扣</a></p>
+<p>注意问题的拆解，环形街区抢劫时首尾房屋不能同时出现，故等价于抢劫两条街道：一条<code>留首去尾</code>街道和一条<code>去首留尾</code>街道。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 环形。首尾取一个</span><br><span class="line">const rob &#x3D; nums &#x3D;&gt; &#123;</span><br><span class="line">    if(nums.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return nums[0]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(nums.length &#x3D;&#x3D;&#x3D; 2) &#123;</span><br><span class="line">        return Math.max(nums[0], nums[1])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return Math.max(helper(nums.slice(0, nums.length - 1)), helper(nums.slice(1, nums.length)))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const helper &#x3D; nums &#x3D;&gt; &#123;</span><br><span class="line">    let cur</span><br><span class="line">    let prev1 &#x3D; nums[0]</span><br><span class="line">    let prev2 &#x3D; 0</span><br><span class="line">    for(let i &#x3D; 1; i &lt; nums.length; i++) &#123;</span><br><span class="line">        cur &#x3D; Math.max(prev1, prev2 + nums[i])</span><br><span class="line">        prev2 &#x3D; prev1</span><br><span class="line">        prev1 &#x3D; cur</span><br><span class="line">    &#125;</span><br><span class="line">    return cur</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="矩阵路径"><a href="#矩阵路径" class="headerlink" title="矩阵路径"></a>矩阵路径</h2><p><code>矩阵路径</code>类问题不同于<code>斐波那契数列</code>类问题，其当前的状态与之前的状态相关，但之前的状态位置比较复杂，需要通过当前位置去计算出来，且通过当前的状态也无法直接计算出下一个状态的相关前状态，故无法用变量直接存储之前的状态。</p>
+<h3 id="1-矩阵最小路径和"><a href="#1-矩阵最小路径和" class="headerlink" title="1 矩阵最小路径和"></a>1 矩阵最小路径和</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-path-sum/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">const minPathSum &#x3D; grid &#x3D;&gt; &#123;</span><br><span class="line">    const m &#x3D; grid.length</span><br><span class="line">    const n &#x3D; grid[0].length</span><br><span class="line"></span><br><span class="line">    let dp &#x3D; new Array(m + 1).fill([])</span><br><span class="line">    dp &#x3D; dp.map(item &#x3D;&gt; new Array(n + 1).fill(0))</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 1; i &lt;&#x3D; m; i++) &#123;</span><br><span class="line">        for(let j &#x3D; 1; j &lt;&#x3D; n; j++) &#123;</span><br><span class="line">            const i_1 &#x3D; i - 1</span><br><span class="line">            const j_1 &#x3D; j - 1</span><br><span class="line">            dp[i][j] &#x3D; grid[i_1][j_1]</span><br><span class="line">            if(i_1 &amp;&amp; j_1) &#123;</span><br><span class="line">                dp[i][j] +&#x3D; Math.min(dp[i_1][j], dp[i][j_1])</span><br><span class="line">                continue</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if(!i_1 &amp;&amp; j_1) &#123;</span><br><span class="line">                dp[i][j] +&#x3D; dp[i][j_1]</span><br><span class="line">                continue</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if(!j_1 &amp;&amp; i_1) &#123;</span><br><span class="line">                dp[i][j] +&#x3D; dp[i_1][j]</span><br><span class="line">                continue</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[m][n]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-矩阵总路径数"><a href="#2-矩阵总路径数" class="headerlink" title="2 矩阵总路径数"></a>2 矩阵总路径数</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const uniquePaths &#x3D; (m, n) &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(m).fill([])</span><br><span class="line">    dp &#x3D; dp.map((item, idx) &#x3D;&gt; &#123;</span><br><span class="line">        if(!idx) &#123;</span><br><span class="line">            return new Array(n).fill(1)</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            let arr &#x3D; new Array(n).fill(0)</span><br><span class="line">            arr[0] &#x3D; 1</span><br><span class="line">            return arr</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 1; i &lt; m; i++) &#123;</span><br><span class="line">        for(let j &#x3D; 1; j &lt; n; j++) &#123;</span><br><span class="line">            dp[i][j] &#x3D; dp[i - 1][j] + dp[i][j - 1]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[m - 1][n - 1]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组区间-🤔"><a href="#数组区间-🤔" class="headerlink" title="数组区间 🤔"></a>数组区间 🤔</h2><h3 id="1-数组区间和"><a href="#1-数组区间和" class="headerlink" title="1 数组区间和"></a>1 数组区间和</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/range-sum-query-immutable/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 优化前 每次计算时间复杂度是O(n)</span><br><span class="line">class NumArray &#123;</span><br><span class="line">    constructor(nums) &#123;</span><br><span class="line">        this.nums &#x3D; [...nums]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sumRange(i, j) &#123;</span><br><span class="line">        let temp &#x3D; nums.slice(i, j + 1)</span><br><span class="line">        return temp.reduce((prev, cur) &#x3D;&gt; prev + cur, 0)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 优化后 每次计算时间复杂度是O(1)</span><br><span class="line">class NumArray &#123;</span><br><span class="line">    constructor(nums) &#123;</span><br><span class="line">        let preSum &#x3D; new Array(nums.length + 1).fill(0)</span><br><span class="line">        for(let i &#x3D; 1; i &lt;&#x3D; nums.length; i++) &#123;</span><br><span class="line">            preSum[i] &#x3D; nums[i - 1] + preSum[i - 1]</span><br><span class="line">        &#125;</span><br><span class="line">        this.preSum &#x3D; preSum</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sumRange(i, j) &#123;</span><br><span class="line">        return this.preSum[j + 1] - this.preSum[i]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-数组中等差递增子区间的个数-🤔"><a href="#2-数组中等差递增子区间的个数-🤔" class="headerlink" title="2 数组中等差递增子区间的个数 🤔"></a>2 数组中等差递增子区间的个数 🤔</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/arithmetic-slices/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const numberOfArithmeticSlices &#x3D; nums &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; 0</span><br><span class="line">    let sum &#x3D; 0</span><br><span class="line">    for(let i &#x3D; 2; i &lt; nums.length; i++) &#123;</span><br><span class="line">        if(nums[i] - nums[i - 1] &#x3D;&#x3D;&#x3D; nums[i - 1] - nums[i - 2]) &#123;</span><br><span class="line">            dp++</span><br><span class="line">            sum +&#x3D; dp</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            dp &#x3D; 0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="分割整数"><a href="#分割整数" class="headerlink" title="分割整数"></a>分割整数</h2><h3 id="1-分割整数的最大乘积"><a href="#1-分割整数的最大乘积" class="headerlink" title="1 分割整数的最大乘积"></a>1 分割整数的最大乘积</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/integer-break/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const integerBreak &#x3D; n &#x3D;&gt; &#123;</span><br><span class="line">    if(n &#x3D;&#x3D;&#x3D; 0) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(n &#x3D;&#x3D;&#x3D; 1 || n &#x3D;&#x3D;&#x3D; 2) &#123;</span><br><span class="line">        return 1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let dp &#x3D; new Array(n + 1).fill(0)</span><br><span class="line">    dp[0] &#x3D; dp[1] &#x3D; dp[2] &#x3D; 1</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 3; i &lt;&#x3D; n; i++) &#123;</span><br><span class="line">        for(let j &#x3D; 1; j &lt;&#x3D; Math.floor(i &#x2F; 2); j++) &#123;</span><br><span class="line">            const f1 &#x3D; j</span><br><span class="line">            const f2 &#x3D; i - j</span><br><span class="line">            dp[i] &#x3D; Math.max(dp[i], f1 * f2, f1 * dp[f2], dp[f1] * f2, dp[f1] * dp[f2])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[n]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-按平方数来分割整数"><a href="#2-按平方数来分割整数" class="headerlink" title="2 按平方数来分割整数"></a>2 按平方数来分割整数</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/perfect-squares/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">const numSquares &#x3D;  n &#x3D;&gt; &#123;</span><br><span class="line">    if(n &#x3D;&#x3D;&#x3D; 0) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(n &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return 1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let factors &#x3D; []</span><br><span class="line">    for(let i &#x3D; 0; i &lt; Math.floor(n&#x2F;2); i++) &#123;</span><br><span class="line">        factors[i] &#x3D; (i + 1) * (i + 1)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let dp &#x3D; new Array(n + 1).fill(Number.MAX_VALUE)</span><br><span class="line">    dp[0] &#x3D; 0</span><br><span class="line">    dp[1] &#x3D; 1</span><br><span class="line">    for(let factor of factors) &#123;</span><br><span class="line">        for(let i &#x3D; factor; i &lt;&#x3D; n; i++) &#123;</span><br><span class="line">            dp[i] &#x3D; Math.min(dp[i], 1 + dp[i - factor])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[n]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-分割整数构成字母字符串"><a href="#3-分割整数构成字母字符串" class="headerlink" title="3 分割整数构成字母字符串"></a>3 分割整数构成字母字符串</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/decode-ways/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const numDecodings &#x3D; s &#x3D;&gt; &#123;</span><br><span class="line">    let dict &#x3D; []</span><br><span class="line">    for(let i &#x3D; 0; i &lt; 26; i++) &#123;</span><br><span class="line">        dict.push(&#96;$&#123;i + 1&#125;&#96;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let dp &#x3D; new Array(s.length + 1).fill(0)</span><br><span class="line">    dp[0] &#x3D; 1</span><br><span class="line">    for(let i &#x3D; 1; i &lt;&#x3D; s.length; i++) &#123;</span><br><span class="line">        for(let d of dict) &#123;</span><br><span class="line">            const dLen &#x3D; d.length</span><br><span class="line">            if(i &gt;&#x3D; dLen) &#123;</span><br><span class="line">                const sSlice &#x3D; s.slice(i - dLen , i)</span><br><span class="line">                if(d &#x3D;&#x3D;&#x3D; sSlice) &#123;</span><br><span class="line">                    dp[i] +&#x3D; dp[i - dLen]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[s.length]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="最长递增子序列-🤔"><a href="#最长递增子序列-🤔" class="headerlink" title="最长递增子序列 🤔"></a>最长递增子序列 🤔</h2><h3 id="1-最长递增子序列-🤔"><a href="#1-最长递增子序列-🤔" class="headerlink" title="1 最长递增子序列 🤔"></a>1 最长递增子序列 🤔</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-increasing-subsequence/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 原始</span><br><span class="line">const lengthOfLIS &#x3D; nums &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(nums.length + 1).fill(1)</span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; nums.length; i++) &#123;</span><br><span class="line">        for(j &#x3D; i - 1; j &gt; 0; j--) &#123;</span><br><span class="line">            if(nums[i - 1] &gt; nums[j - 1]) &#123;</span><br><span class="line">                dp[i] &#x3D; Math.max(dp[i], dp[j] + 1)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp.reduce((prev, cur) &#x3D;&gt; Math.max(prev, cur), 0)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 优化一：减少循环次数（优化效果不明显）</span><br><span class="line">const lengthOfLIS &#x3D; nums &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(nums.length + 1).fill(1)</span><br><span class="line">    let maxDp &#x3D; 1</span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; nums.length; i++) &#123;</span><br><span class="line">        for(j &#x3D; i - 1; j &gt; 0; j--) &#123;</span><br><span class="line">            if(nums[i - 1] &gt; nums[j - 1]) &#123;</span><br><span class="line">                dp[i] &#x3D; Math.max(dp[i], dp[j] + 1)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        maxDp &#x3D; Math.max(maxDp, dp[i])</span><br><span class="line">    &#125;</span><br><span class="line">    return maxDp</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 优化二：使用二分查找降低时间复杂度</span><br><span class="line">&#x2F;&#x2F; to be think 🤔</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-一组整数对能够构成的最长链"><a href="#2-一组整数对能够构成的最长链" class="headerlink" title="2 一组整数对能够构成的最长链"></a>2 一组整数对能够构成的最长链</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-length-of-pair-chain/submissions/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const findLongestChain &#x3D; pairs &#x3D;&gt; &#123;</span><br><span class="line">    pairs.sort((a, b) &#x3D;&gt; a[0] - b[0])</span><br><span class="line">    let dp &#x3D; new Array(pairs.length + 1).fill(1)</span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; pairs.length; i++) &#123;</span><br><span class="line">        for(let j &#x3D; i - 1; j &gt; 0; j--) &#123;</span><br><span class="line">            const curPair &#x3D; pairs[i - 1]</span><br><span class="line">            const prevPair &#x3D; pairs[j - 1]</span><br><span class="line">            if(prevPair[1] &lt; curPair[0]) &#123;</span><br><span class="line">                dp[i] &#x3D; Math.max(dp[i], dp[j] + 1)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp.reduce((prev, cur) &#x3D;&gt; Math.max(prev, cur), 0)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-最长摆动子序列-🤔"><a href="#3-最长摆动子序列-🤔" class="headerlink" title="3 最长摆动子序列 🤔"></a>3 最长摆动子序列 🤔</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/wiggle-subsequence/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 优化前，空间复杂度过大</span><br><span class="line">const wiggleMaxLength &#x3D; nums &#x3D;&gt; &#123;</span><br><span class="line">    if(!nums) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let down &#x3D; new Array(nums.length + 1).fill(0)</span><br><span class="line">    let up &#x3D; new Array(nums.length + 1).fill(0)</span><br><span class="line"></span><br><span class="line">    down[1] &#x3D; 1</span><br><span class="line">    up[1] &#x3D; 1</span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; nums.length; i++) &#123;</span><br><span class="line">        if(nums[i - 1] - nums[i - 2] &gt; 0) &#123;</span><br><span class="line">            up[i] &#x3D; 1 + down[i - 1]</span><br><span class="line">            down[i] &#x3D; down[i - 1]</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(nums[i - 1] - nums[i - 2] &lt; 0) &#123;</span><br><span class="line">            down[i] &#x3D; 1 + up[i - 1]</span><br><span class="line">            up[i] &#x3D; up[i - 1]</span><br><span class="line">            continue</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        down[i] &#x3D; down[i - 1]</span><br><span class="line">        up[i] &#x3D; up[i - 1]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return Math.max(down[nums.length], up[nums.length])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 优化后</span><br><span class="line">const wiggleMaxLength &#x3D; nums &#x3D;&gt; &#123; </span><br><span class="line">    if(!nums) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(nums.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return 1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let down &#x3D; up &#x3D; 1</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 1; i &lt; nums.length; i++) &#123;</span><br><span class="line">        if(nums[i] - nums[i - 1] &gt; 0) &#123;</span><br><span class="line">            up &#x3D; down + 1</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(nums[i] - nums[i - 1] &lt; 0) &#123;</span><br><span class="line">            down &#x3D; up + 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return Math.max(up, down)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h2><h3 id="1-最长公共子序列"><a href="#1-最长公共子序列" class="headerlink" title="1 最长公共子序列"></a>1 最长公共子序列</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-common-subsequence/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const longestCommonSubsequence &#x3D; (text1, text2) &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(text1.length + 1).fill([])</span><br><span class="line">    dp &#x3D; dp.map(item &#x3D;&gt; new Array(text2.length + 1).fill(0))</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 1; i &lt;&#x3D; text1.length; i++) &#123;</span><br><span class="line">        for(let j &#x3D; 1; j &lt;&#x3D; text2.length; j++) &#123;</span><br><span class="line">            if(text1[i - 1] &#x3D;&#x3D;&#x3D; text2[j - 1]) &#123;</span><br><span class="line">                dp[i][j] &#x3D; Math.max(dp[i][j], dp[i - 1][j - 1] + 1)</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                dp[i][j] &#x3D; Math.max(dp[i][j], dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[text1.length][text2.length]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="0-1-背包"><a href="#0-1-背包" class="headerlink" title="0-1 背包"></a>0-1 背包</h2><p>有一个容量为N的背包，要用这个背包装入的物品价值最大，其中物品有两个属性，物品体积w，物品价值v<br>dp[n]含义：当容量为n时，物品能组合出的最大价值。<br>故状态转移方程为：dp[n] = max(dp[n], dp[n - w] + v)</p>
+<h3 id="1-分割等和子集"><a href="#1-分割等和子集" class="headerlink" title="1 分割等和子集"></a>1 分割等和子集</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-equal-subset-sum/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">const canPartition &#x3D; nums &#x3D;&gt; &#123;</span><br><span class="line">    let sum &#x3D; nums.reduce((prev, cur) &#x3D;&gt; prev + cur, 0)</span><br><span class="line">    if(sum % 2) &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    sum &#x2F;&#x3D; 2</span><br><span class="line"></span><br><span class="line">    let dp &#x3D; new Array(sum + 1).fill(false)</span><br><span class="line">    dp[0] &#x3D; true</span><br><span class="line">    for(let num of nums) &#123;</span><br><span class="line">        for(let i &#x3D; sum; i &gt;&#x3D; num; i--) &#123;</span><br><span class="line">            dp[i] &#x3D; dp[i] || dp[i - num]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[sum]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-改变正负号使它们的和为一定整数"><a href="#2-改变正负号使它们的和为一定整数" class="headerlink" title="2 改变正负号使它们的和为一定整数"></a>2 改变正负号使它们的和为一定整数</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/target-sum/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const findTargetSumWays &#x3D; (nums, target) &#x3D;&gt; &#123;</span><br><span class="line">    if(!nums || !nums.length) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const sum &#x3D; nums.reduce((prev, cur) &#x3D;&gt; prev + cur, 0)</span><br><span class="line">    if(sum &lt; target || ((sum + target) % 2)) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const newTarget &#x3D; (sum + target) &#x2F; 2</span><br><span class="line"></span><br><span class="line">    const dp &#x3D; new Array(newTarget + 1).fill(0)</span><br><span class="line">    dp[0] &#x3D; 1</span><br><span class="line">    for(let num of nums) &#123;</span><br><span class="line">        for(let i &#x3D; newTarget; i &gt;&#x3D; num; i--) &#123;</span><br><span class="line">            dp[i] +&#x3D; dp[i - num]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[newTarget]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-一零和"><a href="#3-一零和" class="headerlink" title="3 一零和"></a>3 一零和</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ones-and-zeroes/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const findMaxForm &#x3D; (strs, m, n) &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(m + 1).fill([])</span><br><span class="line">    dp &#x3D; dp.map(item &#x3D;&gt; new Array(n + 1).fill(0))</span><br><span class="line"></span><br><span class="line">    for(let str of strs) &#123;</span><br><span class="line">        let _m &#x3D; 0</span><br><span class="line">        let _n &#x3D; 0</span><br><span class="line">        for(let s of str) &#123;</span><br><span class="line">            s &#x3D;&#x3D;&#x3D; &#39;0&#39; &amp;&amp; _m++</span><br><span class="line">            s &#x3D;&#x3D;&#x3D; &#39;1&#39; $$ _n++</span><br><span class="line">        &#125; </span><br><span class="line">        for(let i &#x3D; m; i &gt;&#x3D;_m; i--) &#123;</span><br><span class="line">            for(let j &#x3D; n; j &gt;&#x3D;_n; j--) &#123;</span><br><span class="line">                dp[i][j] &#x3D; Math.max(dp[i][j], dp[i - _m][j - _n] + 1)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return dp[m][n]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-找零给最少的硬币数"><a href="#4-找零给最少的硬币数" class="headerlink" title="4 找零给最少的硬币数"></a>4 找零给最少的硬币数</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 注意dp数组的初始化值</span><br><span class="line">const coinChange &#x3D; (coins, amount) &#x3D;&gt; &#123; </span><br><span class="line">    let dp &#x3D; new Array(amount + 1).fill(Number.MAX_VALUE)</span><br><span class="line">    dp[0] &#x3D; 0</span><br><span class="line">    for(let coin of coins) &#123;</span><br><span class="line">        for(let i &#x3D; coin; i &lt;&#x3D; amount; i++) &#123;</span><br><span class="line">            dp[i] &#x3D; Math.min(dp[i], dp[i - coin] + 1)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(dp[amount] &#x3D;&#x3D;&#x3D; Number.MAX_VALUE) &#123;</span><br><span class="line">        return -1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[amount]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-找零的硬币数组合"><a href="#5-找零的硬币数组合" class="headerlink" title="5 找零的硬币数组合"></a>5 找零的硬币数组合</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change-2/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const change &#x3D; (amount, coins) &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(amount + 1).fill(0)</span><br><span class="line">    dp[0] &#x3D; 1</span><br><span class="line">    for(let coin of coins) &#123;</span><br><span class="line">        for(let i &#x3D; coin; i &lt;&#x3D; amount; i++) &#123;</span><br><span class="line">            dp[i] +&#x3D; dp[i - coin]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[amount]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-字符串按单词列表划分"><a href="#6-字符串按单词列表划分" class="headerlink" title="6 字符串按单词列表划分"></a>6 字符串按单词列表划分</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-break/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const wordBreak &#x3D; (s, wordDict) &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(s.length + 1).fill(false)</span><br><span class="line">    dp[0] &#x3D; true</span><br><span class="line">    for(let i &#x3D; 1; i &lt; dp.length; i++) &#123;</span><br><span class="line">        for(let word of wordDict) &#123;</span><br><span class="line">            const wordLen &#x3D; word.length</span><br><span class="line">            if(i &gt;&#x3D; wordLen) &#123;</span><br><span class="line">                const wordSlice &#x3D; s.slice(i - wordLen , i)</span><br><span class="line">                if(word &#x3D;&#x3D;&#x3D; wordSlice) &#123;</span><br><span class="line">                    dp[i] &#x3D; dp[i] || dp[i - wordLen]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[s.length]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-组合总和"><a href="#7-组合总和" class="headerlink" title="7  组合总和"></a>7  组合总和</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-iv/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const combinationSum4 &#x3D; (nums, target) &#x3D;&gt; &#123;</span><br><span class="line">    let dp &#x3D; new Array(target + 1).fill(0)</span><br><span class="line">    dp[0] &#x3D; 1</span><br><span class="line">    for(let i &#x3D; 1; i &lt;&#x3D; target; i++) &#123;</span><br><span class="line">        for(let num of nums) &#123;</span><br><span class="line">            if(i &gt;&#x3D; num) &#123;</span><br><span class="line">                dp[i] +&#x3D; dp[i - num]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[target]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="股票交易"><a href="#股票交易" class="headerlink" title="股票交易"></a>股票交易</h2><h3 id="1-需要冷却期限的股票交易"><a href="#1-需要冷却期限的股票交易" class="headerlink" title="1 需要冷却期限的股票交易"></a>1 需要冷却期限的股票交易</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/">力扣</a></p>
+<p>茴香豆茴字的4种写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const maxProfit &#x3D; prices &#x3D;&gt; &#123;</span><br><span class="line">    if(!prices || prices.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let hold &#x3D; new Array(prices.length + 1).fill(0)</span><br><span class="line">    let canBuy &#x3D; new Array(prices.length + 1).fill(0)</span><br><span class="line">    let freeze &#x3D; new Array(prices.length + 1).fill(0)</span><br><span class="line"></span><br><span class="line">    hold[1] &#x3D; -prices[0]</span><br><span class="line">    &#x2F;&#x2F; 初始化边界值，在这里可以省略</span><br><span class="line">    &#x2F;&#x2F; canBuy[1] &#x3D; 0 </span><br><span class="line">    &#x2F;&#x2F; freeze[1] &#x3D; 0</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; prices.length; i++) &#123;</span><br><span class="line">        hold[i] &#x3D; Math.max(hold[i - 1], canBuy[i - 1] - prices[i - 1])</span><br><span class="line">        canBuy[i] &#x3D; Math.max(canBuy[i - 1], freeze[i - 1])</span><br><span class="line">        freeze[i] &#x3D; hold[i - 1] + prices[i - 1]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return Math.max(canBuy[prices.length], freeze[prices.length])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const maxProfit &#x3D; prices &#x3D;&gt; &#123;</span><br><span class="line">    if(!prices || prices.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let hold &#x3D; -prices[0]</span><br><span class="line">    let canBuy &#x3D; 0</span><br><span class="line">    let freeze &#x3D; 0</span><br><span class="line">    </span><br><span class="line">    for(let i &#x3D; 1; i &lt; prices.length; i++) &#123;</span><br><span class="line">        let prevHold &#x3D; hold</span><br><span class="line">        let prevCanBuy &#x3D; canBuy</span><br><span class="line">        let prevFreeze &#x3D; freeze</span><br><span class="line">        hold &#x3D; Math.max(prevHold, prevCanBuy - prices[i])</span><br><span class="line">        canBuy &#x3D; Math.max(prevCanBuy, prevFreeze)</span><br><span class="line">        freeze &#x3D; prevHold + prices[i]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return Math.max(canBuy, freeze)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const maxProfit &#x3D; prices &#x3D;&gt; &#123;</span><br><span class="line">    if(!prices || prices.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let hold &#x3D; -prices[0]</span><br><span class="line">    let canBuy &#x3D; 0</span><br><span class="line">    let freeze &#x3D; 0</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 1; i &lt; prices.length; i++) &#123;</span><br><span class="line">        let prevHold &#x3D; hold</span><br><span class="line">        hold &#x3D; Math.max(hold, canBuy - prices[i])</span><br><span class="line">        canBuy &#x3D; Math.max(canBuy, freeze)</span><br><span class="line">        freeze &#x3D; prevHold + prices[i]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return Math.max(canBuy, freeze)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const maxProfit &#x3D; prices &#x3D;&gt; &#123;</span><br><span class="line">    if(!prices || !prices.length) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let hold &#x3D; new Array(prices.length + 1).fill(0)</span><br><span class="line">    let unhold &#x3D; new Array(prices.length + 1).fill(0)</span><br><span class="line">    hold[1] &#x3D; -prices[0]</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; prices.length; i++) &#123;</span><br><span class="line">        hold[i] &#x3D; Math.max(hold[i - 1], unhold[i - 2] - prices[i - 1])</span><br><span class="line">        unhold[i] &#x3D; Math.max(unhold[i - 1], hold[i - 1] + prices[i - 1])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return unhold[prices.length]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-买卖股票的最佳时机（含手续费）"><a href="#2-买卖股票的最佳时机（含手续费）" class="headerlink" title="2 买卖股票的最佳时机（含手续费）"></a>2 买卖股票的最佳时机（含手续费）</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 方法一</span><br><span class="line">const maxProfit &#x3D; (prices, fee) &#x3D;&gt; &#123;</span><br><span class="line">    const hold &#x3D; new Array(prices.length + 1).fill(0)</span><br><span class="line">    const unhold &#x3D; new Array(prices.length + 1).fill(0)</span><br><span class="line"></span><br><span class="line">    hold[1] &#x3D; -prices[0]</span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; prices.length; i++) &#123;</span><br><span class="line">        hold[i] &#x3D; Math.max(hold[i - 1], unhold[i - 1] - prices[i - 1])</span><br><span class="line">        unhold[i] &#x3D; Math.max(unhold[i - 1], hold[i - 1] + prices[i - 1] - fee)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return unhold[prices.length]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 空间优化</span><br><span class="line">const maxProfit &#x3D; (prices, fee) &#x3D;&gt; &#123;</span><br><span class="line">    let hold &#x3D; -prices[0]</span><br><span class="line">    let unhold &#x3D; 0</span><br><span class="line">    for(let i &#x3D; 1; i &lt; prices.length; i++) &#123;</span><br><span class="line">        let prevHold &#x3D; hold</span><br><span class="line">        hold &#x3D; Math.max(hold, unhold - prices[i])</span><br><span class="line">        unhold &#x3D; Math.max(unhold, prevHold + prices[i] - fee)</span><br><span class="line">    &#125;</span><br><span class="line">    return unhold</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-只能进行两次股票交易"><a href="#3-只能进行两次股票交易" class="headerlink" title="3 只能进行两次股票交易"></a>3 只能进行两次股票交易</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/submissions/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const maxProfit &#x3D; prices &#x3D;&gt; &#123;</span><br><span class="line">    if(!prices || !prices.length || prices.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let hold1 &#x3D; new Array(prices.length + 1).fill(0)</span><br><span class="line">    let canBuy1 &#x3D; new Array(prices.length + 1).fill(0)</span><br><span class="line">    let hold2 &#x3D; new Array(prices.length + 1).fill(0)</span><br><span class="line">    let canBuy2 &#x3D; new Array(prices.length + 1).fill(0)</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 初始值</span><br><span class="line">    hold1[1] &#x3D; -prices[0]</span><br><span class="line">    canBuy1[1] &#x3D; 0</span><br><span class="line">    hold2[1] &#x3D; -prices[0]</span><br><span class="line">    canBuy2[1] &#x3D; 0</span><br><span class="line">    </span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; prices.length; i++) &#123;</span><br><span class="line">        hold1[i] &#x3D; Math.max(hold1[i - 1], -prices[i - 1])</span><br><span class="line">        canBuy1[i] &#x3D; Math.max(canBuy1[i - 1], hold1[i - 1] + prices[i - 1])</span><br><span class="line">        hold2[i] &#x3D; Math.max(hold2[i - 1], canBuy1[i - 1] - prices[i - 1])</span><br><span class="line">        canBuy2[i] &#x3D; Math.max(canBuy2[i - 1], hold2[i - 1] + prices[i - 1])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return canBuy2[prices.length]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">const maxProfit &#x3D; prices &#x3D;&gt; &#123;</span><br><span class="line">    if(!prices || !prices.length || prices.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let hold1 &#x3D; -prices[0]</span><br><span class="line">    let canBuy1 &#x3D; 0</span><br><span class="line">    let hold2 &#x3D; -prices[0]</span><br><span class="line">    let canBuy2 &#x3D; 0</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 1; i &lt; prices.length; i++) &#123;</span><br><span class="line">        let prevHold1 &#x3D; hold1</span><br><span class="line">        let prevCanBuy1 &#x3D; canBuy1</span><br><span class="line">        let prevHold2 &#x3D; hold2</span><br><span class="line">        let prevCanBuy2 &#x3D; canBuy2</span><br><span class="line">        hold1 &#x3D; Math.max(prevHold1, - prices[i])</span><br><span class="line">        canBuy1 &#x3D; Math.max(prevCanBuy1, prevHold1 + prices[i])</span><br><span class="line">        hold2 &#x3D; Math.max(prevHold2, prevCanBuy1 - prices[i])</span><br><span class="line">        canBuy2 &#x3D; Math.max(prevCanBuy2, prevHold2 + prices[i])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return canBuy2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 多维通用解法</span><br><span class="line">const maxProfit &#x3D; prices &#x3D;&gt; &#123;</span><br><span class="line">    if(!prices || !prices.length || prices.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let dp &#x3D; new Array(prices.length + 1).fill([])</span><br><span class="line">    dp &#x3D; dp.map(item &#x3D;&gt; new Array(4).fill(0))</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 0 &#x3D;&gt; hold 1</span><br><span class="line">    &#x2F;&#x2F; 1 &#x3D;&gt; canBuy 1</span><br><span class="line">    &#x2F;&#x2F; 2 &#x3D;&gt; hold 2</span><br><span class="line">    &#x2F;&#x2F; 3 &#x3D;&gt; canBuy 2</span><br><span class="line"></span><br><span class="line">    dp[1][0] &#x3D; dp[1][2] &#x3D; - prices[0]</span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; prices.length; i++) &#123;</span><br><span class="line">        dp[i][0] &#x3D; Math.max(dp[i - 1][0], - prices[i - 1])</span><br><span class="line">        dp[i][1] &#x3D; Math.max(dp[i - 1][1], dp[i - 1][0] + prices[i - 1])</span><br><span class="line">        dp[i][2] &#x3D; Math.max(dp[i - 1][2], dp[i - 1][1] - prices[i - 1])</span><br><span class="line">        dp[i][3] &#x3D; Math.max(dp[i - 1][3], dp[i - 1][2] + prices[i - 1])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[prices.length][3]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 再整合</span><br><span class="line">const maxProfit &#x3D; prices &#x3D;&gt; &#123;</span><br><span class="line">    if(!prices || !prices.length || prices.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let dp &#x3D; new Array(prices.length + 1).fill([])</span><br><span class="line">    dp &#x3D; dp.map(item &#x3D;&gt; new Array(5).fill(0)) &#x2F;&#x2F; 5 个状态</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 0 &#x3D;&gt; idle</span><br><span class="line">    &#x2F;&#x2F; 1 &#x3D;&gt; hold1</span><br><span class="line">    &#x2F;&#x2F; 2 &#x3D;&gt; canBuy1</span><br><span class="line">    &#x2F;&#x2F; 3 &#x3D;&gt; hold2</span><br><span class="line">    &#x2F;&#x2F; 4 &#x3D;&gt; canBuy2</span><br><span class="line"></span><br><span class="line">    dp[1][1] &#x3D; dp[1][3] &#x3D; - prices[0]</span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; prices.length; i++) &#123;</span><br><span class="line">        dp[i][1] &#x3D; Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i - 1])</span><br><span class="line">        dp[i][2] &#x3D; Math.max(dp[i - 1][2], dp[i - 1][1] + prices[i - 1])</span><br><span class="line">        dp[i][3] &#x3D; Math.max(dp[i - 1][3], dp[i - 1][2] - prices[i - 1])</span><br><span class="line">        dp[i][4] &#x3D; Math.max(dp[i - 1][4], dp[i - 1][3] + prices[i - 1])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[prices.length][4]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-只能进行k次的股票交易"><a href="#4-只能进行k次的股票交易" class="headerlink" title="4 只能进行k次的股票交易"></a>4 只能进行k次的股票交易</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const maxProfit &#x3D; (k, prices) &#x3D;&gt; &#123;</span><br><span class="line">    if(!prices || !prices.length || prices.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let statusNum &#x3D; 2 * k + 1</span><br><span class="line">    let dp &#x3D; new Array(prices.length + 1).fill([])</span><br><span class="line">    dp &#x3D; dp.map(item &#x3D;&gt; new Array(statusNum).fill(0))</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 初始化</span><br><span class="line">    for(let i &#x3D; 0; i &lt; statusNum; i++) &#123;</span><br><span class="line">        i % 2 &amp;&amp; (dp[1][i] &#x3D; -prices[0])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; prices.length; i++) &#123;</span><br><span class="line">        for(let j &#x3D; 1; j &lt; statusNum; j++) &#123;</span><br><span class="line">            if(j%2) &#123;</span><br><span class="line">                dp[i][j] &#x3D; Math.max(dp[i - 1][j], dp[i - 1][j - 1] - prices[i - 1])</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                dp[i][j] &#x3D; Math.max(dp[i - 1][j], dp[i - 1][j - 1] + prices[i - 1])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[prices.length][statusNum - 1]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串编辑-🤔"><a href="#字符串编辑-🤔" class="headerlink" title="字符串编辑 🤔"></a>字符串编辑 🤔</h2><h3 id="1-删除两个字符串的字符使它们相等"><a href="#1-删除两个字符串的字符使它们相等" class="headerlink" title="1 删除两个字符串的字符使它们相等"></a>1 删除两个字符串的字符使它们相等</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/delete-operation-for-two-strings/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 将问题转化成最长公共子序列</span><br><span class="line">const minDistance &#x3D; (word1, word2) &#x3D;&gt; &#123;</span><br><span class="line">    let w1Len &#x3D; word1.length</span><br><span class="line">    let w2Len &#x3D; word2.length</span><br><span class="line"></span><br><span class="line">    let dp &#x3D; new Array(w1Len + 1).fill([])</span><br><span class="line">    dp &#x3D; dp.map(item &#x3D;&gt; new Array(w2Len + 1).fill(0))</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 1; i &lt;&#x3D; w1Len; i++) &#123;</span><br><span class="line">        for(let j &#x3D; 1; j &lt;&#x3D; w2Len; j++) &#123;</span><br><span class="line">            if(word1[i - 1] &#x3D;&#x3D;&#x3D; word2[j - 1]) &#123;</span><br><span class="line">                dp[i][j] &#x3D; Math.max(dp[i][j], dp[i - 1][j - 1] + 1)</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                dp[i][j] &#x3D; Math.max(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return w1Len + w2Len - 2 * dp[w1Len][w2Len]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-编辑距离-🤔"><a href="#2-编辑距离-🤔" class="headerlink" title="2 编辑距离 🤔"></a>2 编辑距离 🤔</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/edit-distance/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">const minDistance &#x3D; (word1, word2) &#x3D;&gt; &#123;</span><br><span class="line">    let w1Len &#x3D; word1.length</span><br><span class="line">    let w2Len &#x3D; word2.length</span><br><span class="line"></span><br><span class="line">    let dp &#x3D; new Array(w1Len + 1).fill([])</span><br><span class="line">    dp &#x3D; dp.map(item &#x3D;&gt; new Array(w2Len + 1).fill(0))</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 0; i &lt;&#x3D; w1Len; i++) &#123;</span><br><span class="line">        dp[i][0] &#x3D; i</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for(let j &#x3D; 0; j &lt;&#x3D; w2Len; j++) &#123;</span><br><span class="line">        dp[0][j] &#x3D; j</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for(let i &#x3D; 1; i &lt;&#x3D; w1Len; i++) &#123;</span><br><span class="line">        for(let j &#x3D; 1;  j &lt;&#x3D; w2Len; j++) &#123;</span><br><span class="line">            if(word1[i - 1] &#x3D;&#x3D;&#x3D; word2[j - 1]) &#123;</span><br><span class="line">                dp[i][j] &#x3D; Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1])</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                dp[i][j] &#x3D; 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[w1Len][w2Len]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-复制粘贴字符串"><a href="#3-复制粘贴字符串" class="headerlink" title="3 复制粘贴字符串"></a>3 复制粘贴字符串</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/2-keys-keyboard/description/">力扣</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const minSteps &#x3D; n &#x3D;&gt; &#123;</span><br><span class="line">    if(!n || n &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let dp &#x3D; new Array(n + 1).fill(0)</span><br><span class="line">    dp[1] &#x3D; 0</span><br><span class="line">    for(let i &#x3D; 2; i &lt;&#x3D; n; i++) &#123;</span><br><span class="line">        dp[i] &#x3D; i</span><br><span class="line">        const boundray &#x3D; Math.floor(Math.sqrt(i))</span><br><span class="line">        for(let j &#x3D; 2; j &lt;&#x3D; boundray; j++) &#123;</span><br><span class="line">            if(i%j &#x3D;&#x3D;&#x3D; 0) &#123;</span><br><span class="line">                dp[i] &#x3D; dp[j] + dp[i&#x2F;j]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[n]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/12/24/%E6%97%A5%E5%BF%97/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2021-04-21 09:23:22
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/leetcode/" title="leetcode">
+                        <b>#</b> leetcode
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/04/23/list/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97"><span class="toc-text">斐波那契数列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%88%AC%E6%A5%BC%E6%A2%AF"><span class="toc-text">1 爬楼梯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BC%BA%E7%9B%97%E6%8A%A2%E5%8A%AB"><span class="toc-text">2 强盗抢劫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%BC%BA%E7%9B%97%E5%9C%A8%E7%8E%AF%E5%BD%A2%E8%A1%97%E5%8C%BA%E6%8A%A2%E5%8A%AB"><span class="toc-text">3 强盗在环形街区抢劫</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E8%B7%AF%E5%BE%84"><span class="toc-text">矩阵路径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%9F%A9%E9%98%B5%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C"><span class="toc-text">1 矩阵最小路径和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%9F%A9%E9%98%B5%E6%80%BB%E8%B7%AF%E5%BE%84%E6%95%B0"><span class="toc-text">2 矩阵总路径数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E5%8C%BA%E9%97%B4-%F0%9F%A4%94"><span class="toc-text">数组区间 🤔</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%95%B0%E7%BB%84%E5%8C%BA%E9%97%B4%E5%92%8C"><span class="toc-text">1 数组区间和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%AD%89%E5%B7%AE%E9%80%92%E5%A2%9E%E5%AD%90%E5%8C%BA%E9%97%B4%E7%9A%84%E4%B8%AA%E6%95%B0-%F0%9F%A4%94"><span class="toc-text">2 数组中等差递增子区间的个数 🤔</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%89%B2%E6%95%B4%E6%95%B0"><span class="toc-text">分割整数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%86%E5%89%B2%E6%95%B4%E6%95%B0%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B9%98%E7%A7%AF"><span class="toc-text">1 分割整数的最大乘积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8C%89%E5%B9%B3%E6%96%B9%E6%95%B0%E6%9D%A5%E5%88%86%E5%89%B2%E6%95%B4%E6%95%B0"><span class="toc-text">2 按平方数来分割整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%86%E5%89%B2%E6%95%B4%E6%95%B0%E6%9E%84%E6%88%90%E5%AD%97%E6%AF%8D%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">3 分割整数构成字母字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97-%F0%9F%A4%94"><span class="toc-text">最长递增子序列 🤔</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97-%F0%9F%A4%94"><span class="toc-text">1 最长递增子序列 🤔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%80%E7%BB%84%E6%95%B4%E6%95%B0%E5%AF%B9%E8%83%BD%E5%A4%9F%E6%9E%84%E6%88%90%E7%9A%84%E6%9C%80%E9%95%BF%E9%93%BE"><span class="toc-text">2 一组整数对能够构成的最长链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9C%80%E9%95%BF%E6%91%86%E5%8A%A8%E5%AD%90%E5%BA%8F%E5%88%97-%F0%9F%A4%94"><span class="toc-text">3 最长摆动子序列 🤔</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97"><span class="toc-text">最长公共子序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97"><span class="toc-text">1 最长公共子序列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0-1-%E8%83%8C%E5%8C%85"><span class="toc-text">0-1 背包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86"><span class="toc-text">1 分割等和子集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%94%B9%E5%8F%98%E6%AD%A3%E8%B4%9F%E5%8F%B7%E4%BD%BF%E5%AE%83%E4%BB%AC%E7%9A%84%E5%92%8C%E4%B8%BA%E4%B8%80%E5%AE%9A%E6%95%B4%E6%95%B0"><span class="toc-text">2 改变正负号使它们的和为一定整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%80%E9%9B%B6%E5%92%8C"><span class="toc-text">3 一零和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%89%BE%E9%9B%B6%E7%BB%99%E6%9C%80%E5%B0%91%E7%9A%84%E7%A1%AC%E5%B8%81%E6%95%B0"><span class="toc-text">4 找零给最少的硬币数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%89%BE%E9%9B%B6%E7%9A%84%E7%A1%AC%E5%B8%81%E6%95%B0%E7%BB%84%E5%90%88"><span class="toc-text">5 找零的硬币数组合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%89%E5%8D%95%E8%AF%8D%E5%88%97%E8%A1%A8%E5%88%92%E5%88%86"><span class="toc-text">6 字符串按单词列表划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C"><span class="toc-text">7  组合总和</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93"><span class="toc-text">股票交易</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%9C%80%E8%A6%81%E5%86%B7%E5%8D%B4%E6%9C%9F%E9%99%90%E7%9A%84%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93"><span class="toc-text">1 需要冷却期限的股票交易</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%EF%BC%88%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9%EF%BC%89"><span class="toc-text">2 买卖股票的最佳时机（含手续费）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8F%AA%E8%83%BD%E8%BF%9B%E8%A1%8C%E4%B8%A4%E6%AC%A1%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93"><span class="toc-text">3 只能进行两次股票交易</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%8F%AA%E8%83%BD%E8%BF%9B%E8%A1%8Ck%E6%AC%A1%E7%9A%84%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93"><span class="toc-text">4 只能进行k次的股票交易</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E8%BE%91-%F0%9F%A4%94"><span class="toc-text">字符串编辑 🤔</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%A0%E9%99%A4%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%AD%97%E7%AC%A6%E4%BD%BF%E5%AE%83%E4%BB%AC%E7%9B%B8%E7%AD%89"><span class="toc-text">1 删除两个字符串的字符使它们相等</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB-%F0%9F%A4%94"><span class="toc-text">2 编辑距离 🤔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">3 复制粘贴字符串</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/misakisaysyes">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" target="_blank" rel="noopener" href="https://twitter.com/misakisaysyes">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" target="_blank" rel="noopener" href="https://twitter.com/misakisaysyes">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/misakisaysyes">Copyright © Misakisaysyes 2021</a>
+        
+    </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

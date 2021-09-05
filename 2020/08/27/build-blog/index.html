@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="misakisaysyes" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      基于hexo + github.io搭建个人博客 
+      
+      
+      |
+    
+     misakisaysyes
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/avatar.jpeg">
+    <link rel="icon" href="/images/avatar.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+     <!-- 这里加载烟花特效 -->
+    <!-- <a href="/">
+      
+        <img src="/images/avatar.jpeg" alt="" id="avatar-img">
+      
+    </a> -->
+    <div class="nickname">
+      <a id="user-name" href="/">Misakisaysyes </a>
+      <span id="user-icon">♥️</span>
+    </div>
+    
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/mo.min.js"></script>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+<script src="/js/animation.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">基于hexo + github.io搭建个人博客</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2020-08-27 17:07:03
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/blog/" title="blog">
+                    <b>#</b> blog
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h2><h3 id="1-安装hexo"><a href="#1-安装hexo" class="headerlink" title="1 安装hexo"></a>1 安装hexo</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/">doc</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-初始化项目"><a href="#2-初始化项目" class="headerlink" title="2 初始化项目"></a>2 初始化项目</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/setup">doc</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<p>得到如下目录结构的项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-下载oranges主题"><a href="#3-下载oranges主题" class="headerlink" title="3 下载oranges主题"></a>3 下载oranges主题</h3><p><a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">doc</a></p>
+<p>下载后将包含主题的<code>oranges</code>文件夹放置于上述目录结构的<code>themes</code>下</p>
+<blockquote>
+<p>注意 ：若用文档中的方式下载主题，则会在themes目录下得到一个oranges的git项目，在这种情况下，若对oranges主题做一些修改，则这些修改只能在oranges目录下被管理（commit discard …），在oranges目录之外只能被识别而无法被管理。所以最好不要在一个git项目中管理另外一个git项目。</p>
+</blockquote>
+<h3 id="4-hexo上传图片配置"><a href="#4-hexo上传图片配置" class="headerlink" title="4 hexo上传图片配置"></a>4 hexo上传图片配置</h3><p><a target="_blank" rel="noopener" href="https://github.com/xcodebuild/hexo-asset-image">doc</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/xcodebuild/hexo-asset-image/issues/44#issuecomment-499405301">issue</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f72aaad7b852">reference blog</a></p>
+<h3 id="5-本地测试"><a href="#5-本地测试" class="headerlink" title="5 本地测试"></a>5 本地测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-上线"><a href="#6-上线" class="headerlink" title="6 上线"></a>6 上线</h3><p>部署到github.io上 <a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages">doc</a></p>
+<p>此处的文档是标准部署流程，但目前博客部署的方式比较野生（无脑），大致就是：将资源文件传到以<code>github注册名.github.io</code>命名到仓库上，再对仓库进行配置，配置生效后，<code>github注册名.github.io</code>就是可访问地址。</p>
+<p>具体有三个操作：</p>
+<ul>
+<li>1.本地生成静态资源文件。 </li>
+<li>2.给线上仓库配置服务器目录</li>
+<li>3.将静态资源文件上传到线上服务器目录下</li>
+</ul>
+<p><em>本地生成静态文件</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate  &#x2F;&#x2F; 生成静态文件，静态文件默认输出的目录为public</span><br><span class="line">$ mkdir docs  &#x2F;&#x2F; 在根目录下创建名为docs的目录作为线上的服务器目录（该目录的位置和名称与仓库配置相关）</span><br><span class="line">$ cp -r .&#x2F;public&#x2F;* .&#x2F;docs  &#x2F;&#x2F; 将public下的内容复制到docs下</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 项目目录结构参考如下：</span><br><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br><span class="line">|   └── oranges</span><br><span class="line">└── publics</span><br><span class="line">└── docs</span><br></pre></td></tr></table></figure>
+
+<p><em>给线上仓库配置服务器目录</em></p>
+<p><img src="/2020/08/27/build-blog/1.png" alt="1.png"></p>
+<p>其中source项的目录配置只有<code>/</code>和<code>/docs</code>两种，选择<code>/</code>则项目里只能存放静态资源文件，选择<code>/docs</code>则项目里需要有个docs目录存放静态资源文件。</p>
+<h2 id="新文章发布"><a href="#新文章发布" class="headerlink" title="新文章发布"></a>新文章发布</h2><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/commands">doc</a></p>
+<p><strong>创建新文章</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post &#96;文章名.md&#96;</span><br></pre></td></tr></table></figure>
+<p><strong>本地生成静态文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate </span><br><span class="line">$ mkdir docs </span><br><span class="line">$ cp -r .&#x2F;public&#x2F;* .&#x2F;docs</span><br></pre></td></tr></table></figure>
+
+<p><strong>上线</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ... &#x2F;&#x2F;  git操作</span><br></pre></td></tr></table></figure>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2020-08-27 17:07:03
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/blog/" title="blog">
+                        <b>#</b> blog
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2020/09/01/%E6%9D%82%E6%80%9D/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div class="post-catalog" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA"><span class="toc-text">博客搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85hexo"><span class="toc-text">1 安装hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="toc-text">2 初始化项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%8B%E8%BD%BDoranges%E4%B8%BB%E9%A2%98"><span class="toc-text">3 下载oranges主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-hexo%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE"><span class="toc-text">4 hexo上传图片配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95"><span class="toc-text">5 本地测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%B8%8A%E7%BA%BF"><span class="toc-text">6 上线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83"><span class="toc-text">新文章发布</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        <div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/misakisaysyes">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" target="_blank" rel="noopener" href="https://twitter.com/misakisaysyes">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="twitter" target="_blank" rel="noopener" href="https://twitter.com/misakisaysyes">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/misakisaysyes">Copyright © Misakisaysyes 2021</a>
+        
+    </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>
