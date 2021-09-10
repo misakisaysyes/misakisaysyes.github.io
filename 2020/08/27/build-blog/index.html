@@ -182,7 +182,7 @@ MathJax = {
 <p><em>给线上仓库配置服务器目录</em></p>
 <p><img src="/2020/08/27/build-blog/1.png" alt="1.png"></p>
 <p>其中source项的目录配置只有<code>/</code>和<code>/docs</code>两种，选择<code>/</code>则项目里只能存放静态资源文件，选择<code>/docs</code>则项目里需要有个docs目录存放静态资源文件。</p>
-<h2 id="新文章发布"><a href="#新文章发布" class="headerlink" title="新文章发布"></a>新文章发布</h2><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/commands">doc</a></p>
+<h2 id="新文章发布（旧版已废弃，新版见《个人博文指北》）"><a href="#新文章发布（旧版已废弃，新版见《个人博文指北》）" class="headerlink" title="新文章发布（旧版已废弃，新版见《个人博文指北》）"></a>新文章发布（旧版已废弃，新版见《个人博文指北》）</h2><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/commands">doc</a></p>
 <p><strong>创建新文章</strong> </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post &#96;文章名.md&#96;</span><br></pre></td></tr></table></figure>
 <p><strong>本地生成静态文件</strong></p>
@@ -191,13 +191,21 @@ MathJax = {
 <p><strong>上线</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ... &#x2F;&#x2F;  git操作</span><br></pre></td></tr></table></figure>
 
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>拖延症患者终于无法忍受每次发文章时还要手动部署的繁琐，于是弄了个自动部署。</p>
-<p>自动部署配置参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/one-command-deployment">hexo 部署配置</a></p>
-<p>有了自动部署后，<a href="#6-%E4%B8%8A%E7%BA%BF">6 上线</a>这一节就可以不用看了。</p>
-<p>编辑完新文章后<code>hexo generate &amp;&amp; hexo d</code>就行了。</p>
-<blockquote>
-<p>tips: 配置自动部署时，需要适当更改github该仓库的服务器根目录，在Settings&gt;Pages&gt;Sources中查看。</p>
-</blockquote>
+<h2 id="博客优化log"><a href="#博客优化log" class="headerlink" title="博客优化log"></a>博客优化log</h2><h3 id="在hexo-orange主题中添加mojs动画"><a href="#在hexo-orange主题中添加mojs动画" class="headerlink" title="在hexo orange主题中添加mojs动画"></a>在hexo orange主题中添加mojs动画</h3><pre><code>| - MYBLOG
+    | - themes
+        | - oranges
+            | 。。。
+            | - source
+                | ...
+                | - js
+                    | - mo.min.js // 动画库文件
+                    | - animation.js // 动画js实现
+            | - layout
+                | ...
+                | - _partial
+                    | - navigation.ejs // 在需要用到动画的ejs模版中引入文件
+</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;** navigation.ejs 文件最末尾引入js文件</span><br><span class="line"> *  并且mo.min.js必须先于animation.js引入</span><br><span class="line"> *&#x2F;</span><br><span class="line">    &lt;%- js([&#39;&#x2F;js&#x2F;mo.min.js&#39;])%&gt;</span><br><span class="line">    &lt;%- js([&#39;&#x2F;js&#x2F;animation.js&#39;])%&gt;</span><br></pre></td></tr></table></figure>
 
       </div>
       
@@ -238,7 +246,7 @@ MathJax = {
   <div class="post-catalog" id="catalog">
     <div class="title">Contents</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA"><span class="toc-text">博客搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85hexo"><span class="toc-text">1 安装hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="toc-text">2 初始化项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%8B%E8%BD%BDoranges%E4%B8%BB%E9%A2%98"><span class="toc-text">3 下载oranges主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-hexo%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE"><span class="toc-text">4 hexo上传图片配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95"><span class="toc-text">5 本地测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%B8%8A%E7%BA%BF"><span class="toc-text">6 上线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83"><span class="toc-text">新文章发布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-text">后记</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA"><span class="toc-text">博客搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85hexo"><span class="toc-text">1 安装hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="toc-text">2 初始化项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%8B%E8%BD%BDoranges%E4%B8%BB%E9%A2%98"><span class="toc-text">3 下载oranges主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-hexo%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE"><span class="toc-text">4 hexo上传图片配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95"><span class="toc-text">5 本地测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%B8%8A%E7%BA%BF"><span class="toc-text">6 上线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%EF%BC%88%E6%97%A7%E7%89%88%E5%B7%B2%E5%BA%9F%E5%BC%83%EF%BC%8C%E6%96%B0%E7%89%88%E8%A7%81%E3%80%8A%E4%B8%AA%E4%BA%BA%E5%8D%9A%E6%96%87%E6%8C%87%E5%8C%97%E3%80%8B%EF%BC%89"><span class="toc-text">新文章发布（旧版已废弃，新版见《个人博文指北》）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96log"><span class="toc-text">博客优化log</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8hexo-orange%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0mojs%E5%8A%A8%E7%94%BB"><span class="toc-text">在hexo orange主题中添加mojs动画</span></a></li></ol></li></ol>
     </div>
   </div>
 
