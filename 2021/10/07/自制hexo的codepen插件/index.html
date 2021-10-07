@@ -11,7 +11,7 @@
   
   <title>
     
-      archive_a: 2021/9 
+      自制hexo的codepen插件 
       
       
       |
@@ -101,138 +101,133 @@
 
 
       <div class="flex-container">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2021</span>
-          </h2>
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">自制hexo的codepen插件</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2021-10-07 15:41:07
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>博客中需要插入，codepen代码。</p>
+<p>于是在<a target="_blank" rel="noopener" href="https://hexo.io/plugins/">hexo 官网</a> 搜到了那么一个<a target="_blank" rel="noopener" href="https://github.com/maliMirkec/hexo-tag-codepen">插件</a>，<code>幸运</code>的是这个插件已经失效了。</p>
+<p>虽然在npm官网上搜，依然能找到很多能使的插件：</p>
+<p><img src="/2021/10/07/%E8%87%AA%E5%88%B6hexo%E7%9A%84codepen%E6%8F%92%E4%BB%B6/1.png" alt="1.png"></p>
+<h2 id="开发hexo-codepen插件。"><a href="#开发hexo-codepen插件。" class="headerlink" title="开发hexo codepen插件。"></a>开发hexo codepen插件。</h2><h3 id="如何在hexo中开发自定义插件"><a href="#如何在hexo中开发自定义插件" class="headerlink" title="如何在hexo中开发自定义插件"></a>如何在hexo中开发自定义插件</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/plugins">ref</a></p>
+<p>有两种方式：</p>
+<p><code>一种</code></p>
+<p>首先博客根目录下（package.json同级目录下）添加script文件夹。</p>
+<p>然后在script文件夹中添加你想开发的插件的js文件。</p>
+<pre><code>| - MyBolg
+    | - package.json
+    | - ...
+    | - scripts // 自定义插件目录
+        | - index.js 
+</code></pre>
+<p>在js文件中，将插件函数注册到全局hexo变量的不同属性上即生效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; hexo 全局变量</span><br><span class="line">hexo.extend.tag.register(&#39;codepen&#39;, (args) &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F;  插件函数</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>具体注册方法见文档</p>
+<blockquote>
+<p>tips: 这里的hexo是通过<code>npm i -g hexo</code>全局安装的</p>
+</blockquote>
+<p><code>另一种</code></p>
+<p>首先在博客node_moudles目录下添加名为<code>hexo-xxx</code>的文件夹（命名必须以<code>hexo-</code>开头）</p>
+<p>然后在该文件夹创建npm包相关的文件</p>
+<pre><code>| - hexo-xxx
+    | - package.json
+    | - package-lock.json
+    | - index.js
+</code></pre>
+<p>最后根据<code>hexo-xxx/package.json</code>配置，在博客的<code>package.json</code>的<code>dependencies</code>字段填写相关信息。</p>
+<p>这时自定义hexo插件便可以生效了。</p>
+<h3 id="hexo-codepen插件原理"><a href="#hexo-codepen插件原理" class="headerlink" title="hexo codepen插件原理"></a>hexo codepen插件原理</h3><p>当不用插件时，使用codepen需要在hexo博客插入一段html。</p>
+<p>这段html就是一个iframe标签，不同pen用标签src所带的不同hash值区分。</p>
+<p>我们现在就是嫌手动把这段html插到md文档里不美观。</p>
+<p>所以我们就写一个插件，这个插件用来在渲染时，接收从md文档中传入的hash参数，然后返回一串组装了该hash的html字符串模版给hexo渲染。</p>
+<p>当然，插件接收的参数包括但不仅限于hash，也可以接收一些设定iframe样式的参数。</p>
+<p>具体实现见源码，还是比较简单的。</p>
+<h3 id="使用git-action将包自动发布到npm上"><a href="#使用git-action将包自动发布到npm上" class="headerlink" title="使用git action将包自动发布到npm上"></a>使用git action将包自动发布到npm上</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/mouday/article/details/105329347">ref</a></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/10/04/%E8%B5%84%E6%BA%90%E6%94%B6%E9%9B%86/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2021-10-07 15:41:07
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
         </div>
       
-      <div class="post-item" title="自制hexo的codepen插件">
-        <div class="time-m-d">10-07</div>
-        <div class="title">
-          <a href="/2021/10/07/%E8%87%AA%E5%88%B6hexo%E7%9A%84codepen%E6%8F%92%E4%BB%B6/">
-            <span>自制hexo的codepen插件</span>
-          </a>
-        </div>
-      </div>
+    </div>
     
-      <div class="post-item" title="资源收集">
-        <div class="time-m-d">10-04</div>
-        <div class="title">
-          <a href="/2021/10/04/%E8%B5%84%E6%BA%90%E6%94%B6%E9%9B%86/">
-            <span>资源收集</span>
-          </a>
-        </div>
-      </div>
+  <div class="post-catalog" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91hexo-codepen%E6%8F%92%E4%BB%B6%E3%80%82"><span class="toc-text">开发hexo codepen插件。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E4%B8%AD%E5%BC%80%E5%8F%91%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E4%BB%B6"><span class="toc-text">如何在hexo中开发自定义插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hexo-codepen%E6%8F%92%E4%BB%B6%E5%8E%9F%E7%90%86"><span class="toc-text">hexo codepen插件原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8git-action%E5%B0%86%E5%8C%85%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83%E5%88%B0npm%E4%B8%8A"><span class="toc-text">使用git action将包自动发布到npm上</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="设计模式">
-        <div class="time-m-d">09-09</div>
-        <div class="title">
-          <a href="/2021/09/09/%E3%80%8A%E5%9B%BE%E8%AF%B4%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%8Bjs%E5%AE%9E%E7%8E%B0/">
-            <span>设计模式</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="DP在实际开发中的应用">
-        <div class="time-m-d">07-26</div>
-        <div class="title">
-          <a href="/2021/07/26/DP%E5%9C%A8%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">
-            <span>DP在实际开发中的应用</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="关于commander">
-        <div class="time-m-d">07-01</div>
-        <div class="title">
-          <a href="/2021/07/01/%E5%85%B3%E4%BA%8Ecommander-%E8%84%9A%E6%89%8B%E6%9E%B6%E7%B3%BB%E5%88%971/">
-            <span>关于commander</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="关于npm">
-        <div class="time-m-d">06-23</div>
-        <div class="title">
-          <a href="/2021/06/23/%E5%85%B3%E4%BA%8Enpm-%E8%84%9A%E6%89%8B%E6%9E%B6%E7%B3%BB%E5%88%970/">
-            <span>关于npm</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="mo.js 动画库">
-        <div class="time-m-d">06-11</div>
-        <div class="title">
-          <a href="/2021/06/11/mo-js-%E5%8A%A8%E7%94%BB%E5%BA%93/">
-            <span>mo.js 动画库</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="树">
-        <div class="time-m-d">04-27</div>
-        <div class="title">
-          <a href="/2021/04/27/tree/">
-            <span>树</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="开发笔记">
-        <div class="time-m-d">04-26</div>
-        <div class="title">
-          <a href="/2021/04/26/develop-notes/">
-            <span>开发笔记</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="链表">
-        <div class="time-m-d">04-23</div>
-        <div class="title">
-          <a href="/2021/04/23/list/">
-            <span>链表</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="动态规划">
-        <div class="time-m-d">04-21</div>
-        <div class="title">
-          <a href="/2021/04/21/dp/">
-            <span>动态规划</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2020</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="基于hexo + github.io搭建个人博客">
-        <div class="time-m-d">08-27</div>
-        <div class="title">
-          <a href="/2020/08/27/build-blog/">
-            <span>基于hexo + github.io搭建个人博客</span>
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
       </div>
     
   </div>
-</div>
+
 
         <div class="footer">
   <div class="social">
