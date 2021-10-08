@@ -136,47 +136,93 @@ MathJax = {
           2021-10-07 15:41:07
         </span>
         
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/hexo%E6%8F%92%E4%BB%B6/" title="hexo插件">
+                    <b>#</b> hexo插件
+                  </a>
+                </span>
+                
+                <span class="span--tag">
+                  <a href="/tags/Git-Action%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83npm%E5%8C%85/" title="Git Action自动发布npm包">
+                    <b>#</b> Git Action自动发布npm包
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
       <div class="markdown-body">
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>博客中需要插入，codepen代码。</p>
-<p>于是在<a target="_blank" rel="noopener" href="https://hexo.io/plugins/">hexo 官网</a> 搜到了那么一个<a target="_blank" rel="noopener" href="https://github.com/maliMirkec/hexo-tag-codepen">插件</a>，<code>幸运</code>的是这个插件已经失效了。</p>
-<p>虽然在npm官网上搜，依然能找到很多能使的插件：</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>hexo博客里插入codepen，本质就是在<code>文章.md</code>中插入一段html代码，但这会使<code>文章.md</code>的可读性变差，增加写博客的负担。</p>
+<p>于是，这里实现了一个插件，旨在更优雅地将codepen代码插入到<code>文章.md</code>中。</p>
+<p>插件实现后，想要发布一个版本，需要走以下流程：</p>
+<ul>
+<li>修改package.json的version</li>
+<li>发布到Npm上</li>
+<li>将代码提交的Github</li>
+</ul>
+<blockquote>
+<p>PS: 发布到npm上必然先于将代码提交到github上</p>
+</blockquote>
+<p>这里借助<code>semantic-release</code>和<code>git action</code>，将发包操作写到CI中，大大简化了发包流程。</p>
+<h2 id="开发hexo-codepen插件。"><a href="#开发hexo-codepen插件。" class="headerlink" title="开发hexo codepen插件。"></a>开发hexo codepen插件。</h2><h3 id="如何在hexo中开发与使用自定义插件"><a href="#如何在hexo中开发与使用自定义插件" class="headerlink" title="如何在hexo中开发与使用自定义插件"></a>如何在hexo中开发与使用自定义插件</h3><h4 id="插件开发"><a href="#插件开发" class="headerlink" title="插件开发"></a>插件开发</h4><p>hexo框架允许使用者自定义一些js脚本（插件）来<code>扩展</code>博客的功能。</p>
+<p>所以hexo提供了一个<code>extend</code>对象，用来专门管理自定义的js脚本。</p>
+<p>hexo中将插件分为好几类，不同类别的插件想要生效的话，需调用相应的api注册到hexo全局中。</p>
+<p>具体可参考<a target="_blank" rel="noopener" href="https://hexo.io/api/console">文档</a>。</p>
 <p><img src="/2021/10/07/%E8%87%AA%E5%88%B6hexo%E7%9A%84codepen%E6%8F%92%E4%BB%B6/1.png" alt="1.png"></p>
-<h2 id="开发hexo-codepen插件。"><a href="#开发hexo-codepen插件。" class="headerlink" title="开发hexo codepen插件。"></a>开发hexo codepen插件。</h2><h3 id="如何在hexo中开发自定义插件"><a href="#如何在hexo中开发自定义插件" class="headerlink" title="如何在hexo中开发自定义插件"></a>如何在hexo中开发自定义插件</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/plugins">ref</a></p>
-<p>有两种方式：</p>
+<p>就以hexo codepen插件 —— <code>hexo-codepen-snippet</code>为例：</p>
+<p>它的主要作用是插入一段html<code>标签</code>到<code>文章.md</code>中，所以使用了api</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo.extend.tag.register(name, function(args, content)&#123;</span><br><span class="line">    &#x2F;&#x2F; codepen插件功能实现</span><br><span class="line">&#125;, options);</span><br></pre></td></tr></table></figure>
+
+<p>总结下来，插件开发主要是两步：</p>
+<ul>
+<li>实现自定义功能函数。</li>
+<li>调用<code>hexo.extend</code>相应api，注册插件。</li>
+</ul>
+<p>所以插件脚本的结构大致应为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const plugin1 &#x3D; (...args) &#x3D;&gt; &#123;&#125;</span><br><span class="line">const plugin2 &#x3D; (...args) &#x3D;&gt; &#123;&#125;</span><br><span class="line"></span><br><span class="line">hexo.extend.XXX.register(&#39;plugin1&#39;, plugin1)</span><br><span class="line">hexo.extend.XXX.register(&#39;plugin2&#39;, plugin2)</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h4><p>插件的使用，即将插件脚本放到博客项目特定的目录下，hexo框架会自动执行这些🦶本。</p>
+<p>有两种使用方式，</p>
 <p><code>一种</code></p>
 <p>首先博客根目录下（package.json同级目录下）添加script文件夹。</p>
-<p>然后在script文件夹中添加你想开发的插件的js文件。</p>
+<p>然后在script文件夹中添加插件脚本</p>
 <pre><code>| - MyBolg
     | - package.json
     | - ...
     | - scripts // 自定义插件目录
-        | - index.js 
+        | - index.js // 自定义插件脚本
 </code></pre>
-<p>在js文件中，将插件函数注册到全局hexo变量的不同属性上即生效。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; hexo 全局变量</span><br><span class="line">hexo.extend.tag.register(&#39;codepen&#39;, (args) &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F;  插件函数</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>具体注册方法见文档</p>
-<blockquote>
-<p>tips: 这里的hexo是通过<code>npm i -g hexo</code>全局安装的</p>
-</blockquote>
+<p>这种方式适用于插件比较简单的情况。</p>
 <p><code>另一种</code></p>
-<p>首先在博客node_moudles目录下添加名为<code>hexo-xxx</code>的文件夹（命名必须以<code>hexo-</code>开头）</p>
+<p>首先在博客node_moudles目录下添加名为<code>hexo-xxx</code>的文件夹（文件夹名必须以<code>hexo-</code>开头）</p>
 <p>然后在该文件夹创建npm包相关的文件</p>
 <pre><code>| - hexo-xxx
     | - package.json
     | - package-lock.json
-    | - index.js
+    | - index.js // 自定义插件脚本
 </code></pre>
-<p>最后根据<code>hexo-xxx/package.json</code>配置，在博客的<code>package.json</code>的<code>dependencies</code>字段填写相关信息。</p>
+<p>最后根据<code>hexo-xxx/package.json</code>的<code>name</code>字段，在博客的<code>package.json</code>的<code>dependencies</code>字段填写相关信息。</p>
 <p>这时自定义hexo插件便可以生效了。</p>
+<blockquote>
+<p>PS：这个过程类似于<code>npm install</code>现成的hexo插件。<br>作者目前是把这个自建在node_modules中的hexo插件目录当作git仓库在用</p>
+</blockquote>
 <h3 id="hexo-codepen插件原理"><a href="#hexo-codepen插件原理" class="headerlink" title="hexo codepen插件原理"></a>hexo codepen插件原理</h3><p>当不用插件时，使用codepen需要在hexo博客插入一段html。</p>
 <p>这段html就是一个iframe标签，不同pen用标签src所带的不同hash值区分。</p>
-<p>我们现在就是嫌手动把这段html插到md文档里不美观。</p>
-<p>所以我们就写一个插件，这个插件用来在渲染时，接收从md文档中传入的hash参数，然后返回一串组装了该hash的html字符串模版给hexo渲染。</p>
+<p>现在就是嫌手动把这段html插到md文档里不美观。</p>
+<p>所以这个插件就是用来在渲染时，接收从md文档中传入的hash参数，然后返回一串组装了该hash的html字符串模版给hexo渲染。</p>
+<p>我们在md文档里只用引用简单的插件传入几个参数就行了。</p>
 <p>当然，插件接收的参数包括但不仅限于hash，也可以接收一些设定iframe样式的参数。</p>
-<p>具体实现见源码，还是比较简单的。</p>
-<h3 id="使用git-action将包自动发布到npm上"><a href="#使用git-action将包自动发布到npm上" class="headerlink" title="使用git action将包自动发布到npm上"></a>使用git action将包自动发布到npm上</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/mouday/article/details/105329347">ref</a></p>
+<p>具体实现见<a target="_blank" rel="noopener" href="https://github.com/misakisaysyes/hexo-codepen-snippet">源码</a>。</p>
+<h2 id="构建发包流程"><a href="#构建发包流程" class="headerlink" title="构建发包流程"></a>构建发包流程</h2><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html">github action 阮一峰教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/learn-github-actions/expressions">github action 官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://meixg.cn/2021/01/20/semantic-release-guide/">ref</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@semantic-release/commit-analyzer">@semantic-release/commit-analyzer</a></p>
+<blockquote>
+<p>PS: 使用semantic-release一定要去了解@semantic-release/commit-analyzer插件<br>这个插件规定了commit message的标准格式，只有按照格式填写了commit信息才能自动生成changlog与发布到npm上</p>
+</blockquote>
 
       </div>
       
@@ -195,6 +241,23 @@ MathJax = {
               2021-10-07 15:41:07
             </span>
             
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/hexo%E6%8F%92%E4%BB%B6/" title="hexo插件">
+                        <b>#</b> hexo插件
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/Git-Action%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83npm%E5%8C%85/" title="Git Action自动发布npm包">
+                        <b>#</b> Git Action自动发布npm包
+                      </a>
+                    </span>
+                    
+                  </span>
+              
           </div>
           <div class="post-foot-prev">
             
@@ -206,7 +269,7 @@ MathJax = {
   <div class="post-catalog" id="catalog">
     <div class="title">Contents</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91hexo-codepen%E6%8F%92%E4%BB%B6%E3%80%82"><span class="toc-text">开发hexo codepen插件。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E4%B8%AD%E5%BC%80%E5%8F%91%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E4%BB%B6"><span class="toc-text">如何在hexo中开发自定义插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hexo-codepen%E6%8F%92%E4%BB%B6%E5%8E%9F%E7%90%86"><span class="toc-text">hexo codepen插件原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8git-action%E5%B0%86%E5%8C%85%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83%E5%88%B0npm%E4%B8%8A"><span class="toc-text">使用git action将包自动发布到npm上</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91hexo-codepen%E6%8F%92%E4%BB%B6%E3%80%82"><span class="toc-text">开发hexo codepen插件。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E4%B8%AD%E5%BC%80%E5%8F%91%E4%B8%8E%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E4%BB%B6"><span class="toc-text">如何在hexo中开发与使用自定义插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91"><span class="toc-text">插件开发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8"><span class="toc-text">插件使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hexo-codepen%E6%8F%92%E4%BB%B6%E5%8E%9F%E7%90%86"><span class="toc-text">hexo codepen插件原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E5%8F%91%E5%8C%85%E6%B5%81%E7%A8%8B"><span class="toc-text">构建发包流程</span></a></li></ol>
     </div>
   </div>
 
