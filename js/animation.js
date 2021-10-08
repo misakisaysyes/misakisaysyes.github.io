@@ -108,7 +108,18 @@ const tween = new mojs.Tween({
         } else if (progress == 1) {
             factor = 1
         }
+
+        let factor0
+        if (progress < 0.3) { 
+            factor0 = progress * 3
+        } else if (progress < 1) {
+            factor0 = 1 
+        } else {
+            factor0 = 0
+        }
+
         heartEl.style.transform = `scale(${factor})`
+        heartEl.style.fill = `rgba(${Math.floor(102 + 144 * factor0)}, ${Math.floor(102 + (-38 * factor0))}, ${Math.floor(102 + (-38 * factor0))})`
     }
 })
 

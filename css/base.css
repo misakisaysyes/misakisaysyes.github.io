@@ -193,6 +193,14 @@ a:hover {
   display: inline-block;
 }
 
+svg {
+  fill: #666;
+}
+
+svg:hover {
+  fill: #f64040;
+}
+
 .content {
   clear: both;
   padding: 0 20px;
