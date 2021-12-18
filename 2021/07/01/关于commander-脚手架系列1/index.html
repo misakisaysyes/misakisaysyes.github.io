@@ -154,17 +154,43 @@ MathJax = {
 <p>本来是为了开发自定义脚手架看的commander。</p>
 <p>后来意外地发现看了commander以后，之前很多npm包的help内容理解起来比以前更轻松了。</p>
 <p>也算意外之喜吧。</p>
-<h3 id="用commander开发一个最简单的命令行"><a href="#用commander开发一个最简单的命令行" class="headerlink" title="用commander开发一个最简单的命令行"></a>用commander开发一个最简单的命令行</h3><p>首先 保证电脑中安装了<code>nodejs</code>和<code>npm</code></p>
+<h3 id="命令行开发环境搭建"><a href="#命令行开发环境搭建" class="headerlink" title="命令行开发环境搭建"></a>命令行开发环境搭建</h3><h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><p>首先 保证电脑中安装了<code>nodejs</code>和<code>npm</code>，在项目中安装了<code>commander</code></p>
+<p>然后 创建包目录</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir test-cli</span><br><span class="line">npm init</span><br></pre></td></tr></table></figure>
 
-<p>得到如下目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- test-cli</span><br><span class="line">    - package.json</span><br></pre></td></tr></table></figure>
+<p>得到的项目结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- test-cli</span><br><span class="line">    - package.json</span><br><span class="line">    - index.js &#x2F;&#x2F; 命令行代码实现文件</span><br></pre></td></tr></table></figure>
 
-<p>一顿操作，给test-cli.js加个bin文件夹，</p>
-<p>给package.json文件加上’bin’字段，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;test-cli&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;bin&quot;: &#123;</span><br><span class="line">    &quot;test-cli&quot;: &quot;.&#x2F;bin&#x2F;index.js&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;author&quot;: &quot;&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;commander&quot;: &quot;^7.2.0&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h4><p><code>全局命令方式</code></p>
+<p>给package.json的<code>bin</code>字段指定命令行实现文件位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;test-cli&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;bin&quot;: &#123;</span><br><span class="line">    &quot;test-cli&quot;: &quot;.&#x2F;index.js&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;author&quot;: &quot;&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;commander&quot;: &quot;^7.2.0&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="options"><a href="#options" class="headerlink" title="options"></a>options</h4><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://github.com/tj/commander.js">commander</a></p>
+<p>index.js文件开头加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env node</span><br></pre></td></tr></table></figure>
+
+<p>执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm link</span><br></pre></td></tr></table></figure>
+
+<p>之后可以在控制台直接使用<code>test-cli</code>命令</p>
+<p>调试完后记得执行，把软连接删掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm unlink</span><br></pre></td></tr></table></figure>
+
+<p><code>脚本调试方式</code></p>
+<p>直接在控制台执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node index.js [params]</span><br></pre></td></tr></table></figure>
+
+<h3 id="快速开发总结"><a href="#快速开发总结" class="headerlink" title="快速开发总结"></a>快速开发总结</h3><p>commander开发主要分为选项（option）和指令（command）两类。</p>
+<p>两者有相似的地方，但也有区别。个人理解指令开发用于更复杂的场景。</p>
+<p>开发模版：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env node</span><br><span class="line">const &#123; Command &#125; &#x3D; require(&#39;commander&#39;)</span><br><span class="line">const program &#x3D; new Command()</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; ... 选项开发 ... </span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; ... 指令开发 ...</span><br><span class="line"></span><br><span class="line">program.parse() &#x2F;&#x2F; parse之后才能生效</span><br></pre></td></tr></table></figure>
+
+<p>选项开发</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">program</span><br><span class="line">  .option([1], [2], [3], [4])</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; [1] : 指定选项缩写、选项全名、选项所带参数。模版 &#96;-$&#123;缩写&#125;, --$&#123;全名&#125; &lt;$&#123;参数名&#125;&gt;&#96;</span><br><span class="line">&#x2F;&#x2F; [2] : 选项描述。模版 &#96;$&#123;描述&#125;&#96;</span><br><span class="line">&#x2F;&#x2F; [3] : 默认值，或者选项参数处理函数（可省）</span><br><span class="line">&#x2F;&#x2F; [4] : 当为带变量的选项执行方式时，该处为初始值（可省）</span><br><span class="line">&#x2F;&#x2F; &lt;$&#123;参数&#125;&gt;: 不可省</span><br><span class="line">&#x2F;&#x2F; [$&#123;参数&#125;]: 可省</span><br></pre></td></tr></table></figure>
+
+<p>指令开发</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">program</span><br><span class="line">  .command() &#x2F;&#x2F; 命令名</span><br><span class="line">  .argument() &#x2F;&#x2F; 参数</span><br><span class="line">  .option() &#x2F;&#x2F; 选项</span><br><span class="line">  .action() &#x2F;&#x2F; 动作</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://github.com/tj/commander.js">commander</a></p>
 
       </div>
       
@@ -210,7 +236,7 @@ MathJax = {
   <div class="post-catalog" id="catalog">
     <div class="title">Contents</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFcommander"><span class="toc-text">什么是commander?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8commander%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="toc-text">用commander开发一个最简单的命令行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#options"><span class="toc-text">options</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFcommander"><span class="toc-text">什么是commander?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">命令行开发环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E8%AF%95"><span class="toc-text">调试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93"><span class="toc-text">快速开发总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </div>
 
