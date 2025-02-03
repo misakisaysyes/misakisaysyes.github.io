@@ -11,7 +11,7 @@
   
   <title>
     
-      开发笔记 
+      hexo-codepen-snippet插件开发 
       
       
       |
@@ -129,11 +129,11 @@ MathJax = {
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">开发笔记</div>
+      <div class="post-title">hexo-codepen-snippet插件开发</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="Update time"></i>
-          2021-04-26 15:19:37
+          2021-10-07 15:41:07
         </span>
         
               <span class="post-tags">
@@ -151,47 +151,97 @@ MathJax = {
                   </a>
                 </span>
                 
+                <span class="span--tag">
+                  <a href="/tags/hexo/" title="hexo">
+                    <b>#</b> hexo
+                  </a>
+                </span>
+                
               </span>
           
       </div>
       <div class="markdown-body">
-        <h3 id="linux-命令"><a href="#linux-命令" class="headerlink" title="linux 命令"></a>linux 命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsof -i:4000 &#x2F;&#x2F; 查看占用端口4000的所有进程</span><br><span class="line">kill &lt;pID&gt; &#x2F;&#x2F; 杀死某个进程</span><br></pre></td></tr></table></figure>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>hexo博客里插入codepen，本质就是在<code>文章.md</code>中插入一段html代码，但这会使<code>文章.md</code>的可读性变差，增加写博客的负担。</p>
+<p>于是，这里实现了一个插件，旨在更优雅地将codepen代码插入到<code>文章.md</code>中。</p>
+<p>插件实现后，想要将包<code>上线</code>（发布到npm上 并将代码放到github中），需要走以下流程：</p>
+<ul>
+<li>修改package.json的version</li>
+<li>发布到npm上</li>
+<li>将代码提交的github</li>
+</ul>
+<p>这里借助<code>semantic-release</code>和<code>git action</code>，将发包操集成CI中，简化发包流程。</p>
+<h2 id="开发hexo-codepen插件。"><a href="#开发hexo-codepen插件。" class="headerlink" title="开发hexo codepen插件。"></a>开发hexo codepen插件。</h2><h3 id="如何在hexo中开发与使用自定义插件"><a href="#如何在hexo中开发与使用自定义插件" class="headerlink" title="如何在hexo中开发与使用自定义插件"></a>如何在hexo中开发与使用自定义插件</h3><h4 id="插件开发"><a href="#插件开发" class="headerlink" title="插件开发"></a>插件开发</h4><p>hexo框架允许使用者自定义一些js脚本（插件）来<code>扩展</code>博客的功能。</p>
+<p>所以hexo对象提供了一个<code>extend</code>属性，该属性的值是一个对象实例，该对象实例用来专门管理自定义的插件js脚本。</p>
+<p>在hexo中，所有的插件都被分为几类，这些类别就是<code>extend</code>对象实例上的属性，具体如下图：</p>
+<p><img src="/2021/10/07/hexo-codepen-snippet-develop/1.png" alt="1.png"></p>
+<p><code>extend</code>对象实例上 表示插件类别的属性 的值，也都是对象实例，且都有<code>register</code>方法。</p>
+<p>这个方法是用来注册插件脚本使之生效的。</p>
+<p>具体可参考<a target="_blank" rel="noopener" href="https://hexo.io/api/console">文档</a>。</p>
+<p>以hexo codepen插件 —— <code>hexo-codepen-snippet</code>为例：</p>
+<p>它的主要作用是插入一段html<code>标签</code>到<code>文章.md</code>中，是个tag类型的插件。</p>
+<p>编写插件函数，并调用<code>tag</code>类别实例的<code>register</code>方法注册生效：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo.extend.tag.register(name, function(args, content)&#123;</span><br><span class="line">    &#x2F;&#x2F; codepen插件功能实现</span><br><span class="line">&#125;, options);</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 $(lsof -i:4000) &#x2F;&#x2F; 杀死端口4000的所有进程</span><br></pre></td></tr></table></figure>
+<p>总结下来，插件开发主要是两步：</p>
+<ul>
+<li>确定插件种类，并实现自定义插件功能。</li>
+<li>将插件注册到<code>hexo.extend.[插件种类]</code>上。</li>
+</ul>
+<p>所以插件脚本的结构大致应为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const plugin1 &#x3D; (...args) &#x3D;&gt; &#123;&#125;</span><br><span class="line">const plugin2 &#x3D; (...args) &#x3D;&gt; &#123;&#125;</span><br><span class="line"></span><br><span class="line">hexo.extend.XXX.register(&#39;plugin1&#39;, plugin1)</span><br><span class="line">hexo.extend.XXX.register(&#39;plugin2&#39;, plugin2)</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="ts"><a href="#ts" class="headerlink" title="ts"></a>ts</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">interface OP &#123;</span><br><span class="line">  op1(): void;</span><br><span class="line">  op2(): void;</span><br><span class="line">  op3()?: void;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ConcreteOP implements OP &#123;</span><br><span class="line">  op1() &#123;&#125;</span><br><span class="line">  op2() &#123;&#125;</span><br><span class="line">  &#x2F;&#x2F; 类中对该方法的实现可有可无</span><br><span class="line">  &#x2F;&#x2F; op3() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>等价于</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">abstract class OP &#123;</span><br><span class="line">  &#x2F;&#x2F; abstract  修饰的方法在子类中必须实现</span><br><span class="line">  abstract op1() &#123;&#125;</span><br><span class="line">  abstract op2() &#123;&#125;</span><br><span class="line">  op3() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ConcreteOP extends OP &#123;</span><br><span class="line">  op1() &#123;&#125;</span><br><span class="line">  op2() &#123;&#125;</span><br><span class="line">  &#x2F;&#x2F; 类中对改方法的实现可有可无</span><br><span class="line">  &#x2F;&#x2F; op3() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="mac网络配置"><a href="#mac网络配置" class="headerlink" title="mac网络配置"></a>mac网络配置</h3><p>当在公共场合无法自动弹出登陆上网页面时，需要将clash代理关掉。</p>
-<h3 id="es6-export-import"><a href="#es6-export-import" class="headerlink" title="es6 export import"></a>es6 export import</h3><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903623273480200">参考</a></p>
-<h3 id="软链接，硬链接"><a href="#软链接，硬链接" class="headerlink" title="软链接，硬链接"></a>软链接，硬链接</h3><p>假设有一个文件占据一块磁盘空间A</p>
-<p><code>硬链接</code>就是一个指针，指向<code>磁盘空间A</code>，访问<code>硬链接</code>就是在访问<code>硬链接</code>指向的这块<code>磁盘空间A</code>。</p>
-<p><code>软链接</code>就是个文件，占据着不同于<code>磁盘空间A</code>的另一块<code>磁盘空间B</code>，<code>磁盘空间B</code>里存放着<code>磁盘空间A</code>的绝对路径。</p>
-<p>每当访问<code>软链接</code>所在的<code>磁盘空间B</code>时，就会自动替换成<code>磁盘空间B</code>存放的<code>磁盘空间A</code>的路径，从而访问到文件。</p>
-<p> <a target="_blank" rel="noopener" href="https://www.linuxprobe.com/soft-and-hard-links.html">参考</a></p>
-<h3 id="css-tranform-属性失效"><a href="#css-tranform-属性失效" class="headerlink" title="css tranform 属性失效"></a>css tranform 属性失效</h3><p>只有当display的值不为<code>inline</code>、<code>contents</code>、<code>table-*</code>，transfrom属性才生效。</p>
-<h3 id="antd-Input获得焦点可编辑失去焦点不可编辑"><a href="#antd-Input获得焦点可编辑失去焦点不可编辑" class="headerlink" title="antd Input获得焦点可编辑失去焦点不可编辑"></a>antd Input获得焦点可编辑失去焦点不可编辑</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const TInput &#x3D; props &#x3D;&gt; &#123;</span><br><span class="line">  const [editable, setEditable] &#x3D; useState(false)</span><br><span class="line">  const [value, setValue] &#x3D; useState(&#39;&#39;)</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">    &lt;Input</span><br><span class="line">      disabled&#x3D;&#123;!editable&#125;</span><br><span class="line">      value&#x3D;&#123;value&#125;</span><br><span class="line">      onChange&#x3D;&#123;e &#x3D;&gt; setValue(e.target.value)&#125;</span><br><span class="line">      ref&#x3D;&#123;ref &#x3D;&gt; ref &amp;&amp; ref.focus()&#125;</span><br><span class="line">      onBlur&#x3D;&#123;() &#x3D;&gt; setEditable(false)&#125;</span><br><span class="line">      onPressEnter&#x3D;&#123;() &#x3D;&gt; setEditable(false)&#125;</span><br><span class="line">    &#x2F;&gt;</span><br><span class="line">    &lt;Button onClick&#x3D;&#123;() &#x3D;&gt; setEditable(true)&#125;&gt;编辑&lt;&#x2F;Button&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="antd-tree组件的treeData属性发生变化不会导致组件重新渲染"><a href="#antd-tree组件的treeData属性发生变化不会导致组件重新渲染" class="headerlink" title="antd tree组件的treeData属性发生变化不会导致组件重新渲染"></a>antd tree组件的treeData属性发生变化不会导致组件重新渲染</h3><p>原因：可能tree组件的官方实现层级就套的太深了，再加上自己开发的组件层级，导致有时state或者props的变化不会触发重新渲染。</p>
-<p>解决方案：利用key属性让组件强制渲染。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import &#123; useEffect &#125; from &#39;react&#39;</span><br><span class="line">import &#123; Tree &#125; from &#39;antd&#39;</span><br><span class="line"></span><br><span class="line">const TestComp &#x3D; (&#123; treeData &#125;) &#x3D;&gt; &#123;</span><br><span class="line"></span><br><span class="line">  const [forceRenderKey, setForceRenderKey] &#x3D; useState(&#39;&#39;)</span><br><span class="line"></span><br><span class="line">  useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">    setForceRenderKey(Math.random().toStrng(36).substr(2))</span><br><span class="line">  &#125;, [treeData])</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">      &lt;Tree</span><br><span class="line">        key&#x3D;&#123;forceRenderKey&#125;</span><br><span class="line">        treeData&#x3D;&#123;treeData&#125;</span><br><span class="line">        ...</span><br><span class="line">        titleRender&#x3D;&#123;nodeData &#x3D;&gt; &lt;div&gt;self defined node&lt;&#x2F;div&gt;&#125;</span><br><span class="line">      &#x2F;&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="a标签的download属性"><a href="#a标签的download属性" class="headerlink" title="a标签的download属性"></a>a标签的download属性</h3><p>给<code>a</code>标签添加download属性后，对于href非同源的情况就会失效。</p>
-<p>详细见文档：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a">a标签 MDN</a></p>
-<h3 id="webpack脚手架项目相关"><a href="#webpack脚手架项目相关" class="headerlink" title="webpack脚手架项目相关"></a>webpack脚手架项目相关</h3><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904101893898248#heading-28">脚手架/CI构建能力</a></p>
-<p><a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/v7/configuring-npm/package-json">npm</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6966119324478079007#heading-11">从 0 构建自己的脚手架/CLI知识体系</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6919308174151385096#heading-76">「前端工程化」从0-1搭建react，ts脚手架</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/tj/commander.js/blob/master/Readme_zh-CN.md">Commander.js</a></p>
+<h4 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h4><p>将插件脚本放到博客项目特定的目录下，做一些配置后，hexo框架会自动执行这些🦶本。</p>
+<p>有两种配置方式：</p>
+<h5 id="配置方法一"><a href="#配置方法一" class="headerlink" title="配置方法一"></a>配置方法一</h5><p>首先博客根目录下（package.json同级目录下）添加script文件夹。</p>
+<p>然后在script文件夹中添加插件脚本</p>
+<pre><code>| - MyBolg
+    | - package.json
+    | - ...
+    | - scripts // 自定义插件目录
+        | - index.js // 自定义插件脚本
+</code></pre>
+<p>这种方式适用于插件比较简单的情况。</p>
+<h5 id="配置方法二"><a href="#配置方法二" class="headerlink" title="配置方法二"></a>配置方法二</h5><p>首先在博客node_moudles目录下添加名为<code>hexo-xxx</code>的文件夹（文件夹名必须以<code>hexo-</code>开头）</p>
+<p>然后在该文件夹创建npm包相关的文件</p>
+<pre><code>| - hexo-xxx
+    | - package.json
+    | - package-lock.json
+    | - index.js // 自定义插件脚本
+</code></pre>
+<p>最后根据<code>hexo-xxx/package.json</code>的<code>name</code>字段，在博客的<code>package.json</code>的<code>dependencies</code>字段填写相关信息。</p>
+<blockquote>
+<p>PS：这个过程类似于<code>npm install</code>现成的hexo插件。<br>作者目前是把这个自建在node_modules中的hexo插件目录当作git仓库在用</p>
+</blockquote>
+<h3 id="hexo-codepen插件原理"><a href="#hexo-codepen插件原理" class="headerlink" title="hexo codepen插件原理"></a>hexo codepen插件原理</h3><p>当不用插件时，使用codepen需要在hexo博客插入一段html。</p>
+<p>这段html就是一个iframe标签，不同pen用标签src所带的不同hash值区分。</p>
+<p>现在就是嫌手动把这段html插到md文档里不美观。</p>
+<p>所以这个插件就是用来在渲染时，接收从md文档中传入的hash参数，然后返回一串组装了该hash的html字符串模版给hexo渲染。</p>
+<p>我们在md文档里只用引用简单的插件传入几个参数就行了。</p>
+<p>当然，插件接收的参数包括但不仅限于hash，也可以接收一些设定iframe样式的参数。</p>
+<p>具体实现见<a target="_blank" rel="noopener" href="https://github.com/misakisaysyes/hexo-codepen-snippet">源码</a>。</p>
+<h2 id="上线"><a href="#上线" class="headerlink" title="上线"></a>上线</h2><p>插件上线主要有两个过程：<code>发布到npm上</code>和<code>发布到github上</code></p>
+<p><code>发布到npm上</code>这个过程必然先于<code>发布到github上</code>。</p>
+<p>因为发布到npm上需要修改package.json的version字段，会产生没有commit的变化，导致工作目录不干净。</p>
+<p>这两个过程如果是手动完成的话，需要经历以下几个步骤<a target="_blank" rel="noopener" href="https://meixg.cn/2021/01/20/semantic-release-guide/">ref</a>:</p>
+<ul>
+<li>修改package.json的version字段 <code>npm version</code></li>
+<li>发布到npm上 <code>npm publish</code></li>
+<li>修改changelog ``</li>
+<li>打上tag</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html">github action 阮一峰教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/learn-github-actions/expressions">github action 官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@semantic-release/commit-analyzer">@semantic-release/commit-analyzer</a></p>
+<blockquote>
+<p>PS: 使用semantic-release一定要去了解@semantic-release/commit-analyzer插件<br>这个插件规定了commit message的标准格式，只有按照格式填写了commit信息才能自动生成changlog与发布到npm上</p>
+</blockquote>
 
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2020/08/27/build-blog/" target="_self">
+              <a href="/2021/09/09/design-pattern-js/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -200,7 +250,7 @@ MathJax = {
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime" title="Update time"></i>
-              2021-04-26 15:19:37
+              2021-10-07 15:41:07
             </span>
             
                   <span class="post-tags">
@@ -218,12 +268,18 @@ MathJax = {
                       </a>
                     </span>
                     
+                    <span class="span--tag">
+                      <a href="/tags/hexo/" title="hexo">
+                        <b>#</b> hexo
+                      </a>
+                    </span>
+                    
                   </span>
               
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2021/06/11/mo-js-animation/" target="_self">
+              <a href="/2022/04/07/mobile-h5-adapt/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -236,7 +292,7 @@ MathJax = {
   <div class="post-catalog" id="catalog">
     <div class="title">Contents</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux-%E5%91%BD%E4%BB%A4"><span class="toc-text">linux 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ts"><span class="toc-text">ts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mac%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="toc-text">mac网络配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es6-export-import"><span class="toc-text">es6 export import</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E9%93%BE%E6%8E%A5%EF%BC%8C%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="toc-text">软链接，硬链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css-tranform-%E5%B1%9E%E6%80%A7%E5%A4%B1%E6%95%88"><span class="toc-text">css tranform 属性失效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#antd-Input%E8%8E%B7%E5%BE%97%E7%84%A6%E7%82%B9%E5%8F%AF%E7%BC%96%E8%BE%91%E5%A4%B1%E5%8E%BB%E7%84%A6%E7%82%B9%E4%B8%8D%E5%8F%AF%E7%BC%96%E8%BE%91"><span class="toc-text">antd Input获得焦点可编辑失去焦点不可编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#antd-tree%E7%BB%84%E4%BB%B6%E7%9A%84treeData%E5%B1%9E%E6%80%A7%E5%8F%91%E7%94%9F%E5%8F%98%E5%8C%96%E4%B8%8D%E4%BC%9A%E5%AF%BC%E8%87%B4%E7%BB%84%E4%BB%B6%E9%87%8D%E6%96%B0%E6%B8%B2%E6%9F%93"><span class="toc-text">antd tree组件的treeData属性发生变化不会导致组件重新渲染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a%E6%A0%87%E7%AD%BE%E7%9A%84download%E5%B1%9E%E6%80%A7"><span class="toc-text">a标签的download属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack%E8%84%9A%E6%89%8B%E6%9E%B6%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3"><span class="toc-text">webpack脚手架项目相关</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91hexo-codepen%E6%8F%92%E4%BB%B6%E3%80%82"><span class="toc-text">开发hexo codepen插件。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E4%B8%AD%E5%BC%80%E5%8F%91%E4%B8%8E%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E4%BB%B6"><span class="toc-text">如何在hexo中开发与使用自定义插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91"><span class="toc-text">插件开发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8"><span class="toc-text">插件使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-text">配置方法一</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-text">配置方法二</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hexo-codepen%E6%8F%92%E4%BB%B6%E5%8E%9F%E7%90%86"><span class="toc-text">hexo codepen插件原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E7%BA%BF"><span class="toc-text">上线</span></a></li></ol>
     </div>
   </div>
 

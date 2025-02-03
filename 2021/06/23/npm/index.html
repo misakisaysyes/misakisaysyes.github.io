@@ -11,7 +11,7 @@
   
   <title>
     
-      开发笔记 
+      关于npm 
       
       
       |
@@ -129,11 +129,11 @@ MathJax = {
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">开发笔记</div>
+      <div class="post-title">关于npm</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="Update time"></i>
-          2021-04-26 15:19:37
+          2021-06-23 19:55:34
         </span>
         
               <span class="post-tags">
@@ -151,47 +151,156 @@ MathJax = {
                   </a>
                 </span>
                 
+                <span class="span--tag">
+                  <a href="/tags/npm/" title="npm">
+                    <b>#</b> npm
+                  </a>
+                </span>
+                
               </span>
           
       </div>
       <div class="markdown-body">
-        <h3 id="linux-命令"><a href="#linux-命令" class="headerlink" title="linux 命令"></a>linux 命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsof -i:4000 &#x2F;&#x2F; 查看占用端口4000的所有进程</span><br><span class="line">kill &lt;pID&gt; &#x2F;&#x2F; 杀死某个进程</span><br></pre></td></tr></table></figure>
+        <h3 id="npm-root-g"><a href="#npm-root-g" class="headerlink" title="npm root [-g]"></a>npm root [-g]</h3><p>local模式：打印出有效的（当前项目使用的）<code>node_modules</code>文件夹路径。</p>
+<p>global模式：打印出全局有效的（全局使用的）<code>node_modules</code>文件夹路径。</p>
+<p>默认local模式。</p>
+<h3 id="npm-prefix-g"><a href="#npm-prefix-g" class="headerlink" title="npm prefix [-g]"></a>npm prefix [-g]</h3><p>local 模式下：打印出<code>最近的</code>、包含<code>package.json</code>的<code>父级文件夹</code>目录。</p>
+<p>global 模式下：得到路径前缀<code>prefix</code>。</p>
+<p>默认local模式。</p>
+<h4 id="关于npm-prefix-本地"><a href="#关于npm-prefix-本地" class="headerlink" title="关于npm prefix (本地)"></a>关于npm prefix (本地)</h4><p>在mac中，本地prefix的值为<code>/Users/admin</code>，尽管该路径下 默认 是没有关于npm的配置文件的。</p>
+<h4 id="关于npm-prefix-g-（全局）"><a href="#关于npm-prefix-g-（全局）" class="headerlink" title="关于npm prefix -g （全局）"></a>关于npm prefix -g （全局）</h4><p>全局安装的包被放在 <code>&#123;prefix&#125;/lib/node_modules</code> 文件夹。</p>
+<p>bin文件夹的路径为 <code>&#123;prefix&#125;/bin</code> 。</p>
+<p>说明文件（man page）被放在 <code>&#123;prefix&#125;/share/man</code> 内。</p>
+<blockquote>
+<p>在mac中 prefix 为 <code>/usr/local</code><br>全局包安装的路径为 <code>/usr/local/lib/node_modules</code>。<br>bin文件夹的路径为 <code>/usr/local/bin</code>。</p>
+</blockquote>
+<p>bin文件夹中大多数是一些<code>软链接</code>文件，也有<code>可执行</code>文件。 </p>
+<p>这些<code>软链接</code>最终指向一些<code>可执行</code>文件，或者<code>shell</code>脚本。</p>
+<p>注意⚠️：<code>/usr/local/bin</code> 软链接的包 包括但不仅限于npm下载的包。</p>
+<p>以mac为例🌰，mac的usr目录如下所示：</p>
+<pre><code>| - usr
+    | - local
+        | - lib
+            | - node_modules
+                | - hexo-cli
+                    | - bin 
+                        | - hexo // 可执行文件
+        | - bin
+            | - hexo // 软链接文件
+</code></pre>
+<p>npm全局下载的<code>hexo包</code>会被放在<code>/usr/local/lib/node_modules</code>下。</p>
+<p>同时，<code>/usr/local/bin</code>目录下会自动生成<code>软链接</code>文件hexo。</p>
+<p>该<code>软链接</code>文件指向hexo包中的可执行文件 （<code>/usr/local/lib/node_modules/hexo-cli/bin/hexo</code>）。</p>
+<p>当然，我们可以通过<code>npm config</code>系列命令修改npm配置，从而改变下载包存放的位置。</p>
+<h3 id="npm-config"><a href="#npm-config" class="headerlink" title="npm config"></a>npm config</h3><p>npm从<code>.npmrc</code>文件中获取配置（代理、安装目录等）。</p>
+<p>.npmrc文件中的配置都以key=value的形式存在。</p>
+<p>有4种不同位置的.npmrc文件：</p>
+<ol>
+<li><p>per-project config file (/path/to/my/project/.npmrc)</p>
+<p>每个项目都会有一个☝️.npmrc文件，该文件在项目的<code>根目录</code>下。</p>
+<p>一个项目的<code>根目录</code>就是该项目的<code>package.json</code>和<code>node_modules</code>所在的目录。</p>
+<p>该配置只在项目内部生效。</p>
+</li>
+<li><p>per-user config file (~/.npmrc)</p>
+<p> // 极少用到，具体用法见文档</p>
+</li>
+<li><p>global config file ($PREFIX/etc/npmrc)</p>
+<p> 全局npmrc文件应放在<code>$&#123;PREFIX&#125;/etc</code>中。</p>
+<p> 对于mac而言就是放在<code>/usr/local/etc</code>中。</p>
+</li>
+<li><p>npm builtin config file (/path/to/npm/npmrc)</p>
+<p> // 极少用到，具体用法见文档</p>
+</li>
+</ol>
+<p>4种不同位置的.npmrc文件优先级为 1 &gt; 2 &gt; 3 &gt; 4</p>
+<p>也就是在项目根目录下配置.npmrc文件，其配置能覆盖全局的.npmrc文件配置。</p>
+<p>通过命令行修改npm配置，实质是通过命令行修改了npmrc文件，从而达到了更改配置的目的。</p>
+<p>npm所有的配置项可参见 <a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/v7/using-npm/config#config-settings">npm config setting</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 常用修改命令</span><br><span class="line">npm config list &#x2F;&#x2F; 查看所有配置</span><br><span class="line">npm config get &lt;key&gt;</span><br><span class="line">npm config set &lt;key&gt; &lt;value&gt;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 $(lsof -i:4000) &#x2F;&#x2F; 杀死端口4000的所有进程</span><br></pre></td></tr></table></figure>
+<h3 id="package-json-和-package-lock-json"><a href="#package-json-和-package-lock-json" class="headerlink" title="package.json 和 package-lock.json"></a>package.json 和 package-lock.json</h3><h4 id="package-json-之-script-字段"><a href="#package-json-之-script-字段" class="headerlink" title="package.json 之 script 字段"></a>package.json 之 script 字段</h4><p>package.json中的script字段可以用来配置命令</p>
+<p>举个例子🌰：</p>
+<pre><code>// 假设有项目
+| - proj
+    | - node_modules
+        | - .bin
+            | - test // 软链接文件
+            | - ...
+        | - test
+            | - bin
+                | - test.js // shell脚本
+            | ...
+    | - package.json
 
-<h3 id="ts"><a href="#ts" class="headerlink" title="ts"></a>ts</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">interface OP &#123;</span><br><span class="line">  op1(): void;</span><br><span class="line">  op2(): void;</span><br><span class="line">  op3()?: void;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ConcreteOP implements OP &#123;</span><br><span class="line">  op1() &#123;&#125;</span><br><span class="line">  op2() &#123;&#125;</span><br><span class="line">  &#x2F;&#x2F; 类中对该方法的实现可有可无</span><br><span class="line">  &#x2F;&#x2F; op3() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>等价于</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">abstract class OP &#123;</span><br><span class="line">  &#x2F;&#x2F; abstract  修饰的方法在子类中必须实现</span><br><span class="line">  abstract op1() &#123;&#125;</span><br><span class="line">  abstract op2() &#123;&#125;</span><br><span class="line">  op3() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ConcreteOP extends OP &#123;</span><br><span class="line">  op1() &#123;&#125;</span><br><span class="line">  op2() &#123;&#125;</span><br><span class="line">  &#x2F;&#x2F; 类中对改方法的实现可有可无</span><br><span class="line">  &#x2F;&#x2F; op3() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+// 现在在package.json中写一些命令，来在项目中运行test这个包
+&quot;script&quot; : &#123;
+    &quot;test1&quot;: &quot;test&quot;,
+    &quot;test2&quot;: &quot;./node_modules/.bin/test&quot;,
+    &quot;test3&quot;: &quot;node ./node_modules/test/bin/*&quot;
+    &quot;test4&quot;: &quot;./node_modules/test/bin/*&quot;,
+&#125;,
+</code></pre>
+<p>在这个例子中,在命令行分别执行以下条命令，得到的结果是一样的：</p>
+<p>第一组<br><code>npm run test1</code><br><code>npx test</code></p>
+<p>第二组<br><code>npm run test2</code><br><code>npx ./node_modules/.bin/test</code><br><code>./node_modules/.bin/test</code></p>
+<p>第三组<br><code>npm run test3</code><br><code>npm run test4</code><br><code>./node_modules/test/bin/*</code><br><code>npx ./node_modules/test/bin/*</code><br><code>node ./node_modules/test/bin/*</code><br><code>npx node ./node_modules/test/bin/*</code></p>
+<p>怎么理解这三组命令执行结果都是一样的？</p>
+<p><strong>首先</strong></p>
+<p>要明确一个☝️点，命令都是手段，最终的目的都是把包运行起来，要运行包得执行包中的<code>shell脚本</code>。</p>
+<p>在这个例子中shell脚本就是<code>./node_modules/test/bin/test.js</code>。</p>
+<p>执行shell脚本可以在命令行中直接输入脚本路径： <code>./node_modules/test/bin/*</code></p>
+<p>可以使用<code>node</code>、<code>npx</code>命令执行shell脚本： <code>npx ./node_modules/test/bin/*</code> 、<code>node ./node_modules/test/bin/*</code>、<code>npx node ./node_modules/test/bin/*</code>。</p>
+<p>可以使用<code>npm run &lt;script&gt;</code>的方式执行脚本： <code>npm run test3</code>、<code>npm run test4</code>。</p>
+<p>所以第三组的命令，全是围绕着怎么去执行包的shell文件展开。</p>
+<blockquote>
+<p>这里的shell脚本是js文件<br>但该js文件但开头一定要有<code>#!/usr/bin/env node</code></p>
+</blockquote>
+<p><strong>其次</strong></p>
+<p>系统执行shell脚本，还可以通过软链接的方式。</p>
+<p>软连接文件指向shell脚本文件，在命令行中输入软链接文件可以直接指向shell脚本，从而运行起来：<code>./node_modules/.bin/test</code>。</p>
+<p>可以使用<code>npx</code>命令执行软链接文件指向的shell脚本：<code>npx ./node_modules/.bin/test</code>。</p>
+<p>也可以使用<code>npm run &lt;script&gt;</code>的方式执行脚本：<code>npm run test2</code>。</p>
+<p>所以第二组命令，全是围绕着怎样根据包的软链接文件执行shell脚本展开。</p>
+<p><strong>最后</strong></p>
+<p>对于第一组命令，npm会自动给它<code>./node_modules/.bin</code>下所有的软链接起别名，别名就是软链接文件名。</p>
+<p>在定义”script”对象中的键值对命令时，我们可以使用这个别名。</p>
+<h4 id="package-json-之-bin-字段"><a href="#package-json-之-bin-字段" class="headerlink" title="package.json 之 bin 字段"></a>package.json 之 bin 字段</h4><p>有时，我们需要开发自定的npm包。并把包中的shell脚本安装到全局执行。这时，我们便需要设置”bin”字段</p>
+<p>举个例子🌰：</p>
+<pre><code>// 现在有个测试项目
+| - proj
+    | - package.json
+    | - test.js
 
-<h3 id="mac网络配置"><a href="#mac网络配置" class="headerlink" title="mac网络配置"></a>mac网络配置</h3><p>当在公共场合无法自动弹出登陆上网页面时，需要将clash代理关掉。</p>
-<h3 id="es6-export-import"><a href="#es6-export-import" class="headerlink" title="es6 export import"></a>es6 export import</h3><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903623273480200">参考</a></p>
-<h3 id="软链接，硬链接"><a href="#软链接，硬链接" class="headerlink" title="软链接，硬链接"></a>软链接，硬链接</h3><p>假设有一个文件占据一块磁盘空间A</p>
-<p><code>硬链接</code>就是一个指针，指向<code>磁盘空间A</code>，访问<code>硬链接</code>就是在访问<code>硬链接</code>指向的这块<code>磁盘空间A</code>。</p>
-<p><code>软链接</code>就是个文件，占据着不同于<code>磁盘空间A</code>的另一块<code>磁盘空间B</code>，<code>磁盘空间B</code>里存放着<code>磁盘空间A</code>的绝对路径。</p>
-<p>每当访问<code>软链接</code>所在的<code>磁盘空间B</code>时，就会自动替换成<code>磁盘空间B</code>存放的<code>磁盘空间A</code>的路径，从而访问到文件。</p>
-<p> <a target="_blank" rel="noopener" href="https://www.linuxprobe.com/soft-and-hard-links.html">参考</a></p>
-<h3 id="css-tranform-属性失效"><a href="#css-tranform-属性失效" class="headerlink" title="css tranform 属性失效"></a>css tranform 属性失效</h3><p>只有当display的值不为<code>inline</code>、<code>contents</code>、<code>table-*</code>，transfrom属性才生效。</p>
-<h3 id="antd-Input获得焦点可编辑失去焦点不可编辑"><a href="#antd-Input获得焦点可编辑失去焦点不可编辑" class="headerlink" title="antd Input获得焦点可编辑失去焦点不可编辑"></a>antd Input获得焦点可编辑失去焦点不可编辑</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const TInput &#x3D; props &#x3D;&gt; &#123;</span><br><span class="line">  const [editable, setEditable] &#x3D; useState(false)</span><br><span class="line">  const [value, setValue] &#x3D; useState(&#39;&#39;)</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">    &lt;Input</span><br><span class="line">      disabled&#x3D;&#123;!editable&#125;</span><br><span class="line">      value&#x3D;&#123;value&#125;</span><br><span class="line">      onChange&#x3D;&#123;e &#x3D;&gt; setValue(e.target.value)&#125;</span><br><span class="line">      ref&#x3D;&#123;ref &#x3D;&gt; ref &amp;&amp; ref.focus()&#125;</span><br><span class="line">      onBlur&#x3D;&#123;() &#x3D;&gt; setEditable(false)&#125;</span><br><span class="line">      onPressEnter&#x3D;&#123;() &#x3D;&gt; setEditable(false)&#125;</span><br><span class="line">    &#x2F;&gt;</span><br><span class="line">    &lt;Button onClick&#x3D;&#123;() &#x3D;&gt; setEditable(true)&#125;&gt;编辑&lt;&#x2F;Button&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+// package.json
+&quot;bin&quot; : &#123;
+    &quot;test&quot; : &quot;./test.js&quot;,
+&#125;
 
-<h3 id="antd-tree组件的treeData属性发生变化不会导致组件重新渲染"><a href="#antd-tree组件的treeData属性发生变化不会导致组件重新渲染" class="headerlink" title="antd tree组件的treeData属性发生变化不会导致组件重新渲染"></a>antd tree组件的treeData属性发生变化不会导致组件重新渲染</h3><p>原因：可能tree组件的官方实现层级就套的太深了，再加上自己开发的组件层级，导致有时state或者props的变化不会触发重新渲染。</p>
-<p>解决方案：利用key属性让组件强制渲染。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import &#123; useEffect &#125; from &#39;react&#39;</span><br><span class="line">import &#123; Tree &#125; from &#39;antd&#39;</span><br><span class="line"></span><br><span class="line">const TestComp &#x3D; (&#123; treeData &#125;) &#x3D;&gt; &#123;</span><br><span class="line"></span><br><span class="line">  const [forceRenderKey, setForceRenderKey] &#x3D; useState(&#39;&#39;)</span><br><span class="line"></span><br><span class="line">  useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">    setForceRenderKey(Math.random().toStrng(36).substr(2))</span><br><span class="line">  &#125;, [treeData])</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">      &lt;Tree</span><br><span class="line">        key&#x3D;&#123;forceRenderKey&#125;</span><br><span class="line">        treeData&#x3D;&#123;treeData&#125;</span><br><span class="line">        ...</span><br><span class="line">        titleRender&#x3D;&#123;nodeData &#x3D;&gt; &lt;div&gt;self defined node&lt;&#x2F;div&gt;&#125;</span><br><span class="line">      &#x2F;&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="a标签的download属性"><a href="#a标签的download属性" class="headerlink" title="a标签的download属性"></a>a标签的download属性</h3><p>给<code>a</code>标签添加download属性后，对于href非同源的情况就会失效。</p>
-<p>详细见文档：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a">a标签 MDN</a></p>
-<h3 id="webpack脚手架项目相关"><a href="#webpack脚手架项目相关" class="headerlink" title="webpack脚手架项目相关"></a>webpack脚手架项目相关</h3><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904101893898248#heading-28">脚手架/CI构建能力</a></p>
-<p><a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/v7/configuring-npm/package-json">npm</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6966119324478079007#heading-11">从 0 构建自己的脚手架/CLI知识体系</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6919308174151385096#heading-76">「前端工程化」从0-1搭建react，ts脚手架</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/tj/commander.js/blob/master/Readme_zh-CN.md">Commander.js</a></p>
+// test.js
+#!/usr/bin/env node
+console.log(&#39;this is a test&#39;)
+</code></pre>
+<p>执行<code>npm link</code>。</p>
+<p>就会有<code>/usr/local/lib/node_modules/proj</code>指向<code>proj</code>这个项目</p>
+<p>然后会有<code>/usr/local/bin/test</code>软链接指向<code>/usr/local/lib/node_modules/proj/test.js</code>脚本。</p>
+<p>此时这个包的命令在本机全局安装成功，可以在命令行执行<code>test</code>命令。</p>
+<p>package.json其他字段和作用可参考 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/701397670">2025.2.2补充</a></p>
+<h4 id="package-lock-json"><a href="#package-lock-json" class="headerlink" title="package-lock.json"></a>package-lock.json</h4><p>该文件记录了一个树状数据结构，该结构记录了一个包所依赖的其他包。</p>
+<p>它可以加快npm下载的速度，举个栗子🌰：</p>
+<p>当在项目中下载某个包时，会先读取这个包中的package-lock.json，了解这个包中所有的依赖。</p>
+<p>如果项目中已下载了这些依赖，那就不用重新下载了，从而节省了下载请求次数，提高了下包速度。</p>
+<blockquote>
+<p>package-lock.json中所记录的包<br><code>等价于</code> node_modules中所有的包<br><code>包含</code> package.json “dependencies”字段中所有的包<br><code>包含</code> package.json “devDependencies”字段中所有的包</p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/v6">npm</a></p>
 
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2020/08/27/build-blog/" target="_self">
+              <a href="/2021/06/11/mo-js-animation/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -200,7 +309,7 @@ MathJax = {
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime" title="Update time"></i>
-              2021-04-26 15:19:37
+              2021-06-23 19:55:34
             </span>
             
                   <span class="post-tags">
@@ -218,12 +327,18 @@ MathJax = {
                       </a>
                     </span>
                     
+                    <span class="span--tag">
+                      <a href="/tags/npm/" title="npm">
+                        <b>#</b> npm
+                      </a>
+                    </span>
+                    
                   </span>
               
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2021/06/11/mo-js-animation/" target="_self">
+              <a href="/2021/07/01/commander/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -236,7 +351,7 @@ MathJax = {
   <div class="post-catalog" id="catalog">
     <div class="title">Contents</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux-%E5%91%BD%E4%BB%A4"><span class="toc-text">linux 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ts"><span class="toc-text">ts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mac%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="toc-text">mac网络配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es6-export-import"><span class="toc-text">es6 export import</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E9%93%BE%E6%8E%A5%EF%BC%8C%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="toc-text">软链接，硬链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css-tranform-%E5%B1%9E%E6%80%A7%E5%A4%B1%E6%95%88"><span class="toc-text">css tranform 属性失效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#antd-Input%E8%8E%B7%E5%BE%97%E7%84%A6%E7%82%B9%E5%8F%AF%E7%BC%96%E8%BE%91%E5%A4%B1%E5%8E%BB%E7%84%A6%E7%82%B9%E4%B8%8D%E5%8F%AF%E7%BC%96%E8%BE%91"><span class="toc-text">antd Input获得焦点可编辑失去焦点不可编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#antd-tree%E7%BB%84%E4%BB%B6%E7%9A%84treeData%E5%B1%9E%E6%80%A7%E5%8F%91%E7%94%9F%E5%8F%98%E5%8C%96%E4%B8%8D%E4%BC%9A%E5%AF%BC%E8%87%B4%E7%BB%84%E4%BB%B6%E9%87%8D%E6%96%B0%E6%B8%B2%E6%9F%93"><span class="toc-text">antd tree组件的treeData属性发生变化不会导致组件重新渲染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a%E6%A0%87%E7%AD%BE%E7%9A%84download%E5%B1%9E%E6%80%A7"><span class="toc-text">a标签的download属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack%E8%84%9A%E6%89%8B%E6%9E%B6%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3"><span class="toc-text">webpack脚手架项目相关</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#npm-root-g"><span class="toc-text">npm root [-g]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm-prefix-g"><span class="toc-text">npm prefix [-g]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Enpm-prefix-%E6%9C%AC%E5%9C%B0"><span class="toc-text">关于npm prefix (本地)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Enpm-prefix-g-%EF%BC%88%E5%85%A8%E5%B1%80%EF%BC%89"><span class="toc-text">关于npm prefix -g （全局）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm-config"><span class="toc-text">npm config</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package-json-%E5%92%8C-package-lock-json"><span class="toc-text">package.json 和 package-lock.json</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#package-json-%E4%B9%8B-script-%E5%AD%97%E6%AE%B5"><span class="toc-text">package.json 之 script 字段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#package-json-%E4%B9%8B-bin-%E5%AD%97%E6%AE%B5"><span class="toc-text">package.json 之 bin 字段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#package-lock-json"><span class="toc-text">package-lock.json</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </div>
 
