@@ -1,0 +1,37 @@
+.mermaid {
+  overflow-x: auto;
+  margin: 24px 0;
+  padding: 16px;
+  border: 1px solid var(--color-border, #e1e4e8);
+  border-radius: 8px;
+  background: var(--color-background, #fff);
+  text-align: center;
+}
+
+.mermaid svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.mermaid[data-mermaid-error] {
+  color: #c62828;
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 720px) {
+  .mermaid {
+    margin-right: -8px;
+    margin-left: -8px;
+    padding: 8px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .mermaid {
+    border-color: #333;
+    background: #1e1e1e;
+  }
+}

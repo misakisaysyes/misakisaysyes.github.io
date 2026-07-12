@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="<%= config.language %>" color-mode="light">
+
+  <%- partial('_partial/header') %>
+
+  <body>
+    <div id="app">
+      <%- partial('_partial/navigation') %>
+
+      <div class="flex-container">
+        <%- body %>
+        <%- partial('_partial/footer') %>
+      </div>
+
+      <div class="tools-bar">
+        <%- partial('_partial/backtotop') %>
+
+        <%- partial('_partial/search') %>
+
+        <%- partial('_partial/colorscheme') %>
+
+        <%- partial('_partial/shares') %>
+      </div>
+    </div>
+    <script defer src="<%- url_for('/js/mermaid.js') %>"></script>
+  </body>
+</html>

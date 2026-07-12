@@ -1,0 +1,35 @@
+<div class="header">
+  <div class="avatar">
+    <!-- 这里加载烟花特效 -->
+    <!-- <a href="<%- theme.avatar.path %>">
+      <% if (config.lazyload && config.lazyload.enable) { %>
+        <img no-lazy src="<%- theme.avatar.author_photo %>" alt="" id="avatar-img">
+      <% } else { %>
+        <img src="<%- theme.avatar.author_photo %>" alt="" id="avatar-img">
+      <% } %>
+    </a> -->
+    <div class="nickname">
+      <a id="user-name" href="<%- theme.avatar.path %>"><%- theme.avatar.author_nickname %></a>
+      <svg t="1633705051853"  id="user-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15546" width="16" height="16"><path d="M288.105 122.229C174.047 122.21 64.691 231.687 64.691 388.095c0 176.07 156.747 241.891 261.855 312.283 101.962 68.266 174.057 161.602 185.453 201.393 9.743-38.936 91.03-135.019 185.448-203.373 103.196-74.727 261.861-136.19 261.861-312.262 0-152.117-109.34-260.294-222.908-260.294-86.792 0-167.781 15.754-224.419 128.441-65.593-111.977-138.495-132.042-223.876-132.054" p-id="15547"></path></svg>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      <%
+        for(let item of theme.navbar) {
+          if (item.enable) {
+      %>
+        <li class="nav-item" data-path="<%- item.path %>">
+          <a href="<%- item.path %>"><%- item.name %></a>
+        </li>
+      <%
+          }
+        }
+      %>
+    </ul>
+  </div>
+</div>
+
+<%- js(['/js/mo.min.js'])%>
+<%- js(['/js/activeNav.js']) %>
+<%- js(['/js/animation.js'])%>
