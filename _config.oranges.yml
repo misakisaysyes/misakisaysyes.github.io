@@ -1,0 +1,8 @@
+comments:
+  enable: true
+  gitalk:
+    enable: false
+  waline:
+    enable: true
+    serverURL: https://misakisaysyes-comment-system.vercel.app
+    vempty_display: false
