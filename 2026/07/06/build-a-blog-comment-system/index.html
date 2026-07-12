@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      博客评论系统 
+      
+      
+      |
+    
+     Misakisaysyes
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <!-- 这里加载烟花特效 -->
+    <!-- <a href="/">
+      
+        <img src="/images/avatar.png" alt="" id="avatar-img">
+      
+    </a> -->
+    <div class="nickname">
+      <a id="user-name" href="/">Misakisaysyes</a>
+      <svg t="1633705051853"  id="user-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15546" width="16" height="16"><path d="M288.105 122.229C174.047 122.21 64.691 231.687 64.691 388.095c0 176.07 156.747 241.891 261.855 312.283 101.962 68.266 174.057 161.602 185.453 201.393 9.743-38.936 91.03-135.019 185.448-203.373 103.196-74.727 261.861-136.19 261.861-312.262 0-152.117-109.34-260.294-222.908-260.294-86.792 0-167.781 15.754-224.419 128.441-65.593-111.977-138.495-132.042-223.876-132.054" p-id="15547"></path></svg>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/mo.min.js"></script>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+<script src="/js/animation.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">博客评论系统</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2026-07-12 18:23:01
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E6%8A%80%E6%9C%AF/" title="技术">
+                    #技术
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%9F%BA%E5%BB%BA/" title="博客基建">
+                    #博客基建
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>给博客新增了评论系统，主要功能有：</p>
+<ul>
+<li>支持发表评论、点赞和回复。</li>
+<li>支持免登录评论，访客填写昵称和邮箱即可评论。</li>
+<li>支持邮件通知，评论收到回复时会邮件提醒。</li>
+<li>提供管理后台，方便admin管理评论数据。</li>
+</ul>
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>该博客评论系统采用<code>Waline</code>搭建，<code>Waline</code>提供了开箱即用的评论、点赞、回复、邮件与后台管理功能，只需在Hexo静态网站中接入<code>Waline Client</code>并将<code>Waline Server</code>部署到云平台上便能使用。本博客使用<code>Vercel</code>托管<code>Waline Server</code>，并通过<code>MongoDB</code>存储评论数据。</p>
+<p>搭建完后整个的博客运行时序如下：</p>
+
+<pre class="mermaid">
+sequenceDiagram
+    autonumber
+    participant Browser as 浏览器
+    participant GitHub as GitHub Pages
+    participant Vercel as Vercel
+    participant MongoDB as MongoDB
+
+    Browser->>GitHub: 请求 Hexo 文章
+    GitHub-->>Browser: 返回 HTML、CSS 和 JavaScript
+    Note over Browser: Waline Client 在浏览器中初始化
+    Browser->>Vercel: Waline Client 请求评论列表
+    Note over Vercel: Waline Server 部署在 Vercel
+    Vercel->>MongoDB: 查询评论
+    MongoDB-->>Vercel: 返回评论数据
+    Vercel-->>Browser: Waline Server 返回评论 JSON
+    Browser->>Browser: Waline Client 渲染评论列表
+
+    Browser->>Vercel: Waline Client 提交评论
+    Vercel->>MongoDB: 保存评论
+    MongoDB-->>Vercel: 保存成功
+    Vercel-->>Browser: Waline Server 返回新评论
+    Browser->>Browser: Waline Client 更新评论列表
+</pre>
+
+
+<p>名词解释：</p>
+<ul>
+<li><code>Waline Client</code>：前端程序，运行在浏览器，负责展示评论界面、发起评论请求</li>
+<li><code>Waline Server</code>： 服务端程序，负责处理评论请求、执行业务逻辑、读写数据库</li>
+<li><code>Vercel</code>：云托管平台，在上面部署和运行Waline Server</li>
+<li><code>MongoDB</code>：数据库，负责持久化存储评论数据</li>
+<li><code>GitHub Pages</code>：云托管平台，托管和分发Hexo生成的静态网站文件</li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p><b> 1.在Vercel上部署Waline Server </b></p>
+<p>相关平台：<a target="_blank" rel="noopener" href="https://vercel.com/">Vercel</a>，参考文档：<a target="_blank" rel="noopener" href="https://waline.js.org/guide/deploy/vercel.html">ref</a></p>
+<ul>
+<li>Vercel新建项目时会关联Github自动创建Waline Server仓库。</li>
+<li>Vercel拉取Waline Server仓库代码，自动完成构建和部署。</li>
+</ul>
+<p><b> 2.在Vercel创建MongoDB数据库，将数据库关联到Waline Server</b></p>
+<p>相关平台：<a target="_blank" rel="noopener" href="https://vercel.com/">Vercel</a></p>
+<ul>
+<li>在Vercel中创建MongoDB数据库，创建路径：<code>Storage &gt; Create Database &gt; MongoDB Atlas</code>。</li>
+<li>将数据库关联到Waline Server：Vercel创建数据库时指定关联Waline Server项目即可，关联成功后Waline Server项目会有和数据库相关的环境变量配置，查看路径：<code>Environment Variables</code>。</li>
+</ul>
+<p><b> 3.在Hexo博客中配置Waline Client，并指定Waline Server地址</b></p>
+<p>该博客使用的主题hexo-theme-orange本身集成了Waline Client，详见<a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges/blob/ae47484c9ff9ed6cdea5b37ca981e067186c622d/_config.yml#L75">_config.yml</a>。</p>
+<p>故只用配置Waline Server地址即可，参考：<a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges/blob/ae47484c9ff9ed6cdea5b37ca981e067186c622d/_config.yml#L78">_config.yml</a>。</p>
+<p>Waline Server地址可以从<a target="_blank" rel="noopener" href="https://vercel.com/">Vercel</a>获取，相关路径 <code>Waline Server项目 &gt; Domains</code>。</p>
+<p><b> 4.配置邮件通知</b></p>
+<ul>
+<li>申请一个walilne发信邮箱，开启SMTP服务。</li>
+<li>在Vercel的Waline Server项目关联邮箱，即配置和邮箱相关的环境变量，可参考：<a target="_blank" rel="noopener" href="https://waline.js.org/reference/server/env.html#%E4%B8%BB%E8%A6%81%E9%85%8D%E7%BD%AE">环境变量配置</a>。</li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2026/07/01/capture-the-moment/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2026-07-12 18:23:01
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E6%8A%80%E6%9C%AF/" title="技术">
+                        #技术
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%9F%BA%E5%BB%BA/" title="博客基建">
+                        #博客基建
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88"><span class="toc-text">方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+  <div id="waline-comments"></div>
+
+  <script>
+    function loadWalineSuc(func) {
+      func({
+        el: '#waline-comments',
+        path: location.pathname,
+        serverURL: 'https://misakisaysyes-comment-system.vercel.app',
+        emoji: false,
+        dark: 'auto',
+        requiredMeta: ['nick', 'mail'],
+        login: 'disable',
+        wordLimit: 150,
+        imageUploader: false,
+        search: false,
+        reaction: false,
+        pageSize: 30,
+        lang: 'en'
+      })
+    }
+  </script>
+
+  
+    <link rel="stylesheet" href="/plugins/waline.css">
+    <script type="module">
+      import { init } from '/plugins/waline.mjs'
+      loadWalineSuc(init)
+    </script>
+  
+
+
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/misakisaysyes">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="http://github.com/misakisaysyes">Copyright © 2026 Misakisaysyes</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F + '&url=' + http%3A%2F%2Fexample.com%2F2026%2F07%2F06%2Fbuild-a-blog-comment-system%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2026/07/06/build-a-blog-comment-system/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+    <script defer src="/js/mermaid.js"></script>
+  </body>
+</html>

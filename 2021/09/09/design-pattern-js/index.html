@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      设计模式 
+      
+      
+      |
+    
+     Misakisaysyes
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <!-- 这里加载烟花特效 -->
+    <!-- <a href="/">
+      
+        <img src="/images/avatar.png" alt="" id="avatar-img">
+      
+    </a> -->
+    <div class="nickname">
+      <a id="user-name" href="/">Misakisaysyes</a>
+      <svg t="1633705051853"  id="user-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15546" width="16" height="16"><path d="M288.105 122.229C174.047 122.21 64.691 231.687 64.691 388.095c0 176.07 156.747 241.891 261.855 312.283 101.962 68.266 174.057 161.602 185.453 201.393 9.743-38.936 91.03-135.019 185.448-203.373 103.196-74.727 261.861-136.19 261.861-312.262 0-152.117-109.34-260.294-222.908-260.294-86.792 0-167.781 15.754-224.419 128.441-65.593-111.977-138.495-132.042-223.876-132.054" p-id="15547"></path></svg>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/mo.min.js"></script>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+<script src="/js/animation.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">设计模式</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2026-07-07 22:08:35
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E6%8A%80%E6%9C%AF/" title="技术">
+                    #技术
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                    #设计模式
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>设计模式</code>是为<code>面对象编程</code>思想服务的一种工具。</p>
+<p>它是软件工程师们基于<code>面对象编程</code>的概念体系(类、对象、继承、多态…)，结合实际工程应用，总结出的一套<code>编程原则</code>和<code>代码模式（模版）</code>。</p>
+<p>这套原则和模版，能帮助新手软件工程师们更快地写出易扩展、好维护的代码。</p>
+<p>本文主要介绍了以下内容：</p>
+<p><img src="/2021/09/09/design-pattern-js/1.png" alt="1.png"></p>
+<h2 id="设计模式原则"><a href="#设计模式原则" class="headerlink" title="设计模式原则"></a>设计模式原则</h2><h3 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h3><p>别名：单一功能原则</p>
+<p>一个类只用来完成一项工作，对于这个类对实体，尽量保证只有一个引起它变化的因素。</p>
+<p>以提内聚性来减少引起变化对因素，从而降低耦合度。</p>
+<h3 id="开放封闭原则"><a href="#开放封闭原则" class="headerlink" title="开放封闭原则"></a>开放封闭原则</h3><p>对象或实体应该对扩展开放，对修改封闭。</p>
+<p>对扩展开放：一旦有新需求，原有类应该很容易扩展出新方法。</p>
+<p>对修改封闭：已经设计完成的类可以独立完成其工作，不需要大的修改。</p>
+<p>通过对抽象类继承，和多态重写机制来实现开放封闭原则。</p>
+<h3 id="里氏-Liskov-替换原则"><a href="#里氏-Liskov-替换原则" class="headerlink" title="里氏(Liskov)替换原则"></a>里氏(Liskov)替换原则</h3><p>在对象<code>x</code>为类型<code>T</code>时<code>q(x)</code>成立。那么<code>S</code>为<code>T</code>的子类时，当<code>y</code>的类型为<code>S</code>那么<code>q(y)</code>也成立。</p>
+<p>即：对父类的调用对子类同样成立。子类或者派生类必然可以替换它们的父类或基类，但反之不一定成立。</p>
+<p><code>Liskov替换原则</code>是关于继承机制的设计原则，违反类Liskov设计原则就必然违反<code>开放封闭原则</code></p>
+<h3 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h3><p>不应该强迫客户端实现一个它们用不上的接口。</p>
+<p>核心思想：实现多个小而专的接口，不要实现大的总接口。<code>多重继承</code>体现类接口隔离原则。</p>
+<h3 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h3><p>实体必须依赖抽象而不是具体实现。高层次的模块不应该依赖低层次的模块，它们都应该依赖于抽象。</p>
+<blockquote>
+<p>当两个模块之间存在紧密的耦合关系时，最好的方法就是分离接口和实现：在依赖之间定义一个抽象的接口使得高层模块调用接口，而底层模块实现接口的定义，以此来有效控制耦合关系，达到依赖于抽象的设计目标。</p>
+</blockquote>
+<h3 id="其他原则"><a href="#其他原则" class="headerlink" title="其他原则"></a>其他原则</h3><h4 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h4><p>合成复用原则就是指在一个新的对象里通过关联关系（包括组合关系和聚合关系）来使用一些已有的对象，使之成为新对象的一部分；新对象通过委派调用已有对象的方法达到复用其已有功能的目的。简言之：要尽量使用组合&#x2F;聚合关系，少用继承。</p>
+<h4 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h4><p>一个实体应当尽量少的与其他实体之间发生相互作用，使得系统功能模块相对独立。</p>
+<p>这样减少修改实体时对其他实体造成的影响。</p>
+<h2 id="创建型模型"><a href="#创建型模型" class="headerlink" title="创建型模型"></a>创建型模型</h2><p>对类实例化的过程进行抽象，将软件模块中创建对象和使用对象分离，外界只知道使用对象的接口，使得整个系统更符合<code>单一职责原则</code>。</p>
+<h3 id="简单工厂模式-Simple-Factory"><a href="#简单工厂模式-Simple-Factory" class="headerlink" title="简单工厂模式 (Simple Factory)"></a>简单工厂模式 (Simple Factory)</h3><p>别名：静态工厂方法 (Static Factory Method)</p>
+<p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/creational_patterns/simple_factory.html#">ref</a></p>
+<iframe 
+                src="undefined/NWgpEKJ?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+
+<h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><p>别名：工厂模式、虚拟构造器模式、多态工厂模式。</p>
+<p>父类负责定义创建产品对象对公共接口，子类工厂负责生产具体对产品对象。</p>
+<p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/creational_patterns/factory_method.html">ref</a></p>
+<iframe 
+                src="undefined/QWgvRbq?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+
+<h3 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/creational_patterns/abstract_factory.html">ref</a></p>
+<p>别名：kit模式，对象创建型模式</p>
+<iframe 
+                src="undefined/RwgVmYp?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+<h3 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/creational_patterns/builder.html">ref</a></p>
+<iframe 
+                src="undefined/WNOjqzq?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/creational_patterns/singleton.html">ref</a></p>
+<p>别名：单件模式、单态模式</p>
+<iframe 
+                src="undefined/WNOjVQv?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+
+<h2 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h2><p>结构型模式描述如何将类和对象结合在一起，从而形成更复杂，功能更强大的结构。</p>
+<p>结构型模式可以分为：<code>类结构型模式</code>和<code>对象型结构模式</code>。</p>
+<p><code>类结构型模式</code>：</p>
+<p>关心类的组合，由多个类组合成更大的系统。</p>
+<p><code>对象型结构模式</code> ：</p>
+<p>关心类与对象的组合，通过关联关系使得一个类中定义另一个类的实例对象，然后通过该对象调用类方法。</p>
+<p>根据<code>合成复用原则</code>，在系统中应该尽量使用<code>关联关系</code>替代<code>继承关系</code>，因此大部分结构模式都是对象型结构模式。</p>
+<h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/adapter.html">ref</a></p>
+<p>用于接口转换</p>
+<h4 id="对象适配器"><a href="#对象适配器" class="headerlink" title="对象适配器"></a>对象适配器</h4><iframe 
+                src="undefined/VwWWZQa?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+
+<h4 id="类适配器"><a href="#类适配器" class="headerlink" title="类适配器"></a>类适配器</h4><iframe 
+                src="undefined/PojmMvN?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>3.
+
+
+<h3 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/bridge.html">ref</a></p>
+<p>别名：柄体模式、接口模式</p>
+<p>是一种对象结构型模式，将继承关系转换成关联关系</p>
+<iframe 
+                src="undefined/WNOOZqK?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+
+<h3 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/decorator.html">ref</a></p>
+<p>别名：油漆工模式，是一种对象结构模型</p>
+<iframe 
+                src="undefined/NWgwKod?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+
+<h3 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/facade.html">ref</a></p>
+<iframe 
+                src="undefined/rNwYPop?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+
+<h3 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/flyweight.html">ref 1</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pingan8787/p/13069474.html">ref 2</a></p>
+<p>别名：轻量级模式，对象结构型模式</p>
+<iframe 
+                src="undefined/qBjVvqw?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+
+<h3 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/structural_patterns/proxy.html">ref</a></p>
+<p>别名：对象结构型模式</p>
+<p>代理一般和权限控制相关。</p>
+<iframe 
+                src="undefined/dyRJbGm?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+
+<h2 id="行为模式"><a href="#行为模式" class="headerlink" title="行为模式"></a>行为模式</h2><p>行为模式：类行为模式、对象行为模式</p>
+<h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/behavioral_patterns/command.html">ref1</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/b16d9d90544d">ref2</a> &#x2F;&#x2F; 🤔：使用命令模式设计编辑器的撤销保存</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/brookshi/p/6533920.html">ref3</a> &#x2F;&#x2F; 命令模式的备忘录功能</p>
+<p>别名： 事务模式、动作模式</p>
+<p>将行为请求者和行为实现者进行解耦，适用于一些需要对行为进行记录撤销的场景。</p>
+<iframe 
+                src="undefined/rNwpBYw?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+<h3 id="中介者模式"><a href="#中介者模式" class="headerlink" title="中介者模式"></a>中介者模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/behavioral_patterns/mediator.html">ref1</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/brookshi/p/6545238.html">ref2</a></p>
+<p>别名：调停者模式</p>
+<iframe 
+                src="undefined/vYZpYqy?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/behavioral_patterns/observer.html">ref</a></p>
+<p>别名：发布订阅模式、模型视图模式、源监听模式、从属者模式</p>
+<iframe 
+                src="undefined/MWorwbe?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+
+<h3 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/behavioral_patterns/state.html">ref</a></p>
+<p>别名：状态对象</p>
+<iframe 
+                src="undefined/qBjxOaJ?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+<h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3><p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/behavioral_patterns/strategy.html">ref</a></p>
+<p>别名：也称为政策模式</p>
+<iframe 
+                src="undefined/oNwEjoO?default-tab=undefined&theme-id=undefined" 
+                style=height: 256px; width: 100%; 
+                scrolling=no 
+                frameborder=no 
+                loading=lazy
+                allowtransparency=true
+                allowfullscreen=true
+            >
+            </iframe>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gy19920604/p/5368358.html">UML时序图</a></p>
+<p><a target="_blank" rel="noopener" href="https://design-patterns.readthedocs.io/zh_CN/latest/index.html">图说设计模式</a> </p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/z00377750/p/9153615.html#3993673374">面向对象对五个基本原则</a></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/07/26/application-of-dp-algorithm/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2026-07-07 22:08:35
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E6%8A%80%E6%9C%AF/" title="技术">
+                        #技术
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                        #设计模式
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/10/07/hexo-codepen-snippet-develop/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8E%9F%E5%88%99"><span class="toc-text">设计模式原则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99"><span class="toc-text">单一职责原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E6%94%BE%E5%B0%81%E9%97%AD%E5%8E%9F%E5%88%99"><span class="toc-text">开放封闭原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8C%E6%B0%8F-Liskov-%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99"><span class="toc-text">里氏(Liskov)替换原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99"><span class="toc-text">接口隔离原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99"><span class="toc-text">依赖倒置原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%8E%9F%E5%88%99"><span class="toc-text">其他原则</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99"><span class="toc-text">合成复用原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99"><span class="toc-text">迪米特法则</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%9E%8B"><span class="toc-text">创建型模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F-Simple-Factory"><span class="toc-text">简单工厂模式 (Simple Factory)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-text">工厂方法模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text">抽象工厂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">建造者模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-text">单例模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="toc-text">结构型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-text">适配器模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8"><span class="toc-text">对象适配器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E9%80%82%E9%85%8D%E5%99%A8"><span class="toc-text">类适配器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F"><span class="toc-text">桥接模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-text">装饰器模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F"><span class="toc-text">外观模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F"><span class="toc-text">享元模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="toc-text">代理模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E4%B8%BA%E6%A8%A1%E5%BC%8F"><span class="toc-text">行为模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-text">命令模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">中介者模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">观察者模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F"><span class="toc-text">状态模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="toc-text">策略模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+  <div id="waline-comments"></div>
+
+  <script>
+    function loadWalineSuc(func) {
+      func({
+        el: '#waline-comments',
+        path: location.pathname,
+        serverURL: 'https://misakisaysyes-comment-system.vercel.app',
+        emoji: false,
+        dark: 'auto',
+        requiredMeta: ['nick', 'mail'],
+        login: 'disable',
+        wordLimit: 150,
+        imageUploader: false,
+        search: false,
+        reaction: false,
+        pageSize: 30,
+        lang: 'en'
+      })
+    }
+  </script>
+
+  
+    <link rel="stylesheet" href="/plugins/waline.css">
+    <script type="module">
+      import { init } from '/plugins/waline.mjs'
+      loadWalineSuc(init)
+    </script>
+  
+
+
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/misakisaysyes">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="http://github.com/misakisaysyes">Copyright © 2026 Misakisaysyes</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F + '&url=' + http%3A%2F%2Fexample.com%2F2021%2F09%2F09%2Fdesign-pattern-js%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2021/09/09/design-pattern-js/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+    <script defer src="/js/mermaid.js"></script>
+  </body>
+</html>

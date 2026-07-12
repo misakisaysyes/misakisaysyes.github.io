@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      DP在实际开发中的应用 
+      
+      
+      |
+    
+     Misakisaysyes
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <!-- 这里加载烟花特效 -->
+    <!-- <a href="/">
+      
+        <img src="/images/avatar.png" alt="" id="avatar-img">
+      
+    </a> -->
+    <div class="nickname">
+      <a id="user-name" href="/">Misakisaysyes</a>
+      <svg t="1633705051853"  id="user-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15546" width="16" height="16"><path d="M288.105 122.229C174.047 122.21 64.691 231.687 64.691 388.095c0 176.07 156.747 241.891 261.855 312.283 101.962 68.266 174.057 161.602 185.453 201.393 9.743-38.936 91.03-135.019 185.448-203.373 103.196-74.727 261.861-136.19 261.861-312.262 0-152.117-109.34-260.294-222.908-260.294-86.792 0-167.781 15.754-224.419 128.441-65.593-111.977-138.495-132.042-223.876-132.054" p-id="15547"></path></svg>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/mo.min.js"></script>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+<script src="/js/animation.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">DP在实际开发中的应用</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2026-07-07 22:09:20
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" title="动态规划">
+                    #动态规划
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E6%8A%80%E6%9C%AF/" title="技术">
+                    #技术
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
+                    #算法
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>在做需求时，遇到过这么一个场景：</p>
+<blockquote>
+<p>用户设定一张试卷的总分，我们随机从题库中选择几道不同的题目，使它们的分值刚好能组成这张试卷。</p>
+</blockquote>
+<p>这需求算法味儿挺浓的，感觉挺有意思的，于是就写了个demo实现了一下。</p>
+<p class="codepen" data-height="300" data-theme-id="light" data-default-tab="js" data-slug-hash="JjNyxLO" data-user="misakisaysyes" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/misakisaysyes/pen/JjNyxLO">
+  一键组卷-core</a> by Misakisaysyes (<a target="_blank" rel="noopener" href="https://codepen.io/misakisaysyes">@misakisaysyes</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="2-需求分析"><a href="#2-需求分析" class="headerlink" title="2 需求分析"></a>2 需求分析</h2><p>我们给这个需求套一组数据，就可以把它变成一道类似于leetcode的题目</p>
+<blockquote>
+<p>用户需要一张<code>100分的试卷</code>。<br>现在题库中有一组人民币面值分数的题目：<code>[1分, 5分, 10分, 20分, 50分]</code>, 这些题目的数量分别为：<code>[5道, 2道, 4道, 2道, 4道]</code>。<br>请随机从题库中挑出几道内容不同的题目，组成总分为100的试卷。</p>
+</blockquote>
+<p>对于这道<code>leetcode</code>，我们先思考🤔两个问题：</p>
+<p><code>问题一</code> </p>
+<pre><code>在当前的条件下：有5道1分、2道5分、4道10分、2道20分、4道50分的题目。
+
+请问在满足题目数量限制的条件下，有多少种选法，能使得所选题目的分数总和为100？
+</code></pre>
+<p><code>问题二</code></p>
+<pre><code>解决了第一个问题后，我们得到n个满足条件的组合。
+
+随机选一个，假设选了 50 + 50 = 100。
+
+即现有的4道50分的题，我们需要从中选择不重复的2道，凑成试卷，这又该怎么选？
+</code></pre>
+<p><code>问题一</code>本质是个<code>多重背包</code>问题，可以用动态规划的方式解决。</p>
+<p><code>问题二</code>本质是个<code>求组合</code>的问题，从C(4, 2)个组合中选一个☝作为结果，这个问题求解方式很多（可以暴力求解），其中也可以用到动态规划。</p>
+<h2 id="3-关于动态规划"><a href="#3-关于动态规划" class="headerlink" title="3 关于动态规划"></a>3 关于动态规划</h2><p>动态规划 即 Dynamic Programming（DP）。</p>
+<p>它是针对一类问题的<code>优化后</code>的解决方案，这类问题能被划分为多个<code>重叠子问题</code>。</p>
+<h3 id="3-1-重叠子问题"><a href="#3-1-重叠子问题" class="headerlink" title="3.1 重叠子问题"></a>3.1 重叠子问题</h3><p>那什么是重叠子问题？</p>
+<p>举个最常见的例子🌰：斐波那契数列</p>
+<table>
+<thead>
+<tr>
+<th align="center">第1位</th>
+<th align="center">第2位</th>
+<th align="center">第3位</th>
+<th align="center">第4位</th>
+<th align="center">第5位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">5</td>
+</tr>
+</tbody></table>
+<p>我们知道斐波那契的递推公式是：<code>第 n 位 = 第 n - 1 位 + 第 n - 2 位</code> </p>
+<p>也就是</p>
+<p>当我们求第4位时，等价在问：第2位等于多少？第3位等于多少？</p>
+<p>当我们求第5位时，等价在问：第3位等于多少？第4位等于多少？</p>
+<p><code>第3位等于多少</code>这个问题，在求第4位和第5位时都被问了一遍，故它是个<code>重叠子问题</code>。</p>
+<p>所以，重叠子问题就是由大问题拆解而来，并在求解过程中会被重复问到的小问题。</p>
+<p>而动态规划就是一种解决<code>能被划分为重叠子问题</code>这类问题的求解方法。</p>
+<h3 id="3-2-从递归到动态规划"><a href="#3-2-从递归到动态规划" class="headerlink" title="3.2 从递归到动态规划"></a>3.2 从递归到动态规划</h3><p>但其实我们可以从很多地方了解到，解决这类问题的方法是递归。</p>
+<p>但递归有个缺陷，就是会重复求解重叠子问题，而导致一些浪费。</p>
+<p>比如在<code>斐波那契</code>这个例子中：</p>
+<p>若用递归，那我们在求<code>第5位等于多少</code>时，就必须再求一遍<code>第3位等于多少</code>。</p>
+<p>尽管<code>第3位等于多少</code>这个问题在求<code>第4位等于多少</code>时算过一遍。</p>
+<p>而动态规划算法就正好解决了这种浪费。它最朴素的核心思想就是：</p>
+<p>在内存中开一个缓存数组，每求解一个重叠子问题，就将答案记录下来。</p>
+<p>当再次问到该子问题时，就可以直接从缓存中取答案，从而减少计算次数。</p>
+<p>所以，动态规划可以理解为进化后的递归。</p>
+<p>这里就用上文中的<code>问题二</code>稍加变化，来演绎一下<code>递归</code>是如何进化成<code>动态规划</code>的。</p>
+<p>变形后的<code>问题二</code>：</p>
+<pre><code>从4道不同的题目中随机选2道，请问能得到多少种组合？
+
+即 求C(4, 2)等于多少？
+</code></pre>
+<blockquote>
+<p>tips: 在基于<code>枚举思想</code>的算法里，能求出所有情况数（组合数），就必然能求出所有情况（列举出所有组合）。</p>
+</blockquote>
+<h3 id="3-3-原始递归求C-4-2"><a href="#3-3-原始递归求C-4-2" class="headerlink" title="3.3 原始递归求C(4, 2)"></a>3.3 原始递归求C(4, 2)</h3><h4 id="3-3-1-分析递推关系"><a href="#3-3-1-分析递推关系" class="headerlink" title="3.3.1 分析递推关系"></a>3.3.1 分析递推关系</h4><p>已知数组[a, b, c, d]，随机选2元素，类似于[a, b]、[b, c]、[c, d]…这种两元素组合共有多少？</p>
+<p>借助组合数学中<code>集合</code>这个工具，有如下分析：</p>
+<p>设<code>全集U</code>为：[a, b]、[b, c]、[c, d]… 即[a, b, c, d]中所有2元素组合。</p>
+<p>设<code>子集A</code>为：[a, b]、[a, c]… 即所有<strong>含</strong><code>a</code>的2元素组合。</p>
+<p>设<code>子集B</code>为：[b, c]、[c, d]… 即所有<strong>不含</strong><code>a</code>的2元素组合。</p>
+<p>由我们赋予U、A、B的含义，可以得到如下关系：</p>
+<p>U &#x3D; A ∪ B</p>
+<p>A ∩ B &#x3D; ∅</p>
+<p>再借助<code>容斥原理</code>，可得：</p>
+<p>|U| &#x3D; |A ∪ B| &#x3D; |A| + |B| - |A ∩ B| </p>
+<p>因为  A ∩ B &#x3D; ∅ &#x3D;&gt; |A ∩ B| &#x3D; 0</p>
+<p>所以 |U| &#x3D; |A| + |B|</p>
+<p>其中</p>
+<p>|U| &#x3D; C(4, 2)</p>
+<p>|A| &#x3D; C(3, 1) &#x2F;&#x2F; 在数组[b, c, d]中随机再选1个元素的组合数</p>
+<p>|B| &#x3D; C(3, 2) &#x2F;&#x2F; 在数组[b, c, d]中随机再选2个元素的组合数</p>
+<p>所以得到：</p>
+<p>C(4, 2) &#x3D; C(3, 1) + C(3, 2)</p>
+<p>用同样的方法分析C(3, 2)可得：</p>
+<p>C(3, 2) &#x3D; C(2, 1) + C(2, 2)</p>
+<p>…</p>
+<p>所以通过类比推理，最后得到递推关系式：</p>
+<p>C(m, n) &#x3D; C(m - 1, n - 1) + C(m - 1, n)</p>
+<h4 id="3-3-2-递归代码"><a href="#3-3-2-递归代码" class="headerlink" title="3.3.2 递归代码"></a>3.3.2 递归代码</h4><p>得到递推关系式后再思考一下边界条件，便可得到如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const testArr = [a, b, c, d]</span><br><span class="line">const Cmn = (arr, num) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    // C(m, n) m = 0 不合法 返回0</span><br><span class="line">    if (!arr.length) &#123; return 0 &#125;</span><br><span class="line"></span><br><span class="line">    // C(m, n) m &lt; n 不合法 返回0</span><br><span class="line">    if (arr.length &lt; num) &#123; return 0 &#125; </span><br><span class="line"></span><br><span class="line">    // C(m, 0) = 1</span><br><span class="line">    if (!num) &#123; return 1 &#125;</span><br><span class="line"></span><br><span class="line">    // C(x, x) = 1  </span><br><span class="line">    if (arr.length === num) &#123; return 1 &#125;</span><br><span class="line">    </span><br><span class="line">    return Cmn(arr.slice(1), num - 1) + Cmn(arr.slice(1), num)</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#x27;C(4, 2) = &#x27;, Cmn(testArr, 2))</span><br></pre></td></tr></table></figure>
+
+<p>原始递归在求解这个问题时，我们可以<code>自顶向下</code>地画出一颗树来：</p>
+<p><img src="/2021/07/26/application-of-dp-algorithm/1.png" alt="1.png"></p>
+<p>从图示可看出，C(2, 1)等于多少？这问题，前后被问了两次，也被回答了两次。</p>
+<p>那是不是可以优化一下？</p>
+<h3 id="3-4-记忆化递归求C-4-2"><a href="#3-4-记忆化递归求C-4-2" class="headerlink" title="3.4 记忆化递归求C(4, 2)"></a>3.4 记忆化递归求C(4, 2)</h3><p>最朴素的优化方法，就是记忆化递归。</p>
+<p>基本操作就是弄个缓存，把所有求解过的子问题的答案都存下。</p>
+<p>当再次问到该问题时，就直接从缓存中拿答案，而不用再去求解了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">const testArr = [a, b, c, d]</span><br><span class="line"></span><br><span class="line">const memo = &#123;&#125;</span><br><span class="line">const Cmn = (arr, num) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    if (!arr.length) &#123; return 0 &#125;</span><br><span class="line">    if (arr.length &lt; num) &#123; return 0 &#125; </span><br><span class="line"></span><br><span class="line">    const key = `$&#123;arr.length&#125;-$&#123;num&#125;`</span><br><span class="line">    if(memo[key]) &#123; return memo[key] &#125;</span><br><span class="line">    if (!num) &#123; memo[key] = 1 &#125;</span><br><span class="line">    if (arr.length === num) &#123; memo[key] = 1 &#125;</span><br><span class="line">    memo[key] = Cmn(arr.slice(1), num - 1) + Cmn(arr.slice(1), num)</span><br><span class="line"></span><br><span class="line">    return memo[key]</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#x27;C(4, 2) = &#x27;, Cmn(testArr, 2))</span><br></pre></td></tr></table></figure>
+
+<p>乍一看上去这种优化思路和动态规划一样，都是开个缓存把结果都存起来。</p>
+<p>但递归下的缓存大小是没法优化的，它必定存储了递归过程中每个节点的值。</p>
+<p>比如</p>
+<p>用带缓存的递归求C(4, 2)，虽然不用重复求C(2, 1)了，但缓存中一定会存下C(4, 2)、C(3, 2)、C(3, 1)、C(2, 2)、C(2, 1)、C(2, 0)、C(1, 1)、C(1, 0)这8个节点的值。</p>
+<p>而事实上，只有C(2, 1)被重复求解了。也就是缓存值其实只有C(2, 1)是有意义的，其它都没用，浪费空间了。</p>
+<p>这是因为递归的这种<code>自顶向下</code>，<code>倒推</code>的求解形式所导致的。</p>
+<p>那有没有办法，去优化一下缓存空间呢？以最小的代价，来解决这类重叠子问题。</p>
+<h3 id="3-5-动态规划求C-4-2"><a href="#3-5-动态规划求C-4-2" class="headerlink" title="3.5 动态规划求C(4, 2)"></a>3.5 动态规划求C(4, 2)</h3><p>答案是有的，那就是动态规划。</p>
+<p>动态规划采取了<code>自底向上</code>的解法。也就是不同于递归从C(4, 2)开始求解，会从C(0, 0)、C(1, 0)…开始计算，直到算到C(4, 2)。</p>
+<p><code>自底向上</code>求解的好处在于：</p>
+<p>可以通过递推关系，预测出当前子问题的结果是否会用到将来的求解中。</p>
+<p>如果被用到了，就缓存下来，如果不会再被用到了，那就把它的空间给释放掉。</p>
+<p>这样就达到了优化缓存大小的目的。</p>
+<p>还是C(4, 2)这个例子，用动态规划的方式改写一遍<code>记忆化递归</code>的解法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">const testArr = [a, b, c, d]</span><br><span class="line">const Cmn = (arr, num) =&gt; &#123;</span><br><span class="line">    let dp = new Array(arr.length + 1).fill()</span><br><span class="line">    dp = dp.map(_ =&gt; &#123;</span><br><span class="line">        let arr = new Array(num + 1).fill(0)</span><br><span class="line">        arr[0] = 1</span><br><span class="line">        return arr</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    for (let i = 1; i &lt;= arr.length; i++) &#123;</span><br><span class="line">        for (let j = 1; j &lt;= num &amp;&amp; j &lt;= i; j++) &#123;</span><br><span class="line">            dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[arr.length][num]</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#x27;C(4, 2) = &#x27;, Cmn(testArr, 2))</span><br></pre></td></tr></table></figure>
+<p>我们开了一个二维数组dp当缓存，也是放8个节点。</p>
+<p>然后根据递推关系式<code>C(m, n) = C(m - 1, n - 1) + C(m - 1, n)</code>写出状态转移方程<code>dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j]</code>。</p>
+<p>这样写的话，本质和前面的<code>记忆化递归</code>没啥两样。</p>
+<p>但是细看状态转移方程会发现：</p>
+<p><strong>对于dp表而言，第i行第值，只与第<code>i - 1行</code>的值相关，和第<code>i - 2行</code>的值无关。</strong></p>
+<p>比如在C(4, 2)中，第3行的值只与第4行相关，第4行第值又只与第3行第值相关。</p>
+<p><img src="/2021/07/26/application-of-dp-algorithm/4.png" alt="4.png"></p>
+<p>所以，在这里，完全可以只缓存一行（3个节点的结果），而不用开二维数组缓存所有子问题的结果。</p>
+<p>但如果只缓存一行，就会有这样的情况：</p>
+<p>当计算第3行时，使用缓存里第2行的结果。当计算第4行时，需要用第3行的结果。</p>
+<p>所以这时，需要考虑更新缓存。</p>
+<p>这里再回到状态转移方程分析，可以发现，当前所求值，其依赖的值都<code>不会</code>在所求值的<strong>右上方</strong>。 </p>
+<p>比如C(4, 1)的结果只与C(3, 0)和C(3, 1)有关，与右上方的C(3, 2)无关。</p>
+<p><img src="/2021/07/26/application-of-dp-algorithm/5.png" alt="5.png"></p>
+<p>也就是说，从右向左地更新缓存，便可在更新缓存的同时，不影响值的计算。</p>
+<p><img src="/2021/07/26/application-of-dp-algorithm/2.png" alt="2.png"></p>
+<p>这样分析下来，dp的解法就可以优化为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const testArr = [a, b, c, d]</span><br><span class="line">const Cmn = (arr, num) =&gt; &#123;</span><br><span class="line">    let dp = new Array(num + 1).fill(0)</span><br><span class="line">    dp[0] = 1</span><br><span class="line">    for (let i = 1; i &lt;= arr.length; i++) &#123;</span><br><span class="line">        for(j = i; j &gt; 0; j --) &#123;</span><br><span class="line">            dp[j] = dp[j - 1] + dp[j]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[num]</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#x27;C(4, 2) = &#x27;, Cmn(testArr, 2))</span><br></pre></td></tr></table></figure>
+
+<p>在解决C(4, 2)这个问题上，这种优化后的dp只用缓存3个节点，相比于<code>记忆化递归</code>的方式节约了至少一半的空间。</p>
+<h2 id="4-回到需求"><a href="#4-回到需求" class="headerlink" title="4 回到需求"></a>4 回到需求</h2><p>以上就是我关于动态规划的一点理解。</p>
+<p>现在回到需求本身。</p>
+<p>这个需求有两个问题要思考，详见<a href="#2-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90">2 需求分析</a></p>
+<p> <code>问题二</code>求C(4, 2)组合上文已经论述过了，这里就主要看看<code>问题一</code>：</p>
+<blockquote>
+<p>用户需要一张<code>100分的试卷</code>，现在我们题库中有一组人民币面值分数的题目：<code>[1分, 5分, 10分, 20分, 50分]</code>，这些题目的数量分别为：<code>[5道, 2道, 4道, 2道, 4道]</code>，请求出所有的组合数</p>
+</blockquote>
+<p>这是一个很典型的多重背包问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const combinations = (total, nums, amount) =&gt; &#123;</span><br><span class="line">    let dp = new Array(total + 1).fill(0)</span><br><span class="line">    dp[0] = 1</span><br><span class="line"></span><br><span class="line">    for(let i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">        for (let j = total; j &gt;= nums[i]; j--) &#123;</span><br><span class="line">            for(let k = 1; k &lt;= amount[i] &amp;&amp; j &gt;= k*nums[i]; k++) &#123;</span><br><span class="line">                dp[j] += dp[j - k*nums[i]]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[total]</span><br><span class="line">&#125;</span><br><span class="line">console.log(combinations(100, [1, 5, 10, 20, 50], [5, 2, 4, 2, 4]))</span><br></pre></td></tr></table></figure>
+
+<p>背包问题是动态规划中一类问题，其结构如下：</p>
+<p><img src="/2021/07/26/application-of-dp-algorithm/6.png" alt="6.png"></p>
+<p>背包问题可以分为<code>0-1背包</code>和<code>完全背包</code>，<code>多重背包</code>是0-1背包的变种。</p>
+<h3 id="4-1-0-1背包和完全背包"><a href="#4-1-0-1背包和完全背包" class="headerlink" title="4.1 0-1背包和完全背包"></a>4.1 0-1背包和完全背包</h3><p>0-1背包的定义：</p>
+<p>有N件物品和一个容量为V的背包，第i件物品消耗的容量为Ci，价值为Wi，求解放入哪些物品可以使得背包中总价值最大。</p>
+<p>基本实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">N // 物品种数，且每种物品只有一件</span><br><span class="line"></span><br><span class="line">C = [C1, C2, ... , Cn] // 每件物品对应消耗的容量</span><br><span class="line"></span><br><span class="line">W = [W1, W2, ... , Wn] // 每件物品对应的价值</span><br><span class="line"></span><br><span class="line">V // 背包容量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const 01Knapsack = (C, W, V) =&gt; &#123;</span><br><span class="line">    const N = C.length</span><br><span class="line">    let dp = new Array(V + 1).fill(0)</span><br><span class="line"></span><br><span class="line">    for(let i = 0; i &lt; N; i++) &#123;</span><br><span class="line">        for(let j = V; j &gt;= C[i]; j--) &#123;</span><br><span class="line">            dp[j] = max(dp[j], dp[j - C[i]] + W[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完全背包的定义：</p>
+<p>有N种物品和一个容量为V的背包，每种物品都有无限件可用，第i件物品消耗的容量为Ci，价值为Wi，求解放入哪些物品可以使得背包中总价值最大。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">N // 物品种数，且每种物品有无限件</span><br><span class="line"></span><br><span class="line">C = [C1, C2, ... , Cn] // 每件物品对应消耗的容量</span><br><span class="line"></span><br><span class="line">W = [W1, W2, ... , Wn] // 每件物品对应的价值</span><br><span class="line"></span><br><span class="line">V // 背包容量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const Knapsack = (C, W, V) =&gt; &#123;</span><br><span class="line">    const N = C.length</span><br><span class="line">    let dp = new Array(V + 1).fill(0)</span><br><span class="line"></span><br><span class="line">    for(let i = 0; i &lt; N; i++) &#123;</span><br><span class="line">        for(let j = C[i]; j &lt;= V; j++) &#123;</span><br><span class="line">            dp[j] = max(dp[j], dp[j - C[i]] + W[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-多重背包"><a href="#4-2-多重背包" class="headerlink" title="4.2 多重背包"></a>4.2 多重背包</h3><p>思路：先将多重背包转化为0-1背包，再进行相应运算，详见 <a href="#4-%E5%9B%9E%E5%88%B0%E9%9C%80%E6%B1%82">4 回到需求</a></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/07/01/commander/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2026-07-07 22:09:20
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" title="动态规划">
+                        #动态规划
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E6%8A%80%E6%9C%AF/" title="技术">
+                        #技术
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
+                        #算法
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/09/09/design-pattern-js/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%89%8D%E8%A8%80"><span class="toc-text">1 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="toc-text">2 需求分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%85%B3%E4%BA%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-text">3 关于动态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E9%87%8D%E5%8F%A0%E5%AD%90%E9%97%AE%E9%A2%98"><span class="toc-text">3.1 重叠子问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BB%8E%E9%80%92%E5%BD%92%E5%88%B0%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-text">3.2 从递归到动态规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%8E%9F%E5%A7%8B%E9%80%92%E5%BD%92%E6%B1%82C-4-2"><span class="toc-text">3.3 原始递归求C(4, 2)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-%E5%88%86%E6%9E%90%E9%80%92%E6%8E%A8%E5%85%B3%E7%B3%BB"><span class="toc-text">3.3.1 分析递推关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-%E9%80%92%E5%BD%92%E4%BB%A3%E7%A0%81"><span class="toc-text">3.3.2 递归代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E8%AE%B0%E5%BF%86%E5%8C%96%E9%80%92%E5%BD%92%E6%B1%82C-4-2"><span class="toc-text">3.4 记忆化递归求C(4, 2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%B1%82C-4-2"><span class="toc-text">3.5 动态规划求C(4, 2)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%9B%9E%E5%88%B0%E9%9C%80%E6%B1%82"><span class="toc-text">4 回到需求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-0-1%E8%83%8C%E5%8C%85%E5%92%8C%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85"><span class="toc-text">4.1 0-1背包和完全背包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85"><span class="toc-text">4.2 多重背包</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+  <div id="waline-comments"></div>
+
+  <script>
+    function loadWalineSuc(func) {
+      func({
+        el: '#waline-comments',
+        path: location.pathname,
+        serverURL: 'https://misakisaysyes-comment-system.vercel.app',
+        emoji: false,
+        dark: 'auto',
+        requiredMeta: ['nick', 'mail'],
+        login: 'disable',
+        wordLimit: 150,
+        imageUploader: false,
+        search: false,
+        reaction: false,
+        pageSize: 30,
+        lang: 'en'
+      })
+    }
+  </script>
+
+  
+    <link rel="stylesheet" href="/plugins/waline.css">
+    <script type="module">
+      import { init } from '/plugins/waline.mjs'
+      loadWalineSuc(init)
+    </script>
+  
+
+
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/misakisaysyes">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="http://github.com/misakisaysyes">Copyright © 2026 Misakisaysyes</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + DP%E5%9C%A8%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8 + '&url=' + http%3A%2F%2Fexample.com%2F2021%2F07%2F26%2Fapplication-of-dp-algorithm%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2021/07/26/application-of-dp-algorithm/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+    <script defer src="/js/mermaid.js"></script>
+  </body>
+</html>

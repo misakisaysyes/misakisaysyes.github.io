@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      hexo-codepen-snippet插件开发 
+      
+      
+      |
+    
+     Misakisaysyes
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <!-- 这里加载烟花特效 -->
+    <!-- <a href="/">
+      
+        <img src="/images/avatar.png" alt="" id="avatar-img">
+      
+    </a> -->
+    <div class="nickname">
+      <a id="user-name" href="/">Misakisaysyes</a>
+      <svg t="1633705051853"  id="user-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15546" width="16" height="16"><path d="M288.105 122.229C174.047 122.21 64.691 231.687 64.691 388.095c0 176.07 156.747 241.891 261.855 312.283 101.962 68.266 174.057 161.602 185.453 201.393 9.743-38.936 91.03-135.019 185.448-203.373 103.196-74.727 261.861-136.19 261.861-312.262 0-152.117-109.34-260.294-222.908-260.294-86.792 0-167.781 15.754-224.419 128.441-65.593-111.977-138.495-132.042-223.876-132.054" p-id="15547"></path></svg>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/mo.min.js"></script>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+<script src="/js/animation.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">hexo-codepen-snippet插件开发</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2026-07-12 18:24:52
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E6%8A%80%E6%9C%AF/" title="技术">
+                    #技术
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%9F%BA%E5%BB%BA/" title="博客基建">
+                    #博客基建
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>hexo博客里插入codepen，本质就是在<code>文章.md</code>中插入一段<code>iframe</code>标签代码。</p>
+<p>但这样插入会让<code>文章.md</code>的可读性变差，不符合我的审美。</p>
+<p>于是按图索骥，捣鼓了<code>hexo-codepen-snippet</code>插件，它能更优雅地将codepen插入<code>文章.md</code>中。</p>
+<p>本文记录了插件的开发、使用与上线。</p>
+<h2 id="插件开发"><a href="#插件开发" class="headerlink" title="插件开发"></a>插件开发</h2><p>基于hexo<code>Extensions</code>中的<code>Tag</code>能力，将<code>iframe</code>标签代码片段抽象成模版，封装成自定义标签。</p>
+<p>基本用法，详见<a target="_blank" rel="noopener" href="https://hexo.io/api/tag">文档</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// name 自定义标签名，funciton为插件功能回调函数</span><br><span class="line">hexo.extend.tag.register(name, function(args, content)&#123;</span><br><span class="line"></span><br><span class="line">&#125;, options);</span><br></pre></td></tr></table></figure>
+
+<p><code>hexo-codepen-snippet</code>插件的核心实现如下，详见<a target="_blank" rel="noopener" href="https://github.com/misakisaysyes/hexo-codepen-snippet">源码</a>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">hexo.extend.tag.register(&#x27;codepen&#x27;, (args) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    // 内置默认配置</span><br><span class="line">    const default_config = &#123;</span><br><span class="line">        style: &#x27;height: 256px; width: 100%;&#x27;,</span><br><span class="line">        scrolling: &#x27;no&#x27;,</span><br><span class="line">        frameborder: &#x27;no&#x27;,</span><br><span class="line">        loading: &#x27;lazy&#x27;,</span><br><span class="line">        allowtransparency: &#x27;true&#x27;,</span><br><span class="line">        allowfullscreen: &#x27;true&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const config = &#123; ...default_config, ...hexo.config.codepen &#125;</span><br><span class="line">    args.forEach(arg =&gt; &#123;</span><br><span class="line">        const buf = arg.split(&#x27;:&#x27;)</span><br><span class="line">        config[buf[0]] = buf[1]</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    const &#123;</span><br><span class="line">        src_prefix,</span><br><span class="line">        slug_hash,</span><br><span class="line">        default_tab,</span><br><span class="line">        theme_id,</span><br><span class="line">        style,</span><br><span class="line">        scrolling,</span><br><span class="line">        frameborder,</span><br><span class="line">        loading,</span><br><span class="line">        allowtransparency,</span><br><span class="line">        allowfullscreen</span><br><span class="line">    &#125; = config</span><br><span class="line"></span><br><span class="line">    return `&lt;iframe</span><br><span class="line">                src=&quot;$&#123;src_prefix&#125;/$&#123;slug_hash&#125;?default-tab=$&#123;default_tab&#125;&amp;theme-id=$&#123;theme_id&#125;&quot;</span><br><span class="line">                style=&quot;$&#123;style&#125;&quot;</span><br><span class="line">                scrolling=$&#123;scrolling&#125;</span><br><span class="line">                frameborder=$&#123;frameborder&#125;</span><br><span class="line">                loading=$&#123;loading&#125;</span><br><span class="line">                allowtransparency=$&#123;allowtransparency&#125;</span><br><span class="line">                allowfullscreen=$&#123;allowfullscreen&#125;</span><br><span class="line">            &gt;</span><br><span class="line">            &lt;/iframe&gt;`</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这里的config字段分为两类：</p>
+<ul>
+<li>有默认值：<code>style</code>、<code>scrolling</code>、<code>frameborder</code>、<code>loading</code>、<code>allowtransparency</code>、<code>allowfullscreen</code> 都是<code>iframe</code>标签的属性。</li>
+<li>无默认值：<code>src_prefix</code>、<code>slug_hash</code>、<code>default_tab</code>、<code>theme_id</code> 共同构成<code>iframe.src</code>的值，在hexo博客使用插件时必传。</li>
+</ul>
+<p>config字段值可以参考codepen中<code>Embed</code>的配置<br><img src="/2021/10/07/hexo-codepen-snippet-develop/codepen-embed-configuration.png" alt="Codepen Embed 配置面板"></p>
+<h2 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h2><p>首先需要在项目中引入插件脚🦶本，然后做全局配置，之后就可以在<code>文章.md</code>中使用自定义标签了。</p>
+<p>相关参考：<a target="_blank" rel="noopener" href="https://hexo.io/docs/plugins.html">引入插件脚🦶本</a>、<a target="_blank" rel="noopener" href="https://github.com/misakisaysyes/hexo-codepen-snippet">插件配置&amp;使用</a></p>
+<h3 id="脚🦶本引入"><a href="#脚🦶本引入" class="headerlink" title="脚🦶本引入"></a>脚🦶本引入</h3><p><b>方式一</b><br>首先博客根目录下（package.json同级目录下）的script目录中引入。</p>
+<pre><code>| - MyBolg
+    | - package.json
+    | - ...
+    | - scripts // 自定义插件目录
+        | - index.js // 自定义插件脚本
+</code></pre>
+<p>这种方式适用于插件比较简单的情况。</p>
+<p><b>方式二</b><br>npm包方式引入，注意：包名必须以<code>hexo-</code>开头。</p>
+<pre><code>| - MyBolg
+    | - node_modules // npm包目录
+        | - hexo-xxx
+            | - package.json
+            | - index.js // 自定义插件脚本
+</code></pre>
+<h3 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h3><p>在配置文件中引入codepen插件</p>
+<pre><code>| - MyBolg
+    | - _config.yml // 配置文件
+</code></pre>
+<p>在_config.yml的codepen插件配置中，可以全局配置<code>无默认值</code>的config字段，如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># codepen</span><br><span class="line">codepen:</span><br><span class="line">src_prefix: &#x27;https://codepen.io/misakisaysyes/embed&#x27;</span><br><span class="line">default_tab: js</span><br><span class="line">theme_id: light</span><br></pre></td></tr></table></figure>
+
+<h3 id="标签使用"><a href="#标签使用" class="headerlink" title="标签使用"></a>标签使用</h3><p><code>文章.md</code>中插入标签如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% codepen slug_hash:WNOjqzq %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用slug_hash区分不同的codepen</p>
+<h2 id="插件上线"><a href="#插件上线" class="headerlink" title="插件上线"></a>插件上线</h2><p>插件实现后，需要将包<code>上线</code>，即将代码上传到github仓库，并将包发到npm上。</p>
+<p>手动发包的流程为：</p>
+<p>[1] 本地修改版本号<code>package.json version</code> <i>（npm version）</i>。<br>[2] 本地修改<code>CHANGELOG.md</code> <i>（手动）</i>。<br>[3] 本地commit后打tag <i>（git commit 后 git tag）</i>。<br>[4] 推送到github仓库 <i>（git push）</i>。<br>[5] 发布包到npm上 <i>（npm publish）</i>。</p>
+<p>略繁琐，这里借助<code>semantic-release</code>和<code>git action</code>，实现自动化发包，简化发包流程。</p>
+<p>在自动化发包的流程中，开发者在本地commit并push之后，<code>git action</code>就会根据项目中的流水线配置<code>.github/workflows/main.yml</code>触发<code>semantic-release</code>。</p>
+<p><code>semantic-release</code>会根据<code>commit message</code>的<code>type</code>（feat、fix、etc…）匹配发布对应版本的（major、patch、etc…）npm包，无需开发者介入自动完成手动发包的1～5步。</p>
+<blockquote>
+<p>commit message type详细见：<a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional#type-enum">config-conventional</a><br>commit message type与npm包版映射关系详见：<a target="_blank" rel="noopener" href="https://github.com/semantic-release/commit-analyzer/blob/master/lib/default-release-rules.js">默认映射</a></p>
+</blockquote>
+<p>使用<code>semantic-release</code>和<code>git action</code>需要在两处做配置：</p>
+<ul>
+<li>项目仓库：详见<a target="_blank" rel="noopener" href="https://meixg.cn/2021/01/20/semantic-release-guide/#semantic-release">参考</a>，主要涉及<code>semantic-release设置配置</code>和<code>git action流水线配置</code></li>
+<li>github：需要在仓库 -&gt; settings -&gt; secrets and variables -&gt; actions中配置<code>NPM_TOKEN</code> （token获取地址：<a target="_blank" rel="noopener" href="https://www.npmjs.com/%EF%BC%89">https://www.npmjs.com/）</a></li>
+</ul>
+<p>附git action资料：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html">github action 阮一峰教程</a> 、<a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/learn-github-actions/expressions">github action 官方文档</a></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2021/09/09/design-pattern-js/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2026-07-12 18:24:52
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E6%8A%80%E6%9C%AF/" title="技术">
+                        #技术
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%9F%BA%E5%BB%BA/" title="博客基建">
+                        #博客基建
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2026/07/01/capture-the-moment/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91"><span class="toc-text">插件开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8"><span class="toc-text">插件使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%9A%F0%9F%A6%B6%E6%9C%AC%E5%BC%95%E5%85%A5"><span class="toc-text">脚🦶本引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE"><span class="toc-text">全局配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E4%BD%BF%E7%94%A8"><span class="toc-text">标签使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E4%B8%8A%E7%BA%BF"><span class="toc-text">插件上线</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+  <div id="waline-comments"></div>
+
+  <script>
+    function loadWalineSuc(func) {
+      func({
+        el: '#waline-comments',
+        path: location.pathname,
+        serverURL: 'https://misakisaysyes-comment-system.vercel.app',
+        emoji: false,
+        dark: 'auto',
+        requiredMeta: ['nick', 'mail'],
+        login: 'disable',
+        wordLimit: 150,
+        imageUploader: false,
+        search: false,
+        reaction: false,
+        pageSize: 30,
+        lang: 'en'
+      })
+    }
+  </script>
+
+  
+    <link rel="stylesheet" href="/plugins/waline.css">
+    <script type="module">
+      import { init } from '/plugins/waline.mjs'
+      loadWalineSuc(init)
+    </script>
+  
+
+
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/misakisaysyes">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="http://github.com/misakisaysyes">Copyright © 2026 Misakisaysyes</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + hexo-codepen-snippet%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91 + '&url=' + http%3A%2F%2Fexample.com%2F2021%2F10%2F07%2Fhexo-codepen-snippet-develop%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2021/10/07/hexo-codepen-snippet-develop/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+    <script defer src="/js/mermaid.js"></script>
+  </body>
+</html>

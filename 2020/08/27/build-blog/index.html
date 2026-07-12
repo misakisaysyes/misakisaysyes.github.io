@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="John Doe" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      基于hexo + github.io搭建个人博客 
+      
+      
+      |
+    
+     Misakisaysyes
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <!-- 这里加载烟花特效 -->
+    <!-- <a href="/">
+      
+        <img src="/images/avatar.png" alt="" id="avatar-img">
+      
+    </a> -->
+    <div class="nickname">
+      <a id="user-name" href="/">Misakisaysyes</a>
+      <svg t="1633705051853"  id="user-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15546" width="16" height="16"><path d="M288.105 122.229C174.047 122.21 64.691 231.687 64.691 388.095c0 176.07 156.747 241.891 261.855 312.283 101.962 68.266 174.057 161.602 185.453 201.393 9.743-38.936 91.03-135.019 185.448-203.373 103.196-74.727 261.861-136.19 261.861-312.262 0-152.117-109.34-260.294-222.908-260.294-86.792 0-167.781 15.754-224.419 128.441-65.593-111.977-138.495-132.042-223.876-132.054" p-id="15547"></path></svg>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/mo.min.js"></script>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+<script src="/js/animation.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">基于hexo + github.io搭建个人博客</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2026-07-12 18:22:53
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E6%8A%80%E6%9C%AF/" title="技术">
+                    #技术
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%9F%BA%E5%BB%BA/" title="博客基建">
+                    #博客基建
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                    #前端
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h2><h3 id="1-mac全局安装hexo"><a href="#1-mac全局安装hexo" class="headerlink" title="1 mac全局安装hexo"></a>1 mac全局安装hexo</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/">doc</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install hexo</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-初始化项目"><a href="#2-初始化项目" class="headerlink" title="2 初始化项目"></a>2 初始化项目</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/setup">doc</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<p>得到如下目录结构的项目</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-下载oranges主题"><a href="#3-下载oranges主题" class="headerlink" title="3 下载oranges主题"></a>3 下载oranges主题</h3><p><a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">doc</a></p>
+<p>下载后将包含主题的<code>oranges</code>文件夹放置于上述目录结构的<code>themes</code>下</p>
+<blockquote>
+<p>注意 ：若用文档中的方式下载主题，则会在themes目录下得到一个oranges的git项目，在这种情况下，若对oranges主题做一些修改，则这些修改只能在oranges目录下被管理（commit discard …），在oranges目录之外只能被识别而无法被管理。所以最好不要在一个git项目中管理另外一个git项目。</p>
+</blockquote>
+<h3 id="4-hexo上传图片配置"><a href="#4-hexo上传图片配置" class="headerlink" title="4 hexo上传图片配置"></a>4 hexo上传图片配置</h3><p><a target="_blank" rel="noopener" href="https://github.com/xcodebuild/hexo-asset-image">doc</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/xcodebuild/hexo-asset-image/issues/44#issuecomment-499405301">issue</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f72aaad7b852">reference blog</a></p>
+<h3 id="5-本地测试"><a href="#5-本地测试" class="headerlink" title="5 本地测试"></a>5 本地测试</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-上线"><a href="#6-上线" class="headerlink" title="6 上线"></a>6 上线</h3><h4 id="6-1-朴素上线（不使用插件）"><a href="#6-1-朴素上线（不使用插件）" class="headerlink" title="6.1 朴素上线（不使用插件）"></a>6.1 朴素上线（不使用插件）</h4><p>部署到github.io上 <a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages">doc</a></p>
+<p>此处的文档是标准部署流程，但目前博客部署的方式比较野生（无脑），大致就是：将资源文件传到以<code>github注册名.github.io</code>命名到仓库上，再对仓库进行配置，配置生效后，<code>github注册名.github.io</code>就是可访问地址。</p>
+<p>具体有三个操作：</p>
+<ul>
+<li>1.本地生成静态资源文件。 </li>
+<li>2.给线上仓库配置服务器目录</li>
+<li>3.将静态资源文件上传到线上服务器目录下</li>
+</ul>
+<p><em>本地生成静态文件</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate  // 生成静态文件，静态文件默认输出的目录为public</span><br><span class="line">$ mkdir docs  // 在根目录下创建名为docs的目录作为线上的服务器目录（该目录的位置和名称与仓库配置相关）</span><br><span class="line">$ cp -r ./public/* ./docs  // 将public下的内容复制到docs下</span><br><span class="line"></span><br><span class="line">// 项目目录结构参考如下：</span><br><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br><span class="line">|   └── oranges</span><br><span class="line">└── publics</span><br><span class="line">└── docs</span><br></pre></td></tr></table></figure>
+
+<p><em>给线上仓库配置服务器目录</em></p>
+<p><img src="/2020/08/27/build-blog/1.png" alt="1.png"></p>
+<p>其中source项的目录配置只有<code>/</code>和<code>/docs</code>两种，选择<code>/</code>则项目里只能存放静态资源文件，选择<code>/docs</code>则项目里需要有个docs目录存放静态资源文件。</p>
+<h4 id="6-2-高效上线（使用插件）"><a href="#6-2-高效上线（使用插件）" class="headerlink" title="6.2 高效上线（使用插件）"></a>6.2 高效上线（使用插件）</h4><p>使用 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-deployer-git">hexo-deployer-git</a> 插件</p>
+<h3 id="7-新文章发布"><a href="#7-新文章发布" class="headerlink" title="7 新文章发布"></a>7 新文章发布</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/commands">doc</a></p>
+<h4 id="7-1-基于朴素上线的发布方式"><a href="#7-1-基于朴素上线的发布方式" class="headerlink" title="7.1 基于朴素上线的发布方式"></a>7.1 基于朴素上线的发布方式</h4><p><strong>创建新文章</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post `文章名.md`</span><br></pre></td></tr></table></figure>
+<p><strong>本地生成静态文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate </span><br><span class="line">$ mkdir docs </span><br><span class="line">$ cp -r ./public/* ./docs</span><br></pre></td></tr></table></figure>
+<p><strong>上线</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ... //  git操作</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-2-基于高效上线的发布方式"><a href="#7-2-基于高效上线的发布方式" class="headerlink" title="7.2 基于高效上线的发布方式"></a>7.2 基于高效上线的发布方式</h4><p><strong>创建新文章</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post `文章名.md`</span><br></pre></td></tr></table></figure>
+<p><strong>发布文章</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+<h2 id="博客优化日志"><a href="#博客优化日志" class="headerlink" title="博客优化日志"></a>博客优化日志</h2><h3 id="为orange主题添加mojs动画"><a href="#为orange主题添加mojs动画" class="headerlink" title="为orange主题添加mojs动画"></a>为orange主题添加mojs动画</h3><pre><code>| - MYBLOG
+    | - themes
+        | - oranges
+            | 。。。
+            | - source
+                | ...
+                | - js
+                    | - mo.min.js // 动画库文件
+                    | - animation.js // 动画js实现
+            | - layout
+                | ...
+                | - _partial
+                    | - navigation.ejs // 在需要用到动画的ejs模版中引入文件
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/** navigation.ejs 文件最末尾引入js文件</span><br><span class="line"> *  并且mo.min.js必须先于animation.js引入</span><br><span class="line"> */</span><br><span class="line">    &lt;%- js([&#x27;/js/mo.min.js&#x27;])%&gt;</span><br><span class="line">    &lt;%- js([&#x27;/js/animation.js&#x27;])%&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在hexo中插入codepen代码"><a href="#在hexo中插入codepen代码" class="headerlink" title="在hexo中插入codepen代码"></a>在hexo中插入codepen代码</h3><p>目前主流的代码在线编辑器有：<code>codepen</code> 和 <code>codesandbox</code>。</p>
+<p>从使用体验上，个人感觉codesandbox加载npm包和热更新的速度不如codepen，而且有时热更新还会出错。</p>
+<p>所以我还是偏爱codepen，博客插入代码也选择了codepen。</p>
+<p>在hexo博客嵌入codepen可以用<a target="_blank" rel="noopener" href="https://github.com/timnew/hexo-tag-codepen">插件</a>。</p>
+<p>但这个插件很久没维护了，有些配置已失效。</p>
+<p>所以此处的解决方案是：直接在markdown中贴上codepen网站导出的代码。</p>
+<p>codepen导出代码方法如图所示：</p>
+<p><code>New Pen</code> -&gt; <code>编辑代码</code> -&gt; <code>Save</code> -&gt; <code>Embed</code></p>
+<p><img src="/2020/08/27/build-blog/2.png" alt="2.png"></p>
+<h3 id="封装hexo-codepen-snippet优化codepen插入方式"><a href="#封装hexo-codepen-snippet优化codepen插入方式" class="headerlink" title="封装hexo-codepen-snippet优化codepen插入方式"></a>封装hexo-codepen-snippet优化codepen插入方式</h3><p><a href="#%E5%9C%A8hexo%E4%B8%AD%E6%8F%92%E5%85%A5codepen%E4%BB%A3%E7%A0%81">在hexo中插入codepen代码</a>这节描述的插入方法有个的问题：</p>
+<p>就是一大段html代码插到md文件中，看上去很不整洁。</p>
+<p><img src="/2020/08/27/build-blog/3.png" alt="3.png"></p>
+<p>于是参考失效的codepen<a target="_blank" rel="noopener" href="https://github.com/timnew/hexo-tag-codepen">插件</a>重新写了一个，并发布到npm，详见<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-codepen-snippet">hexo-codepen-snippet</a>。</p>
+<p>安装插件后，需要插入codepen代码，只用在md中插入如下语句：</p>
+<p><img src="/2020/08/27/build-blog/4.png" alt="4.png"></p>
+<p>整个md文件顿时变得清爽很多。</p>
+<h3 id="接入clustrmaps"><a href="#接入clustrmaps" class="headerlink" title="接入clustrmaps"></a>接入clustrmaps</h3><p>clustrmaps是一款能记录访问你博客ip地理位置的工具🔧</p>
+<p>具体用法就是：</p>
+<p>1.登陆<a target="_blank" rel="noopener" href="http://clustrmaps.com/">clustrmaps官网</a><br>2.配置想要搜集ip地理数据的网址，然后导出一段js代码插入md文档中</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2026-07-12 18:22:53
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E6%8A%80%E6%9C%AF/" title="技术">
+                        #技术
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%9F%BA%E5%BB%BA/" title="博客基建">
+                        #博客基建
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%89%8D%E7%AB%AF/" title="前端">
+                        #前端
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/06/11/mo-js-animation/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA"><span class="toc-text">博客搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-mac%E5%85%A8%E5%B1%80%E5%AE%89%E8%A3%85hexo"><span class="toc-text">1 mac全局安装hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="toc-text">2 初始化项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%8B%E8%BD%BDoranges%E4%B8%BB%E9%A2%98"><span class="toc-text">3 下载oranges主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-hexo%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E9%85%8D%E7%BD%AE"><span class="toc-text">4 hexo上传图片配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95"><span class="toc-text">5 本地测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%B8%8A%E7%BA%BF"><span class="toc-text">6 上线</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-%E6%9C%B4%E7%B4%A0%E4%B8%8A%E7%BA%BF%EF%BC%88%E4%B8%8D%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6%EF%BC%89"><span class="toc-text">6.1 朴素上线（不使用插件）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-%E9%AB%98%E6%95%88%E4%B8%8A%E7%BA%BF%EF%BC%88%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6%EF%BC%89"><span class="toc-text">6.2 高效上线（使用插件）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%96%B0%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83"><span class="toc-text">7 新文章发布</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1-%E5%9F%BA%E4%BA%8E%E6%9C%B4%E7%B4%A0%E4%B8%8A%E7%BA%BF%E7%9A%84%E5%8F%91%E5%B8%83%E6%96%B9%E5%BC%8F"><span class="toc-text">7.1 基于朴素上线的发布方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-2-%E5%9F%BA%E4%BA%8E%E9%AB%98%E6%95%88%E4%B8%8A%E7%BA%BF%E7%9A%84%E5%8F%91%E5%B8%83%E6%96%B9%E5%BC%8F"><span class="toc-text">7.2 基于高效上线的发布方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E6%97%A5%E5%BF%97"><span class="toc-text">博客优化日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BAorange%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0mojs%E5%8A%A8%E7%94%BB"><span class="toc-text">为orange主题添加mojs动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8hexo%E4%B8%AD%E6%8F%92%E5%85%A5codepen%E4%BB%A3%E7%A0%81"><span class="toc-text">在hexo中插入codepen代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%81%E8%A3%85hexo-codepen-snippet%E4%BC%98%E5%8C%96codepen%E6%8F%92%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="toc-text">封装hexo-codepen-snippet优化codepen插入方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5clustrmaps"><span class="toc-text">接入clustrmaps</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+  <div id="waline-comments"></div>
+
+  <script>
+    function loadWalineSuc(func) {
+      func({
+        el: '#waline-comments',
+        path: location.pathname,
+        serverURL: 'https://misakisaysyes-comment-system.vercel.app',
+        emoji: false,
+        dark: 'auto',
+        requiredMeta: ['nick', 'mail'],
+        login: 'disable',
+        wordLimit: 150,
+        imageUploader: false,
+        search: false,
+        reaction: false,
+        pageSize: 30,
+        lang: 'en'
+      })
+    }
+  </script>
+
+  
+    <link rel="stylesheet" href="/plugins/waline.css">
+    <script type="module">
+      import { init } from '/plugins/waline.mjs'
+      loadWalineSuc(init)
+    </script>
+  
+
+
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/misakisaysyes">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="http://github.com/misakisaysyes">Copyright © 2026 Misakisaysyes</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%9F%BA%E4%BA%8Ehexo%20%2B%20github.io%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2 + '&url=' + http%3A%2F%2Fexample.com%2F2020%2F08%2F27%2Fbuild-blog%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2020/08/27/build-blog/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+    <script defer src="/js/mermaid.js"></script>
+  </body>
+</html>
