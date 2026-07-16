@@ -30,8 +30,8 @@
 
   try {
     const cdnUrls = [
-      'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js',
-      'https://unpkg.com/mermaid@11/dist/mermaid.min.js',
+      'https://registry.npmmirror.com/mermaid/11.12.1/files/dist/mermaid.min.js',
+      'https://cdn.staticfile.net/mermaid/11.12.1/mermaid.min.js',
     ];
 
     for (const cdnUrl of cdnUrls) {
