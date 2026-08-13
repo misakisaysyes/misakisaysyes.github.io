@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Misakisaysyes" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      关于浏览器cookie 
+      
+      
+      |
+    
+     Misakisaysyes
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C461BQQ4XR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-C461BQQ4XR');
+    </script> -->
+
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xnmw7vbxc4");
+</script>
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <!-- 这里加载烟花特效 -->
+    <!-- <a href="/">
+      
+        <img src="/images/avatar.png" alt="" id="avatar-img">
+      
+    </a> -->
+    <div class="nickname">
+      <a id="user-name" href="/">Misakisaysyes</a>
+      <svg t="1633705051853"  id="user-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15546" width="16" height="16"><path d="M288.105 122.229C174.047 122.21 64.691 231.687 64.691 388.095c0 176.07 156.747 241.891 261.855 312.283 101.962 68.266 174.057 161.602 185.453 201.393 9.743-38.936 91.03-135.019 185.448-203.373 103.196-74.727 261.861-136.19 261.861-312.262 0-152.117-109.34-260.294-222.908-260.294-86.792 0-167.781 15.754-224.419 128.441-65.593-111.977-138.495-132.042-223.876-132.054" p-id="15547"></path></svg>
+    </div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/mo.min.js"></script>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+<script src="/js/animation.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">关于浏览器cookie</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <!-- <i class="iconfont icon-updatetime mr-10" title="更新时间"></i> -->
+          <!-- 2026-08-13 21:29:25 -->
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Cookie Security Orbits</title>
+<style>:root {
+  color-scheme: light dark;
+  background-color: transparent !important;
+
+<p>&#x2F;_ Agent-facing contract; keep in sync with SKILL.md. _&#x2F;<br>–background: var(<br>–main-surface-primary,<br>light-dark(rgb(255 255 255), rgb(24 24 24))<br>);<br>–foreground: light-dark(rgb(26 28 31), rgb(255 255 255));<br>–card: color-mix(in oklab, var(–foreground) 5%, transparent);<br>–card-foreground: var(–foreground);<br>–popover: light-dark(rgb(255 255 255), rgb(45 45 45));<br>–popover-foreground: var(–foreground);<br>–primary: light-dark(rgb(51 156 255), rgb(131 195 255));<br>–primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));<br>–secondary: light-dark(rgb(255 255 255 &#x2F; 96%), rgb(54 54 54 &#x2F; 96%));<br>–secondary-foreground: var(–foreground);<br>–muted: color-mix(in srgb, var(–foreground) 10%, transparent);<br>–muted-foreground: light-dark(<br>rgb(26 28 31 &#x2F; 49.4%),<br>rgb(255 255 255 &#x2F; 49.8%)<br>);<br>–accent: light-dark(rgb(229 242 255), rgb(13 39 63));<br>–accent-foreground: var(–primary);<br>–destructive: light-dark(rgb(226 85 7), rgb(255 133 73));<br>–border: light-dark(rgb(26 28 31 &#x2F; 8%), rgb(255 255 255 &#x2F; 8.2%));<br>–input: light-dark(<br>rgb(26 28 31 &#x2F; 11.8%),<br>color-mix(in oklab, rgb(0 0 0) 10%, transparent)<br>);<br>–ring: light-dark(rgb(51 156 255), rgb(131 195 255 &#x2F; 76%));<br>–font-size-base: 14px;<br>–red: light-dark(rgb(186 38 35), rgb(250 66 62));<br>–green: light-dark(rgb(0 162 64), rgb(64 201 119));</p>
+<p>&#x2F;_ Internal implementation variables; not part of the agent contract. _&#x2F;<br>–font-sans: -apple-system, system-ui, “Segoe UI”, sans-serif;<br>–font-mono:<br>ui-monospace, SFMono-Regular, “SF Mono”, Menlo, Consolas, “Liberation Mono”,<br>monospace;<br>–font-size-normal: max(11px, var(–font-size-base));<br>–font-size-tooltip: calc(var(–font-size-base) - 1px);<br>–font-size-small: max(11px, calc(var(–font-size-base) - 2px));<br>–font-size-h1: calc(var(–font-size-normal) _ 1.7142857143);<br>–font-size-h2: calc(var(–font-size-normal) _ 1.4285714286);<br>–font-size-h3: calc(var(–font-size-normal) _ 1.2857142857);<br>–font-weight-normal: 430;<br>–font-weight-medium: 500;<br>–line-height-normal: calc(var(–font-size-normal) _ 1.5);<br>–line-height-tooltip: calc(var(–font-size-tooltip) _ 1.4285714286);<br>–line-height-small: calc(var(–font-size-small) + 4px);<br>–radius: 10px;<br>–radius-sm: calc(var(–radius) _ 0.6);<br>–radius-md: calc(var(–radius) _ 0.8);<br>–radius-lg: var(–radius);<br>–radius-2xl: calc(var(–radius) _ 1.6);<br>–radius-full: 9999px;<br>–shadow-sm: 0 1px 2px -1px rgb(0 0 0 &#x2F; 8%);<br>–checkmark-image: url(“data:image&#x2F;svg+xml,%3Csvg xmlns&#x3D;’<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>‘ viewBox&#x3D;’0 0 17 17’%3E%3Cpath d&#x3D;’M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z’&#x2F;%3E%3C&#x2F;svg%3E”);</p>
+<p>&#x2F;_ Legacy aliases; not part of the current agent contract. _&#x2F;<br>–viz-bg: transparent;<br>–viz-panel: var(–card);<br>–viz-border: var(–border);<br>–viz-text: var(–foreground);<br>–viz-muted: var(–muted-foreground);<br>–viz-accent: var(–primary);<br>–viz-accent-text: var(–primary-foreground);<br>–viz-accent-bg: var(–accent);<br>–viz-font-size: var(–font-size-base);<br>–viz-warning: var(–destructive);<br>–color-background-primary: var(–background);<br>–color-text-primary: var(–foreground);<br>–color-border-secondary: var(–border);<br>}</p>
+<p>:root[data-visualize-standalone] {<br>background-color: var(–background) !important;<br>}</p>
+<p>&#x2F;_ Generic mobile code-block hosts provide light&#x2F;dark mode but no series palette.<br>AppBlock hosts set all six variables themselves. _&#x2F;<br>:root:not([data-app-block-surface]) {<br>–viz-series-1: var(–primary);<br>–viz-series-2: light-dark(#f3883b, #f59a56);<br>–viz-series-3: light-dark(#5dc977, #74d58b);<br>–viz-series-4: light-dark(#eb77b1, #f08fc0);<br>–viz-series-5: light-dark(#9b79ec, #aa91ef);<br>–viz-series-6: light-dark(#3ab9b1, #5acbc2);<br>}</p>
+<p>:root[data-theme&#x3D;”light”] {<br>color-scheme: light;<br>}</p>
+<p>:root[data-theme&#x3D;”dark”] {<br>color-scheme: dark;<br>}</p>
+<ul>
+<li>{<br>box-sizing: border-box;<br>}</li>
+</ul>
+<p>html &gt; body {<br>margin: 0;<br>padding: 5px;<br>color: var(–foreground);<br>background: transparent !important;<br>font-family: var(–font-sans);<br>font-size: var(–font-size-normal);<br>font-weight: var(–font-weight-normal);<br>line-height: var(–line-height-normal);<br>}</p>
+<p>:root:not([data-app-block-surface]) &gt; body {<br>padding: 12px;<br>}</p>
+<p>a {<br>color: color-mix(in srgb, var(–viz-accent) 80%, var(–viz-text) 20%);<br>cursor: pointer;<br>font-weight: var(–font-weight-medium);<br>text-decoration: none;<br>text-underline-offset: 2px;<br>}</p>
+<p>a:is(:hover, :focus-visible) {<br>text-decoration-line: underline;<br>text-decoration-style: dashed;<br>text-decoration-thickness: 0.5px;<br>}</p>
+<p>h1,<br>h2,<br>h3,<br>h4,<br>h5,<br>h6,<br>p {<br>margin-block: 0;<br>}</p>
+<p>h1 {<br>font-size: var(–font-size-h1);<br>font-weight: var(–font-weight-medium);<br>line-height: 1.25;<br>}</p>
+<p>h2 {<br>font-size: var(–font-size-h2);<br>font-weight: var(–font-weight-medium);<br>line-height: 1.25;<br>}</p>
+<p>h3,<br>h4,<br>h5,<br>h6 {<br>font-size: var(–font-size-h3);<br>font-weight: var(–font-weight-medium);<br>line-height: 1.3;<br>}</p>
+<p>b,<br>strong,<br>th {<br>font-weight: var(–font-weight-medium);<br>}</p>
+<p>code:not(pre code) {<br>display: inline;<br>padding: 1px 6px;<br>border-radius: var(–radius-sm);<br>background: var(–muted);<br>font-family: var(–font-mono);<br>font-size: 0.92em;<br>overflow-wrap: anywhere;<br>-webkit-box-decoration-break: clone;<br>box-decoration-break: clone;<br>word-break: break-word;<br>}</p>
+<p>.table-responsive {<br>width: 100%;<br>overflow-x: auto;<br>scrollbar-width: thin;<br>}</p>
+<p>.table {<br>width: 100%;<br>border-collapse: collapse;<br>color: var(–foreground);<br>font: inherit;<br>text-align: start;<br>}</p>
+<p>.table :is(th, td) {<br>padding-block: 10px;<br>padding-inline: 0 24px;<br>overflow-wrap: anywhere;<br>border-bottom: 1px solid var(–border);<br>text-align: start;<br>vertical-align: top;<br>}</p>
+<p>.table-responsive &gt; .table :is(th, td) {<br>overflow-wrap: break-word;<br>}</p>
+<p>.table :is(th, td):last-child {<br>padding-inline-end: 0;<br>}</p>
+<p>.table :is(caption, thead th) {<br>font-weight: 600;<br>}</p>
+<p>.table thead th {<br>padding-block: 8px;<br>border-bottom-color: color-mix(in srgb, var(–foreground) 16%, transparent);<br>}</p>
+<p>.table tbody tr:last-child :is(th, td) {<br>border-bottom: 0;<br>}</p>
+<p>.table.table-sm :is(th, td) {<br>padding-block: 6px;<br>}</p>
+<p>.table.table-sm :is(th, td):not(:last-child) {<br>padding-inline-end: 16px;<br>}</p>
+<p>.table :is(.text-end, [align&#x3D;”right”]) {<br>text-align: end;<br>font-variant-numeric: tabular-nums;<br>}</p>
+<p>.table :is(.text-center, [align&#x3D;”center”]) {<br>text-align: center;<br>}</p>
+<p>.table .text-nowrap {<br>white-space: nowrap;<br>}</p>
+<p>#widget {<br>display: flex;<br>flex-direction: column;<br>gap: 12px;<br>width: 100%;<br>padding: 0;<br>background: transparent !important;<br>}</p>
+<p>.card {<br>min-width: 0;<br>padding: 12px;<br>overflow: hidden;<br>overflow-wrap: break-word;<br>border-radius: var(–radius-2xl);<br>color: var(–card-foreground);<br>background: var(–card);<br>}</p>
+<p>#widget &gt; :not(.card) {<br>width: 100% !important;<br>max-width: none !important;<br>margin: 0 !important;<br>padding: 0 !important;<br>border: 0 !important;<br>border-radius: 0 !important;<br>background: transparent !important;<br>box-shadow: none !important;<br>}</p>
+<p>.tooltip {<br>position: fixed;<br>z-index: 50;<br>top: 0;<br>left: 0;<br>width: max-content;<br>max-width: min(<br>20rem,<br>var(–tooltip-available-width, calc(100vw - 10px)),<br>calc(100vw - 10px)<br>);<br>max-height: min(<br>var(–tooltip-available-height, calc(100vh - 10px)),<br>calc(100vh - 10px)<br>);<br>padding: 4px 8px;<br>border: 1px solid var(–border);<br>border-radius: var(–radius-lg);<br>color: var(–popover-foreground);<br>background: var(–popover);<br>box-shadow: none;<br>font-size: var(–font-size-tooltip);<br>line-height: var(–line-height-tooltip);<br>overflow-wrap: break-word;<br>white-space: normal;<br>pointer-events: none;<br>user-select: none;<br>}</p>
+<p>&#x2F;_ The bundled tooltip runtime owns [data-tooltip]. AppBlock’s CSS-only<br>pseudo-tooltip can widen dense grids even while hidden. _&#x2F;<br>main [data-tooltip]::after {<br>content: none;<br>}</p>
+<p>.viz-grid {<br>display: grid;<br>grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));<br>gap: 10px;<br>}</p>
+<p>.viz-stat {<br>display: flex;<br>flex-direction: column;<br>gap: 2px;<br>}</p>
+<p>.viz-stat-value {<br>font-size: var(–font-size-h2);<br>font-weight: var(–font-weight-medium);<br>line-height: 1.25;<br>}</p>
+<p>.viz-row {<br>display: flex;<br>flex-wrap: wrap;<br>align-items: center;<br>gap: 10px;<br>}</p>
+<p>.viz-badge {<br>padding: 3px 8px;<br>border-radius: var(–radius-full);<br>color: var(–accent-foreground);<br>background: var(–accent);<br>font-weight: var(–font-weight-medium);<br>}</p>
+<p>small,<br>.text-small,<br>.viz-badge {<br>font-size: var(–font-size-small);<br>line-height: var(–line-height-small);<br>}</p>
+<p>.text-muted {<br>color: var(–muted-foreground);<br>}</p>
+<p>.sr-only {<br>position: absolute;<br>width: 1px;<br>height: 1px;<br>padding: 0;<br>overflow: hidden;<br>clip: rect(0, 0, 0, 0);<br>white-space: nowrap;<br>border: 0;<br>}</p>
+<p>.viz-controls {<br>display: flex;<br>flex-wrap: wrap;<br>align-items: center;<br>gap: 8px;<br>}</p>
+<p>.viz-controls &gt; .form-label {<br>display: grid;<br>min-width: min(100%, 260px);<br>flex: 1 1 280px;<br>grid-template-columns: minmax(0, 1fr) auto;<br>align-items: baseline;<br>gap: 2px 12px;<br>margin-bottom: 0;<br>}</p>
+<p>.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {<br>grid-column: 1 &#x2F; -1;<br>}</p>
+<p>.btn,<br>.form-check-input,<br>.form-control,<br>.form-range,<br>.form-select {<br>font: inherit;<br>}</p>
+<p>.btn {<br>appearance: button;<br>display: inline-flex;<br>inline-size: fit-content;<br>max-inline-size: 100%;<br>min-height: 28px;<br>align-items: center;<br>justify-content: center;<br>gap: 4px;<br>margin: 0;<br>padding: 0 8px;<br>-webkit-app-region: no-drag;<br>border: 1px solid var(–input);<br>border-radius: var(–radius-lg);<br>color: var(–secondary-foreground);<br>background: var(–secondary);<br>cursor: var(–cursor-interaction, pointer);<br>text-align: center;<br>text-decoration: none;<br>white-space: nowrap;<br>user-select: none;<br>-webkit-font-smoothing: antialiased;<br>}</p>
+<p>.btn:is(.btn-block, .viz-tile) {<br>inline-size: 100%;<br>}</p>
+<p>.btn.viz-tile {<br>min-width: 0;<br>overflow-wrap: anywhere;<br>white-space: normal;<br>}</p>
+<p>a.btn {<br>cursor: pointer;<br>text-decoration: none;<br>}</p>
+<p>.btn:not(:disabled):hover {<br>background: color-mix(in srgb, var(–foreground) 6%, var(–secondary));<br>}</p>
+<p>.btn-primary {<br>border-color: transparent;<br>color: var(–interactive-label-primary-default, var(–primary-foreground));<br>background: var(–interactive-bg-primary-default, var(–foreground));<br>background-clip: padding-box;<br>}</p>
+<p>.btn-primary .text-muted {<br>color: color-mix(<br>in srgb,<br>var(–interactive-label-primary-default, var(–primary-foreground)) 50%,<br>transparent<br>);<br>}</p>
+<p>.btn-primary:not(:disabled):hover {<br>background: color-mix(in srgb, var(–foreground) 80%, transparent);<br>background-clip: padding-box;<br>}</p>
+<p>.btn-ghost {<br>border-color: transparent;<br>color: var(–muted-foreground);<br>background: transparent;<br>}</p>
+<p>.btn-ghost:not(:disabled):hover {<br>color: var(–foreground);<br>background: color-mix(in srgb, var(–foreground) 6%, var(–secondary));<br>}</p>
+<p>.btn:disabled {<br>cursor: not-allowed;<br>opacity: 0.4;<br>}</p>
+<p>[data-lucide] {<br>stroke-width: 1.6;<br>}</p>
+<p>.form-label {<br>display: block;<br>margin-bottom: 6px;<br>color: var(–foreground);<br>}</p>
+<p>.form-control {<br>display: block;<br>width: 100%;<br>min-height: 28px;<br>padding: 0 8px;<br>outline: none;<br>border: 1px solid var(–input);<br>border-radius: var(–radius-lg);<br>color: var(–foreground);<br>background: var(–secondary);<br>}</p>
+<p>.form-control::placeholder {<br>color: var(–muted-foreground);<br>}</p>
+<p>.form-control[type&#x3D;”file”] {<br>padding: 0;<br>overflow: hidden;<br>cursor: var(–cursor-interaction, pointer);<br>}</p>
+<p>.form-control[type&#x3D;”file”]::file-selector-button {<br>min-height: 26px;<br>margin-right: 8px;<br>padding: 0 8px;<br>border: 0;<br>border-right: 1px solid var(–input);<br>color: var(–secondary-foreground);<br>background: var(–secondary);<br>cursor: inherit;<br>font: inherit;<br>}</p>
+<p>.form-control[type&#x3D;”file”]:not(:disabled):hover::file-selector-button {<br>background: color-mix(in srgb, var(–foreground) 6%, var(–secondary));<br>}</p>
+<p>.form-control-color[type&#x3D;”color”] {<br>width: 40px;<br>height: 28px;<br>padding: 3px;<br>cursor: var(–cursor-interaction, pointer);<br>}</p>
+<p>.form-control-color[type&#x3D;”color”]::-webkit-color-swatch-wrapper {<br>padding: 0;<br>}</p>
+<p>.form-control-color[type&#x3D;”color”]::-webkit-color-swatch {<br>border: 0;<br>border-radius: calc(var(–radius-lg) - 4px);<br>}</p>
+<p>textarea.form-control {<br>height: auto;<br>min-height: 72px;<br>padding: 8px 10px;<br>resize: vertical;<br>}</p>
+<p>.form-control:focus-visible {<br>border-color: var(–ring);<br>box-shadow: inset 0 0 0 1px var(–ring);<br>}</p>
+<p>.form-control:disabled,<br>.form-select:disabled {<br>cursor: not-allowed;<br>opacity: 0.4;<br>}</p>
+<p>.form-select {<br>appearance: none;<br>display: block;<br>width: 100%;<br>min-height: 28px;<br>margin: 0;<br>padding: 0 32px 0 8px;<br>outline: none;<br>border: 1px solid var(–input);<br>border-radius: var(–radius-lg);<br>color: var(–foreground);<br>background-color: var(–secondary);<br>background-image:<br>linear-gradient(45deg, transparent 50%, var(–muted-foreground) 50%),<br>linear-gradient(135deg, var(–muted-foreground) 50%, transparent 50%);<br>background-position:<br>calc(100% - 14px) 50%,<br>calc(100% - 10px) 50%;<br>background-repeat: no-repeat;<br>background-size: 4px 4px;<br>cursor: var(–cursor-interaction, default);<br>}</p>
+<p>.form-select:not(:disabled):hover {<br>background-color: color-mix(in srgb, var(–foreground) 6%, var(–secondary));<br>}</p>
+<p>.form-select:focus-visible {<br>border-color: var(–ring);<br>box-shadow: inset 0 0 0 1px var(–ring);<br>}</p>
+<p>.form-check {<br>display: flex;<br>min-height: 20px;<br>align-items: center;<br>gap: 6px;<br>}</p>
+<p>.form-check-input {<br>appearance: none;<br>width: 14px;<br>height: 14px;<br>flex: 0 0 auto;<br>margin: 0;<br>border: 1px solid var(–input);<br>color: var(–primary-foreground);<br>background-color: transparent;<br>cursor: var(–cursor-interaction, default);<br>transition:<br>background-color 150ms,<br>border-color 150ms,<br>box-shadow 150ms;<br>}</p>
+<p>.form-check:not(.form-switch) .form-check-input[type&#x3D;”checkbox”] {<br>border-color: var(–input);<br>border-radius: var(–radius-sm);<br>background-color: var(–secondary);<br>box-shadow: var(–shadow-sm);<br>}</p>
+<p>.form-check:not(.form-switch)<br>.form-check-input:not(:disabled):not(:checked):hover {<br>background-color: var(–card);<br>}</p>
+<p>.form-check:not(.form-switch) .form-check-input[type&#x3D;”checkbox”]:checked {<br>border-color: var(–primary);<br>background-color: var(–primary);<br>}</p>
+<p>.form-check:not(.form-switch)<br>.form-check-input[type&#x3D;”checkbox”]:checked::before {<br>display: block;<br>width: 100%;<br>height: 100%;<br>background: var(–primary-foreground);<br>content: “”;<br>mask: var(–checkmark-image) center &#x2F; 12px 12px no-repeat;<br>}</p>
+<p>.form-check-input[type&#x3D;”radio”] {<br>width: 14px;<br>height: 14px;<br>border-radius: var(–radius-full);<br>}</p>
+<p>.form-check-input[type&#x3D;”radio”]:checked {<br>border: 2px solid var(–primary);<br>background:<br>radial-gradient(circle, var(–primary-foreground) 0 2.5px, transparent 3px),<br>var(–primary);<br>}</p>
+<p>.form-check:not(.form-switch) .form-check-input:focus-visible {<br>outline: 2px solid var(–ring);<br>outline-offset: 2px;<br>}</p>
+<p>.form-check:not(.form-switch) .form-check-input:disabled {<br>cursor: not-allowed;<br>pointer-events: none;<br>}</p>
+<p>.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {<br>cursor: not-allowed;<br>}</p>
+<p>.form-switch .form-check-input:disabled,<br>.form-switch .form-check-input:disabled + .form-check-label {<br>cursor: not-allowed;<br>opacity: 0.6;<br>}</p>
+<p>.form-check-label {<br>color: var(–foreground);<br>cursor: var(–cursor-interaction, default);<br>}</p>
+<p>.form-switch .form-check-input {<br>position: relative;<br>width: 32px;<br>height: 20px;<br>border: 0;<br>border-radius: var(–radius-full);<br>background: var(–muted);<br>box-shadow: none;<br>transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);<br>}</p>
+<p>.form-switch .form-check-input::before {<br>position: absolute;<br>top: 50%;<br>left: 0;<br>width: 16px;<br>height: 16px;<br>box-sizing: border-box;<br>border: 1px solid light-dark(var(–primary-foreground), var(–foreground));<br>border-radius: var(–radius-full);<br>background: light-dark(var(–primary-foreground), var(–foreground));<br>box-shadow: var(–shadow-sm);<br>content: “”;<br>transform: translate(2px, -50%);<br>transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);<br>}</p>
+<p>.form-switch .form-check-input:checked {<br>background: var(–primary);<br>}</p>
+<p>.form-switch .form-check-input:checked::before {<br>transform: translate(14px, -50%);<br>}</p>
+<p>.form-switch .form-check-input:focus-visible {<br>box-shadow: 0 0 0 2px var(–ring);<br>}</p>
+<p>.form-range {<br>appearance: none;<br>display: block;<br>width: 100%;<br>height: 28px;<br>flex: 1;<br>margin: 0;<br>padding: 0;<br>outline: none;<br>border: 0;<br>accent-color: var(–primary);<br>background: linear-gradient(<br>color-mix(in srgb, var(–foreground) 7%, transparent),<br>color-mix(in srgb, var(–foreground) 7%, transparent)<br>)<br>center &#x2F; 100% 2px no-repeat;<br>}</p>
+<p>.form-range::-webkit-slider-runnable-track {<br>height: 28px;<br>background: transparent;<br>}</p>
+<p>.form-range::-webkit-slider-thumb {<br>appearance: none;<br>width: 20px;<br>height: 20px;<br>margin-top: 4px;<br>border: 1px solid var(–border);<br>border-radius: var(–radius-full);<br>background: light-dark(var(–primary-foreground), var(–foreground));<br>}</p>
+<p>.form-range:focus-visible::-webkit-slider-thumb {<br>border-color: var(–ring);<br>box-shadow: inset 0 0 0 1px var(–ring);<br>}</p>
+<p>.form-range::-moz-range-track {<br>height: 28px;<br>background: transparent;<br>}</p>
+<p>.form-range::-moz-range-thumb {<br>width: 20px;<br>height: 20px;<br>border: 1px solid var(–border);<br>border-radius: var(–radius-full);<br>background: light-dark(var(–primary-foreground), var(–foreground));<br>}</p>
+<p>.form-range:focus-visible::-moz-range-thumb {<br>border-color: var(–ring);<br>box-shadow: inset 0 0 0 1px var(–ring);<br>}</p>
+<p>.form-range:disabled {<br>cursor: not-allowed;<br>opacity: 0.4;<br>}</p>
+<p>.btn:not(.btn-primary, .viz-tile):is(<br>[aria-pressed&#x3D;”true”],<br>[aria-selected&#x3D;”true”],<br>.is-selected<br>) {<br>border-color: var(–primary);<br>color: var(–primary-foreground);<br>background: var(–primary);<br>}</p>
+<p>.btn.viz-tile:is([aria-pressed&#x3D;”true”], [aria-selected&#x3D;”true”], .is-selected) {<br>border-color: var(–primary);<br>box-shadow: inset 0 0 0 1px var(–primary);<br>}</p>
+<p>.btn:focus-visible {<br>outline: 2px solid var(–ring);<br>outline-offset: 2px;<br>}</p>
+<p>svg {<br>display: block;<br>max-width: 100%;<br>height: auto;<br>}</p>
+<p>#widget &gt; svg {<br>width: 100%;<br>}</p>
+<p>.text-warning,<br>.text-destructive {<br>color: var(–destructive);<br>}<br></style></p>
+</head>
+<body>
+<div id="cookie-attributes-3d">
+  <div class="cookie-stage card" aria-label="Cookie 属性三维交互图。中心是 sessionId，周围是 Domain、Path、Expires/Max-Age、HttpOnly、SameSite 和 Secure。">
+    <canvas id="cookie-canvas"></canvas>
+    <div id="cookie-labels" aria-hidden="true"></div>
+    <div class="cookie-hint text-small text-muted">拖动旋转 · 滚轮缩放 · 点击属性</div>
+  </div>
+  <div id="cookie-detail" class="card" aria-live="polite">
+    <span class="viz-badge">sessionId</span>
+    <span>登录凭证的索引；浏览器保存，服务端用它查询 Session。</span>
+  </div>
+</div>
+
+<style>
+  #cookie-attributes-3d {
+    width: 100%;
+    color: var(--foreground);
+  }
+
+  #cookie-attributes-3d .cookie-stage {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--viz-series-1) 12%, transparent), transparent 48%),
+      var(--card);
+  }
+
+  #cookie-attributes-3d canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+  }
+
+  #cookie-attributes-3d canvas:active {
+    cursor: grabbing;
+  }
+
+  #cookie-attributes-3d #cookie-labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  #cookie-attributes-3d .cookie-label {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+    background: color-mix(in srgb, var(--card) 88%, transparent);
+    color: var(--card-foreground);
+    white-space: nowrap;
+    pointer-events: auto;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 500;
+  }
+
+  #cookie-attributes-3d .cookie-label.is-selected {
+    background: var(--primary);
+    color: var(--primary-foreground);
+    border-color: transparent;
+  }
+
+  #cookie-attributes-3d .cookie-center-label {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    color: var(--primary-foreground);
+    white-space: nowrap;
+    pointer-events: none;
+    font-weight: 500;
+  }
+
+  #cookie-attributes-3d .cookie-satellite-label {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: var(--secondary);
+    color: var(--secondary-foreground);
+    white-space: nowrap;
+    pointer-events: none;
+    font-weight: 500;
+  }
+
+  #cookie-attributes-3d .cookie-hint {
+    position: absolute;
+    left: 12px;
+    bottom: 10px;
+    pointer-events: none;
+  }
+
+  #cookie-attributes-3d #cookie-detail {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 54px;
+  }
+
+  @media (max-width: 520px) {
+    #cookie-attributes-3d .cookie-stage {
+      height: 430px;
+    }
+
+    #cookie-attributes-3d #cookie-detail {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script type="module">
+  import * as THREE from "https://esm.sh/three@0.180.0";
+  import { OrbitControls } from "https://esm.sh/three@0.180.0/examples/jsm/controls/OrbitControls.js";
+
+  const root = document.getElementById("cookie-attributes-3d");
+  const canvas = document.getElementById("cookie-canvas");
+  const stage = root.querySelector(".cookie-stage");
+  const labelsLayer = document.getElementById("cookie-labels");
+  const detail = document.getElementById("cookie-detail");
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+  camera.position.set(0, 1.5, 10.5);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+  controls.enablePan = false;
+  controls.minDistance = 7;
+  controls.maxDistance = 15;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.45;
+
+  const css = getComputedStyle(root);
+  const series1 = css.getPropertyValue("--viz-series-1").trim() || "#6296ff";
+  const series2 = css.getPropertyValue("--viz-series-2").trim() || "#75c9a3";
+  const neutral = css.getPropertyValue("--muted-foreground").trim() || "#8d96a5";
+  const border = css.getPropertyValue("--border").trim() || "#69707c";
+
+  const centerMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color(series1),
+    roughness: 0.35,
+    metalness: 0.05,
+    emissive: new THREE.Color(series1),
+    emissiveIntensity: 0.12
+  });
+  const center = new THREE.Mesh(new THREE.SphereGeometry(1.28, 48, 48), centerMaterial);
+  center.userData.key = "sessionId";
+  scene.add(center);
+
+  const centerLabel = document.createElement("div");
+  centerLabel.className = "cookie-center-label";
+  centerLabel.textContent = "Cookie";
+  labelsLayer.appendChild(centerLabel);
+
+  const ring = new THREE.Mesh(
+    new THREE.TorusGeometry(3.75, 0.018, 10, 140),
+    new THREE.MeshBasicMaterial({ color: new THREE.Color(border), transparent: true, opacity: 0.55 })
+  );
+  ring.rotation.x = Math.PI / 2.45;
+  ring.rotation.z = -0.12;
+  scene.add(ring);
+
+  const attributes = [
+    { key: "Domain", angle: 0.1, detail: "控制哪些域名的请求可以携带 Cookie；设为共同父域可覆盖子域。" },
+    { key: "Path", angle: 1.13, detail: "控制域名下哪些 URL 路径可以携带 Cookie；登录态通常显式设为 /。" },
+    { key: "Expires / Max-Age", angle: 2.17, detail: "控制有效期：Expires 是绝对时间，Max-Age 是剩余秒数。" },
+    { key: "HttpOnly", satellite: "XSS", angle: 3.23, detail: "防止 Js 通过 document.cookie 读取修改 cookie，降低 XSS 窃取凭证的风险。" },
+    { key: "SameSite", satellite: "CSRF", angle: 4.28, detail: "控制跨站请求是否携带 Cookie，主要用于降低 CSRF 风险。" },
+    { key: "Secure", angle: 5.33, detail: "只允许通过 HTTPS 发送 Cookie，降低传输链路被窃听的风险。" }
+  ];
+
+  const nodeGeometry = new THREE.SphereGeometry(0.52, 32, 32);
+  const linePositions = [];
+  const nodes = [];
+
+  attributes.forEach((item, index) => {
+    const x = Math.cos(item.angle) * 3.75;
+    const y = Math.sin(item.angle) * 2.35;
+    const z = Math.sin(item.angle * 1.55) * 1.05;
+    const material = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(index % 2 ? series2 : series1),
+      roughness: 0.4,
+      metalness: 0.03,
+      emissive: new THREE.Color(index % 2 ? series2 : series1),
+      emissiveIntensity: 0.08
+    });
+    const node = new THREE.Mesh(nodeGeometry, material);
+    node.position.set(x, y, z);
+    node.userData = item;
+    scene.add(node);
+    nodes.push(node);
+    linePositions.push(0, 0, 0, x, y, z);
+
+    const label = document.createElement("button");
+    label.type = "button";
+    label.className = "cookie-label";
+    label.textContent = item.key;
+    label.setAttribute("aria-label", item.key + "：" + item.detail);
+    label.addEventListener("click", () => selectNode(node));
+    labelsLayer.appendChild(label);
+    item.label = label;
+
+    if (item.satellite) {
+      const pivot = new THREE.Group();
+      pivot.position.copy(node.position);
+      pivot.visible = false;
+      scene.add(pivot);
+
+      const satelliteMesh = new THREE.Mesh(
+        new THREE.SphereGeometry(0.2, 24, 24),
+        new THREE.MeshStandardMaterial({
+          color: new THREE.Color(series2),
+          emissive: new THREE.Color(series2),
+          emissiveIntensity: 0.28,
+          roughness: 0.35
+        })
+      );
+      satelliteMesh.position.set(0.95, 0, 0);
+      pivot.add(satelliteMesh);
+
+      const orbit = new THREE.Mesh(
+        new THREE.TorusGeometry(0.95, 0.012, 8, 72),
+        new THREE.MeshBasicMaterial({ color: new THREE.Color(neutral), transparent: true, opacity: 0.52 })
+      );
+      orbit.position.copy(node.position);
+      orbit.rotation.x = Math.PI / 2;
+      orbit.visible = false;
+      scene.add(orbit);
+
+      const satelliteLabel = document.createElement("span");
+      satelliteLabel.className = "cookie-satellite-label";
+      satelliteLabel.textContent = item.satellite;
+      satelliteLabel.style.display = "none";
+      labelsLayer.appendChild(satelliteLabel);
+
+      item.satelliteObject = { pivot, mesh: satelliteMesh, orbit, label: satelliteLabel };
+    }
+  });
+
+  const lines = new THREE.LineSegments(
+    new THREE.BufferGeometry().setAttribute("position", new THREE.Float32BufferAttribute(linePositions, 3)),
+    new THREE.LineBasicMaterial({ color: new THREE.Color(neutral), transparent: true, opacity: 0.38 })
+  );
+  scene.add(lines);
+
+  const ambient = new THREE.AmbientLight(0xffffff, 1.65);
+  scene.add(ambient);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 2.6);
+  keyLight.position.set(4, 7, 8);
+  scene.add(keyLight);
+  const rimLight = new THREE.PointLight(new THREE.Color(series1), 14, 16);
+  rimLight.position.set(-5, -2, 4);
+  scene.add(rimLight);
+
+  const overviewPosition = new THREE.Vector3(0, 1.5, 10.5);
+  const overviewTarget = new THREE.Vector3(0, 0, 0);
+  let selected = null;
+  let focusedAttribute = null;
+  let cameraTween = null;
+
+  function tweenCamera(target, distance, returnToOverview) {
+    const startPosition = camera.position.clone();
+    const startTarget = controls.target.clone();
+    let endPosition;
+    let endTarget;
+
+    if (returnToOverview) {
+      endPosition = overviewPosition.clone();
+      endTarget = overviewTarget.clone();
+    } else {
+      const direction = camera.position.clone().sub(target).normalize();
+      endPosition = target.clone().add(direction.multiplyScalar(distance));
+      endPosition.y += 0.22;
+      endTarget = target.clone();
+    }
+
+    cameraTween = {
+      startPosition,
+      startTarget,
+      endPosition,
+      endTarget,
+      startedAt: performance.now(),
+      duration: 780
+    };
+    controls.enabled = false;
+  }
+
+  function selectNode(node) {
+    selected = node;
+    controls.autoRotate = false;
+    const isFocusNode = node.userData.key === "HttpOnly" || node.userData.key === "SameSite";
+    focusedAttribute = isFocusNode ? node.userData : null;
+
+    nodes.forEach((candidate) => {
+      const active = candidate === node;
+      candidate.scale.setScalar(active ? 1.35 : 1);
+      candidate.material.emissiveIntensity = active ? 0.65 : 0.08;
+      candidate.userData.label.classList.toggle("is-selected", active);
+
+      const satellite = candidate.userData.satelliteObject;
+      if (satellite) {
+        const satelliteActive = active && isFocusNode;
+        satellite.pivot.visible = satelliteActive;
+        satellite.orbit.visible = satelliteActive;
+        satellite.label.style.display = satelliteActive ? "block" : "none";
+      }
+    });
+
+    tweenCamera(node.position, 3.65, !isFocusNode);
+    detail.replaceChildren();
+    const badge = document.createElement("span");
+    badge.className = "viz-badge";
+    badge.textContent = node.userData.key;
+    const description = document.createElement("span");
+    description.textContent = node.userData.detail;
+    detail.append(badge, description);
+  }
+
+  const raycaster = new THREE.Raycaster();
+  const pointer = new THREE.Vector2();
+  canvas.addEventListener("pointerdown", () => { controls.autoRotate = false; });
+  canvas.addEventListener("click", (event) => {
+    const rect = canvas.getBoundingClientRect();
+    pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    raycaster.setFromCamera(pointer, camera);
+    const hit = raycaster.intersectObjects(nodes, false)[0];
+    if (hit) selectNode(hit.object);
+  });
+
+  function resize() {
+    const width = stage.clientWidth;
+    const height = stage.clientHeight;
+    renderer.setSize(width, height, false);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+  }
+
+  function updateLabels() {
+    const width = stage.clientWidth;
+    const height = stage.clientHeight;
+    const centerProjected = center.position.clone().project(camera);
+    centerLabel.style.left = ((centerProjected.x * 0.5 + 0.5) * width) + "px";
+    centerLabel.style.top = ((-centerProjected.y * 0.5 + 0.5) * height) + "px";
+    centerLabel.style.display = focusedAttribute ? "none" : "block";
+    attributes.forEach((item, index) => {
+      const projected = nodes[index].position.clone().project(camera);
+      const visible = projected.z < 1;
+      const visibleInCurrentMode = !focusedAttribute || item === focusedAttribute;
+      item.label.style.display = visible && visibleInCurrentMode ? "block" : "none";
+      item.label.style.left = ((projected.x * 0.5 + 0.5) * width) + "px";
+      item.label.style.top = ((-projected.y * 0.5 + 0.5) * height - 34) + "px";
+      item.label.style.opacity = String(Math.max(0.48, 1 - Math.max(0, projected.z) * 0.45));
+
+      if (item.satelliteObject && item.satelliteObject.pivot.visible) {
+        const satelliteWorld = new THREE.Vector3();
+        item.satelliteObject.mesh.getWorldPosition(satelliteWorld);
+        const satelliteProjected = satelliteWorld.project(camera);
+        item.satelliteObject.label.style.left = ((satelliteProjected.x * 0.5 + 0.5) * width) + "px";
+        item.satelliteObject.label.style.top = ((-satelliteProjected.y * 0.5 + 0.5) * height - 20) + "px";
+      }
+    });
+  }
+
+  function updateCameraTween(now) {
+    if (!cameraTween) return;
+    const raw = Math.min(1, (now - cameraTween.startedAt) / cameraTween.duration);
+    const eased = 1 - Math.pow(1 - raw, 3);
+    camera.position.lerpVectors(cameraTween.startPosition, cameraTween.endPosition, eased);
+    controls.target.lerpVectors(cameraTween.startTarget, cameraTween.endTarget, eased);
+    if (raw === 1) {
+      controls.enabled = true;
+      cameraTween = null;
+    }
+  }
+
+  const observer = new ResizeObserver(resize);
+  observer.observe(stage);
+  resize();
+
+  function animate(now) {
+    updateCameraTween(now);
+    if (focusedAttribute && focusedAttribute.satelliteObject) {
+      focusedAttribute.satelliteObject.pivot.rotation.y = now * 0.00135;
+    }
+    controls.update();
+    center.rotation.y += selected ? 0.002 : 0.004;
+    updateLabels();
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+animate(performance.now());
+</script>
+
+<script id="codex-visualization-floating-ui-core" src="https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js"></script>
+<script id="codex-visualization-floating-ui-dom" src="https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js"></script>
+<script id="codex-visualization-lucide" async src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js"></script>
+<script id="codex-visualization-tooltip">/* oxlint-disable typescript/no-unsafe-argument, typescript/no-unsafe-call, typescript/no-unsafe-return */
+// Runs inside the visualization sandbox, not the host webview.
+(() => {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set(["top", "right", "bottom", "left"]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =>
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest("[data-tooltip]")
+      : null;
+  const containsTarget = (trigger, target) =>
+    target?.nodeType != null && trigger.contains(target);
+  const getContent = (trigger) =>
+    trigger.getAttribute("data-tooltip")?.trim() ?? "";
+  const getPlacement = (trigger) => {
+    const placement = trigger.getAttribute("data-tooltip-placement");
+    return tooltipPlacements.has(placement) ? placement : "top";
+  };
+  const getTooltip = () => {
+    if (tooltip == null) {
+      tooltip = document.createElement("div");
+      tooltip.id = tooltipId;
+      tooltip.className = "tooltip";
+      tooltip.setAttribute("role", "tooltip");
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) => {
+    const ids = new Set(
+      (trigger.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute("aria-describedby");
+    } else {
+      trigger.setAttribute("aria-describedby", [...ids].join(" "));
+    }
+  };
+  const clearOpenTimeout = () => {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) => {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) => {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              "--tooltip-available-width",
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              "--tooltip-available-height",
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: "fixed",
+    })
+      .then(({ x, y }) => {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = "visible";
+      })
+      .catch(() => {
+        if (activeTrigger === trigger && request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) => {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = "hidden";
+    floating.style.transform = "translate(0, 0)";
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () => {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) => {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() < skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() => {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) => {
+    if (event.pointerType === "touch") {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(":focus-visible")) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) => {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () => {
+    closeTooltip(false);
+    document.removeEventListener("pointerover", handlePointerOpen);
+    document.removeEventListener("pointerout", handleLeave);
+    document.removeEventListener("focusin", handleFocusIn);
+    document.removeEventListener("focusout", handleLeave);
+    document.removeEventListener("keydown", handleKeyDown);
+    document.removeEventListener("contextmenu", handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener("pointerover", handlePointerOpen);
+  document.addEventListener("pointerout", handleLeave);
+  document.addEventListener("focusin", handleFocusIn);
+  document.addEventListener("focusout", handleLeave);
+  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("contextmenu", handleContextMenu);
+  window.addEventListener("pagehide", destroy, { once: true });
+})();
+</script>
+<script id="codex-visualization-lucide-initialization">(() => {
+  const initialize = () => {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById("codex-visualization-lucide")
+    ?.addEventListener("load", initialize, { once: true });
+})();
+</script>
+</body>
+</html>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2026/07/06/build-a-blog-comment-system/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>上一页</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <!-- <i class="iconfont icon-updatetime mr-10" title="更新时间"></i> -->
+              <!-- 2026-08-13 21:29:25 -->
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+
+    
+      <div class="comments-container">
+        
+  <div id="waline-comments"></div>
+
+  <script>
+    function loadWalineSuc(func) {
+      func({
+        el: '#waline-comments',
+        path: location.pathname,
+        serverURL: 'https://misakisaysyes-comment-system.vercel.app',
+        emoji: false,
+        dark: 'auto',
+        requiredMeta: ['nick', 'mail'],
+        login: 'disable',
+        wordLimit: 150,
+        imageUploader: false,
+        search: false,
+        reaction: false,
+        pageSize: 30,
+        lang: 'zh-CN'
+      })
+    }
+  </script>
+
+  
+    <link rel="stylesheet" href="/plugins/waline.css">
+    <script type="module">
+      import { init } from '/plugins/waline.mjs'
+      loadWalineSuc(init)
+    </script>
+  
+
+
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/misakisaysyes">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="http://github.com/misakisaysyes">Copyright © 2026 Misakisaysyes</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%85%B3%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8cookie + '&url=' + https%3A%2F%2Fmisakisaysyes.github.io%2F2026%2F08%2F13%2Fcookie-knowledge%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://misakisaysyes.github.io/2026/08/13/cookie-knowledge/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+    <script defer src="/js/mermaid.js"></script>
+  </body>
+</html>
