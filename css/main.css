@@ -2203,20 +2203,76 @@ svg:hover {
   background: #808080 !important;
 }
 .mermaid {
+  display: block;
+  width: 100%;
+  min-width: 0;
   overflow-x: auto;
-  margin: 24px 0;
-  padding: 16px;
-  border: 1px solid var(--color-border, #e1e4e8);
-  border-radius: 8px;
-  background: var(--color-background, #fff);
-  text-align: center;
+  overflow-y: hidden;
+  margin: 10px 0 0;
+  padding: 10px;
+  border: 1px solid var(--border, var(--color-border, #DCE3EC));
+  border-radius: 10px;
+  background: var(--card, var(--color-background, #fff));
+  text-align: left;
 }
 
 .mermaid svg {
   display: block;
-  max-width: 100%;
+  width: 100% !important;
+  min-width: 100%;
+  max-width: 100% !important;
   height: auto;
-  margin: 0 auto;
+  margin: 0;
+}
+
+/* Keep sequence diagrams consistent with the code-like CORS diagram. */
+.mermaid .actor,
+.mermaid .actor-top,
+.mermaid .actor-bottom,
+.mermaid .labelBox {
+  fill: #FFF4D6 !important;
+  stroke: #E9D8A6 !important;
+}
+
+.mermaid .actor-line {
+  stroke: #E9D8A6 !important;
+}
+
+.mermaid .messageLine0,
+.mermaid .messageLine1,
+.mermaid .loopLine {
+  stroke: #1F2937 !important;
+}
+
+.mermaid .note,
+.mermaid .note rect,
+.mermaid .note path,
+.mermaid rect.note,
+.mermaid path.note {
+  fill: #F8FAFC !important;
+  stroke: #CBD5E1 !important;
+  stroke-width: 1.2px !important;
+}
+
+.mermaid .noteText,
+.mermaid .messageText,
+.mermaid text {
+  fill: rgb(36, 41, 46) !important;
+  font-weight: 400 !important;
+}
+
+.mermaid .noteText,
+.mermaid .messageText {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace !important;
+}
+
+.mermaid .noteText {
+  font-size: 12px !important;
+}
+
+.mermaid text.sequenceNumber {
+  fill: #FFFFFF !important;
+  font-weight: 400 !important;
 }
 
 .mermaid[data-mermaid-error] {
@@ -2227,16 +2283,14 @@ svg:hover {
 
 @media (max-width: 720px) {
   .mermaid {
-    margin-right: -8px;
-    margin-left: -8px;
     padding: 8px;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   .mermaid {
-    border-color: #333;
-    background: #1e1e1e;
+    border-color: var(--border, #333);
+    background: var(--card, #1e1e1e);
   }
 }
 
