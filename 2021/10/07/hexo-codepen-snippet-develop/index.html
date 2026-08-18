@@ -224,7 +224,7 @@
 <li>有默认值：<code>style</code>、<code>scrolling</code>、<code>frameborder</code>、<code>loading</code>、<code>allowtransparency</code>、<code>allowfullscreen</code> 都是<code>iframe</code>标签的属性。</li>
 <li>无默认值：<code>src_prefix</code>、<code>slug_hash</code>、<code>default_tab</code>、<code>theme_id</code> 共同构成<code>iframe.src</code>的值，在hexo博客使用插件时必传。</li>
 </ul>
-<p>config字段值可以参考codepen中<code>Embed</code>的配置<br><img src="/2021/10/07/hexo-codepen-snippet-develop/codepen-embed-configuration.png" alt="Codepen Embed 配置面板"></p>
+<p>config字段值可以参考codepen中<code>Embed</code>的配置<br><img src="/2021/10/07/hexo-codepen-snippet-develop/codepen-embed-configuration.png" alt="Codepen Embed 配置面板" loading="lazy" decoding="async" data-lazy-skeleton></p>
 <h2 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h2><p>首先需要在项目中引入插件脚🦶本，然后做全局配置，之后就可以在<code>文章.md</code>中使用自定义标签了。</p>
 <p>相关参考：<a target="_blank" rel="noopener" href="https://hexo.io/docs/plugins.html">引入插件脚🦶本</a>、<a target="_blank" rel="noopener" href="https://github.com/misakisaysyes/hexo-codepen-snippet">插件配置&amp;使用</a></p>
 <h3 id="脚🦶本引入"><a href="#脚🦶本引入" class="headerlink" title="脚🦶本引入"></a>脚🦶本引入</h3><p><b>方式一</b><br>首先博客根目录下（package.json同级目录下）的script目录中引入。</p>
@@ -443,6 +443,9 @@
 
       </div>
     </div>
+    
+      <script defer src="/js/media-lazyload.js"></script>
+    
     <script defer src="/js/mermaid.js"></script>
   </body>
 </html>

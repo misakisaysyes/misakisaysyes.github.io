@@ -313,7 +313,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const testArr = [a, b, c, d]</span><br><span class="line">const Cmn = (arr, num) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    // C(m, n) m = 0 不合法 返回0</span><br><span class="line">    if (!arr.length) &#123; return 0 &#125;</span><br><span class="line"></span><br><span class="line">    // C(m, n) m &lt; n 不合法 返回0</span><br><span class="line">    if (arr.length &lt; num) &#123; return 0 &#125; </span><br><span class="line"></span><br><span class="line">    // C(m, 0) = 1</span><br><span class="line">    if (!num) &#123; return 1 &#125;</span><br><span class="line"></span><br><span class="line">    // C(x, x) = 1  </span><br><span class="line">    if (arr.length === num) &#123; return 1 &#125;</span><br><span class="line">    </span><br><span class="line">    return Cmn(arr.slice(1), num - 1) + Cmn(arr.slice(1), num)</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#x27;C(4, 2) = &#x27;, Cmn(testArr, 2))</span><br></pre></td></tr></table></figure>
 
 <p>原始递归在求解这个问题时，我们可以<code>自顶向下</code>地画出一颗树来：</p>
-<p><img src="/2021/07/26/application-of-dp-algorithm/1.png" alt="1.png"></p>
+<p><img src="/2021/07/26/application-of-dp-algorithm/1.png" alt="1.png" loading="lazy" decoding="async" data-lazy-skeleton></p>
 <p>从图示可看出，C(2, 1)等于多少？这问题，前后被问了两次，也被回答了两次。</p>
 <p>那是不是可以优化一下？</p>
 <h3 id="3-4-记忆化递归求C-4-2"><a href="#3-4-记忆化递归求C-4-2" class="headerlink" title="3.4 记忆化递归求C(4, 2)"></a>3.4 记忆化递归求C(4, 2)</h3><p>最朴素的优化方法，就是记忆化递归。</p>
@@ -342,16 +342,16 @@
 <p>但是细看状态转移方程会发现：</p>
 <p><strong>对于dp表而言，第i行第值，只与第<code>i - 1行</code>的值相关，和第<code>i - 2行</code>的值无关。</strong></p>
 <p>比如在C(4, 2)中，第3行的值只与第4行相关，第4行第值又只与第3行第值相关。</p>
-<p><img src="/2021/07/26/application-of-dp-algorithm/4.png" alt="4.png"></p>
+<p><img src="/2021/07/26/application-of-dp-algorithm/4.png" alt="4.png" loading="lazy" decoding="async" data-lazy-skeleton></p>
 <p>所以，在这里，完全可以只缓存一行（3个节点的结果），而不用开二维数组缓存所有子问题的结果。</p>
 <p>但如果只缓存一行，就会有这样的情况：</p>
 <p>当计算第3行时，使用缓存里第2行的结果。当计算第4行时，需要用第3行的结果。</p>
 <p>所以这时，需要考虑更新缓存。</p>
 <p>这里再回到状态转移方程分析，可以发现，当前所求值，其依赖的值都<code>不会</code>在所求值的<strong>右上方</strong>。 </p>
 <p>比如C(4, 1)的结果只与C(3, 0)和C(3, 1)有关，与右上方的C(3, 2)无关。</p>
-<p><img src="/2021/07/26/application-of-dp-algorithm/5.png" alt="5.png"></p>
+<p><img src="/2021/07/26/application-of-dp-algorithm/5.png" alt="5.png" loading="lazy" decoding="async" data-lazy-skeleton></p>
 <p>也就是说，从右向左地更新缓存，便可在更新缓存的同时，不影响值的计算。</p>
-<p><img src="/2021/07/26/application-of-dp-algorithm/2.png" alt="2.png"></p>
+<p><img src="/2021/07/26/application-of-dp-algorithm/2.png" alt="2.png" loading="lazy" decoding="async" data-lazy-skeleton></p>
 <p>这样分析下来，dp的解法就可以优化为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const testArr = [a, b, c, d]</span><br><span class="line">const Cmn = (arr, num) =&gt; &#123;</span><br><span class="line">    let dp = new Array(num + 1).fill(0)</span><br><span class="line">    dp[0] = 1</span><br><span class="line">    for (let i = 1; i &lt;= arr.length; i++) &#123;</span><br><span class="line">        for(j = i; j &gt; 0; j --) &#123;</span><br><span class="line">            dp[j] = dp[j - 1] + dp[j]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[num]</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#x27;C(4, 2) = &#x27;, Cmn(testArr, 2))</span><br></pre></td></tr></table></figure>
 
@@ -367,7 +367,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const combinations = (total, nums, amount) =&gt; &#123;</span><br><span class="line">    let dp = new Array(total + 1).fill(0)</span><br><span class="line">    dp[0] = 1</span><br><span class="line"></span><br><span class="line">    for(let i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">        for (let j = total; j &gt;= nums[i]; j--) &#123;</span><br><span class="line">            for(let k = 1; k &lt;= amount[i] &amp;&amp; j &gt;= k*nums[i]; k++) &#123;</span><br><span class="line">                dp[j] += dp[j - k*nums[i]]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dp[total]</span><br><span class="line">&#125;</span><br><span class="line">console.log(combinations(100, [1, 5, 10, 20, 50], [5, 2, 4, 2, 4]))</span><br></pre></td></tr></table></figure>
 
 <p>背包问题是动态规划中一类问题，其结构如下：</p>
-<p><img src="/2021/07/26/application-of-dp-algorithm/6.png" alt="6.png"></p>
+<p><img src="/2021/07/26/application-of-dp-algorithm/6.png" alt="6.png" loading="lazy" decoding="async" data-lazy-skeleton></p>
 <p>背包问题可以分为<code>0-1背包</code>和<code>完全背包</code>，<code>多重背包</code>是0-1背包的变种。</p>
 <h3 id="4-1-0-1背包和完全背包"><a href="#4-1-0-1背包和完全背包" class="headerlink" title="4.1 0-1背包和完全背包"></a>4.1 0-1背包和完全背包</h3><p>0-1背包的定义：</p>
 <p>有N件物品和一个容量为V的背包，第i件物品消耗的容量为Ci，价值为Wi，求解放入哪些物品可以使得背包中总价值最大。</p>
@@ -554,6 +554,9 @@
 
       </div>
     </div>
+    
+      <script defer src="/js/media-lazyload.js"></script>
+    
     <script defer src="/js/mermaid.js"></script>
   </body>
 </html>

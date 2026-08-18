@@ -239,7 +239,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate  // 生成静态文件，静态文件默认输出的目录为public</span><br><span class="line">$ mkdir docs  // 在根目录下创建名为docs的目录作为线上的服务器目录（该目录的位置和名称与仓库配置相关）</span><br><span class="line">$ cp -r ./public/* ./docs  // 将public下的内容复制到docs下</span><br><span class="line"></span><br><span class="line">// 项目目录结构参考如下：</span><br><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br><span class="line">|   └── oranges</span><br><span class="line">└── publics</span><br><span class="line">└── docs</span><br></pre></td></tr></table></figure>
 
 <p><em>给线上仓库配置服务器目录</em></p>
-<p><img src="/2020/08/27/build-blog/1.png" alt="1.png"></p>
+<p><img src="/2020/08/27/build-blog/1.png" alt="1.png" loading="lazy" decoding="async" data-lazy-skeleton></p>
 <p>其中source项的目录配置只有<code>/</code>和<code>/docs</code>两种，选择<code>/</code>则项目里只能存放静态资源文件，选择<code>/docs</code>则项目里需要有个docs目录存放静态资源文件。</p>
 <h4 id="6-2-高效上线（使用插件）"><a href="#6-2-高效上线（使用插件）" class="headerlink" title="6.2 高效上线（使用插件）"></a>6.2 高效上线（使用插件）</h4><p>使用 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-deployer-git">hexo-deployer-git</a> 插件</p>
 <h3 id="7-新文章发布"><a href="#7-新文章发布" class="headerlink" title="7 新文章发布"></a>7 新文章发布</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/docs/commands">doc</a></p>
@@ -279,13 +279,13 @@
 <p>所以此处的解决方案是：直接在markdown中贴上codepen网站导出的代码。</p>
 <p>codepen导出代码方法如图所示：</p>
 <p><code>New Pen</code> -&gt; <code>编辑代码</code> -&gt; <code>Save</code> -&gt; <code>Embed</code></p>
-<p><img src="/2020/08/27/build-blog/2.png" alt="2.png"></p>
+<p><img src="/2020/08/27/build-blog/2.png" alt="2.png" loading="lazy" decoding="async" data-lazy-skeleton></p>
 <h3 id="封装hexo-codepen-snippet优化codepen插入方式"><a href="#封装hexo-codepen-snippet优化codepen插入方式" class="headerlink" title="封装hexo-codepen-snippet优化codepen插入方式"></a>封装hexo-codepen-snippet优化codepen插入方式</h3><p><a href="#%E5%9C%A8hexo%E4%B8%AD%E6%8F%92%E5%85%A5codepen%E4%BB%A3%E7%A0%81">在hexo中插入codepen代码</a>这节描述的插入方法有个的问题：</p>
 <p>就是一大段html代码插到md文件中，看上去很不整洁。</p>
-<p><img src="/2020/08/27/build-blog/3.png" alt="3.png"></p>
+<p><img src="/2020/08/27/build-blog/3.png" alt="3.png" loading="lazy" decoding="async" data-lazy-skeleton></p>
 <p>于是参考失效的codepen<a target="_blank" rel="noopener" href="https://github.com/timnew/hexo-tag-codepen">插件</a>重新写了一个，并发布到npm，详见<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-codepen-snippet">hexo-codepen-snippet</a>。</p>
 <p>安装插件后，需要插入codepen代码，只用在md中插入如下语句：</p>
-<p><img src="/2020/08/27/build-blog/4.png" alt="4.png"></p>
+<p><img src="/2020/08/27/build-blog/4.png" alt="4.png" loading="lazy" decoding="async" data-lazy-skeleton></p>
 <p>整个md文件顿时变得清爽很多。</p>
 <h3 id="接入clustrmaps"><a href="#接入clustrmaps" class="headerlink" title="接入clustrmaps"></a>接入clustrmaps</h3><p>clustrmaps是一款能记录访问你博客ip地理位置的工具🔧</p>
 <p>具体用法就是：</p>
@@ -460,6 +460,9 @@
 
       </div>
     </div>
+    
+      <script defer src="/js/media-lazyload.js"></script>
+    
     <script defer src="/js/mermaid.js"></script>
   </body>
 </html>

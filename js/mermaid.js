@@ -21,6 +21,8 @@
   async function loadMermaid() {
     if (window.mermaid) return window.mermaid;
     const cdnUrls = [
+      'https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js',
+      'https://unpkg.com/mermaid@11.12.0/dist/mermaid.min.js',
       'https://registry.npmmirror.com/mermaid/11.12.0/files/dist/mermaid.min.js',
       'https://cdn.staticfile.net/mermaid/11.12.0/mermaid.min.js',
     ];

@@ -1045,6 +1045,8 @@ figure .pin-copy {
   --bg-block-md-table: #ffffff;
   --bg-block-md-table-2: #f6f8fa;
   --color-border-md-table: #dfe2e5;
+  --media-skeleton-base: #eef1f4;
+  --media-skeleton-highlight: rgba(255, 255, 255, 0.75);
 }
 
 /* dark scheme */
@@ -1068,6 +1070,8 @@ figure .pin-copy {
   --bg-block-md-table: #2E3440;
   --bg-block-md-table-2: #313744;
   --color-border-md-table: #4c566a;
+  --media-skeleton-base: #3b4252;
+  --media-skeleton-highlight: rgba(255, 255, 255, 0.08);
 }
 
 * {
@@ -2201,6 +2205,61 @@ svg:hover {
 }
 .fancybox-progress {
   background: #808080 !important;
+}
+.markdown-body img[data-lazy-skeleton],
+.markdown-body video[data-lazy-skeleton] {
+  display: block;
+  width: 100%;
+  background-color: var(--media-skeleton-base);
+  background-image: linear-gradient(100deg, transparent 20%, var(--media-skeleton-highlight) 50%, transparent 80%);
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  animation: media-skeleton-shimmer 1.4s ease-in-out infinite;
+}
+.markdown-body img[data-lazy-skeleton]:not([width]):not([height]) {
+  min-height: clamp(160px, 38vw, 360px);
+}
+.markdown-body video[data-lazy-skeleton] {
+  aspect-ratio: 16/9;
+  min-height: 180px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .markdown-body img[data-lazy-skeleton],
+  .markdown-body video[data-lazy-skeleton] {
+    animation: none;
+  }
+}
+@-moz-keyframes media-skeleton-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+@-webkit-keyframes media-skeleton-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+@-o-keyframes media-skeleton-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+@keyframes media-skeleton-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
 }
 .mermaid {
   display: block;

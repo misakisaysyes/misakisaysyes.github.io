@@ -19,6 +19,8 @@
   --bg-block-md-table: #ffffff;
   --bg-block-md-table-2: #f6f8fa;
   --color-border-md-table: #dfe2e5;
+  --media-skeleton-base: #eef1f4;
+  --media-skeleton-highlight: rgba(255, 255, 255, 0.75);
 }
 
 /* dark scheme */
@@ -42,4 +44,6 @@
   --bg-block-md-table: #2E3440;
   --bg-block-md-table-2: #313744;
   --color-border-md-table: #4c566a;
+  --media-skeleton-base: #3b4252;
+  --media-skeleton-highlight: rgba(255, 255, 255, 0.08);
 }
